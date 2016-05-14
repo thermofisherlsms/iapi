@@ -52,6 +52,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -115,7 +120,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(322, 185);
+            this.button5.Location = new System.Drawing.Point(200, 246);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 7;
@@ -125,7 +130,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(322, 214);
+            this.button6.Location = new System.Drawing.Point(281, 246);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 8;
@@ -145,6 +150,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.serverConnectedTB);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.instrumentConnectedTB);
@@ -273,19 +280,68 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(159, 75);
+            this.button7.Location = new System.Drawing.Point(200, 73);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 23);
             this.button7.TabIndex = 10;
-            this.button7.Text = "SendScan";
+            this.button7.Text = "Send Custom Scan";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(200, 101);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(130, 23);
+            this.button8.TabIndex = 11;
+            this.button8.Text = "Send Repeating Scan";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(200, 144);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(130, 23);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "Cancel Repeating Scan";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(200, 173);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(130, 23);
+            this.button10.TabIndex = 13;
+            this.button10.Text = "Cancel Custom Scan";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(162, 112);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 120);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(150, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Ready To Receive Next Scan";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 281);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button6);
@@ -332,6 +388,11 @@
         private System.Windows.Forms.TextBox serverConnectedTB;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label8;
     }
 }
 

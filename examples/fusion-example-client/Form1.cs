@@ -31,6 +31,7 @@ namespace FusionExampleClient
         IScans _scans;
 
         int totalScansArrived = 0;
+        int customScans = 0;
 
         public Form1()
         {
@@ -81,7 +82,24 @@ namespace FusionExampleClient
 
             _instValues = _instControl.InstrumentValues;
             _scans = _instControl.GetScans(false);
+            _scans.CanAcceptNextCustomScan += _scans_CanAcceptNextCustomScan;
+            _scans.PossibleParametersChanged += _scans_PossibleParametersChanged;
 
+        }
+
+        void _scans_PossibleParametersChanged(object sender, EventArgs e)
+        {
+           // throw new NotImplementedException();
+        }
+
+        void _scans_CanAcceptNextCustomScan(object sender, EventArgs e)
+        {
+            customScans++;
+            Invoke(new Action(
+           () =>
+           {
+               textBox2.Text = customScans.ToString();
+           }));
         }
 
         void Acquisition_StateChanged(object sender, StateChangedEventArgs e)
@@ -157,16 +175,39 @@ namespace FusionExampleClient
         }
 
         private void button7_Click(object sender, EventArgs e)
-        {
-            var possibleParameters = _scans.PossibleParameters;
-
+        {           
             ICustomScan customScan = _scans.CreateCustomScan();
-            customScan.Values["FirstMass"] = "252";
-            customScan.Values["LastMass"] = "1985";
-            customScan.Values["ScanType"] = "SIM";
-            customScan.Values["MicroScans"] = "2";
+
+            customScan.Values["FirstMass"] = "150";
+            customScan.Values["LastMass"] = "600";
+            customScan.Values["ScanType"] = "Full";
+           // customScan.Values["PrecursorMass"] = "524.3";
+            //customScan.Values["CollisionEnergy"] = "25";
+            customScan.Values["MicroScans"] = "1";
 
             _scans.SetCustomScan(customScan);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            IRepeatingScan repeatScan = _scans.CreateRepeatingScan();
+
+            repeatScan.Values["FirstMass"] = "500";
+            repeatScan.Values["LastMass"] = "600";
+            repeatScan.Values["ScanType"] = "SIM";
+            repeatScan.Values["MicroScans"] = "2";
+
+            _scans.SetRepetitionScan(repeatScan);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            _scans.CancelRepetition();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            _scans.CancelCustomScan();
         }
 
 
