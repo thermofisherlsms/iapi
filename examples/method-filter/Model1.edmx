@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="methoddbModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\balaram.barange\Downloads\methoddb.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Table_precursor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" Nullable="false" />
+          <Property Name="Precursor" Type="integer" />
+        </EntityType>
+        <EntityType Name="Table_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" Nullable="false" />
+          <Property Name="PrecursorID" Type="integer" />
+          <Property Name="mz" Type="integer" />
+          <Property Name="INT" Type="integer" />
+        </EntityType>
+        <EntityContainer Name="methoddbModelStoreContainer">
+          <EntitySet Name="Table_precursor" EntityType="Self.Table_precursor" store:Type="Tables" />
+          <EntitySet Name="Table_Product" EntityType="Self.Table_Product" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="methoddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Table_precursor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="Precursor" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Table_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="PrecursorID" Type="Int64" />
+          <Property Name="mz" Type="Int64" />
+          <Property Name="INT" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="methoddbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Table_precursor" EntityType="Self.Table_precursor" />
+          <EntitySet Name="Table_Product" EntityType="Self.Table_Product" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="methoddbModelStoreContainer" CdmEntityContainer="methoddbEntities">
+          <EntitySetMapping Name="Table_precursor">
+            <EntityTypeMapping TypeName="methoddbModel.Table_precursor">
+              <MappingFragment StoreEntitySet="Table_precursor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Precursor" ColumnName="Precursor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Product">
+            <EntityTypeMapping TypeName="methoddbModel.Table_Product">
+              <MappingFragment StoreEntitySet="Table_Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PrecursorID" ColumnName="PrecursorID" />
+                <ScalarProperty Name="mz" ColumnName="mz" />
+                <ScalarProperty Name="INT" ColumnName="INT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
