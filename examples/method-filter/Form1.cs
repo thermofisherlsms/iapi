@@ -35,7 +35,24 @@ namespace Thermo.IAPI.Examples
         public Form1()
         {
             InitializeComponent();
+            _instAccessContainer.ServiceConnectionChanged += ConnectionChanged;
+            _instAccessContainer.MessagesArrived += OnMessagesArrived;
         }
+
+        void ConnectionChanged(object sender, EventArgs e)
+        {
+            Invoke(new Action(
+            () =>
+            {
+                lblIsConnected.Text = _instAccessContainer.ServiceConnected ? "Connected!" : "Not Connected!";
+            }));
+        }
+
+        void OnMessagesArrived(object sender, MessagesArrivedEventArgs e)
+        {
+            
+        }
+
 
         #region Button Handlers
         private void btnBrowse_Click(object sender, EventArgs e)

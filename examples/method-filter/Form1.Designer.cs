@@ -49,6 +49,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblInstrument = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableprecursorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSetBindingSource)).BeginInit();
@@ -59,7 +61,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 102);
+            this.label1.Location = new System.Drawing.Point(23, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
@@ -67,14 +69,14 @@
             // 
             // txtMethodPath
             // 
-            this.txtMethodPath.Location = new System.Drawing.Point(121, 102);
+            this.txtMethodPath.Location = new System.Drawing.Point(132, 169);
             this.txtMethodPath.Name = "txtMethodPath";
             this.txtMethodPath.Size = new System.Drawing.Size(472, 20);
             this.txtMethodPath.TabIndex = 1;
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(599, 101);
+            this.btnBrowse.Location = new System.Drawing.Point(610, 168);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(40, 23);
             this.btnBrowse.TabIndex = 2;
@@ -84,7 +86,7 @@
             // 
             // btnDatabase
             // 
-            this.btnDatabase.Location = new System.Drawing.Point(599, 137);
+            this.btnDatabase.Location = new System.Drawing.Point(610, 204);
             this.btnDatabase.Name = "btnDatabase";
             this.btnDatabase.Size = new System.Drawing.Size(40, 23);
             this.btnDatabase.TabIndex = 5;
@@ -94,7 +96,7 @@
             // 
             // txtDB
             // 
-            this.txtDB.Location = new System.Drawing.Point(121, 138);
+            this.txtDB.Location = new System.Drawing.Point(132, 205);
             this.txtDB.Name = "txtDB";
             this.txtDB.Size = new System.Drawing.Size(472, 20);
             this.txtDB.TabIndex = 4;
@@ -102,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 138);
+            this.label2.Location = new System.Drawing.Point(22, 205);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -174,23 +176,23 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 22);
+            this.label4.Location = new System.Drawing.Point(11, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.Size = new System.Drawing.Size(41, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "IsConnected";
+            this.label4.Text = "Server ";
             // 
             // lblIsConnected
             // 
             this.lblIsConnected.AutoSize = true;
-            this.lblIsConnected.Location = new System.Drawing.Point(88, 22);
+            this.lblIsConnected.Location = new System.Drawing.Point(66, 6);
             this.lblIsConnected.Name = "lblIsConnected";
             this.lblIsConnected.Size = new System.Drawing.Size(0, 13);
             this.lblIsConnected.TabIndex = 11;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(247, 12);
+            this.button1.Location = new System.Drawing.Point(383, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -200,7 +202,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(566, 12);
+            this.button2.Location = new System.Drawing.Point(575, 1);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -210,7 +212,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(328, 12);
+            this.button3.Location = new System.Drawing.Point(464, 1);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
@@ -224,11 +226,30 @@
             this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
             this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Instrument";
+            // 
+            // lblInstrument
+            // 
+            this.lblInstrument.AutoSize = true;
+            this.lblInstrument.Location = new System.Drawing.Point(76, 39);
+            this.lblInstrument.Name = "lblInstrument";
+            this.lblInstrument.Size = new System.Drawing.Size(0, 13);
+            this.lblInstrument.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 578);
+            this.Controls.Add(this.lblInstrument);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -279,6 +300,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblInstrument;
     }
 }
 
