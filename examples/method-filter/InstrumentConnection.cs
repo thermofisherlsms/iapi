@@ -68,6 +68,7 @@ namespace Thermo.IAPI.Examples
         internal void CloseConnection()
         {
             _instAccessContainer.Dispose();
+            DBHelper.Close();
         }
 
         internal void GetInstAccess(int p)

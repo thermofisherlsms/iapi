@@ -26,6 +26,7 @@ namespace Thermo.IAPI.Examples
     public partial class Form1 : Form
     {
         InstrumentAccessService ias;
+        List<int> precursors = new List<int>();
 
         public Form1()
         {
@@ -59,6 +60,7 @@ namespace Thermo.IAPI.Examples
         private void btnDatabase_Click(object sender, EventArgs e)
         {
             txtDB.Text = IOHelper.OpenFile("SQLite Database files (*.db)|*.db");
+            DBHelper.Init(txtDB.Text);
         }
         #endregion
         
@@ -68,6 +70,11 @@ namespace Thermo.IAPI.Examples
         {
             // TODO: This line of code loads data into the 'methoddbDataSet.Table_precursor' table. You can move, or remove it, as needed.
             //this.table_precursorTableAdapter.Fill(this.methoddbDataSet.Table_precursor);
+            DBHelper.Init(txtDB.Text);
+            // store scans only that matches the master table.            
+            precursors.Add(524);
+            precursors.Add(197);
+            dataGridView1.DataSource = DBHelper.GetPrecursorTable();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -103,14 +110,23 @@ namespace Thermo.IAPI.Examples
         void OnMsScanArrived(object sender, MsScanEventArgs e)
         {
             var lastScan1 =  ias.InstMSScanContainer.GetLastMsScan();
-            var lastScan2 = e.GetScan();
+            var currentScan = e.GetScan();
 
-            var header = lastScan2.Header;
+            var header = currentScan.Header;
+            int msOrder = int.Parse(header["MSOrder"]);
+            if (msOrder < 2)
+            {
+                return;
+            }            
 
             if(header.ContainsKey("PrecursorMass[0]"))
             {
-
-                Debugger.Break();
+                var precursorMass = decimal.Parse(currentScan.Header["PrecursorMass[0]"]);
+                if(DBHelper.precursors.ContainsKey((int)precursorMass))
+                {
+                    //put the top 100 in the second table.
+                    DBHelper.StoreScan(currentScan);
+                }
             }
         }
 

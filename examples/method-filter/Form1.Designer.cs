@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMethodPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -36,14 +35,9 @@
             this.txtDB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableprecursorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.methoddbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.methoddbDataSet = new Thermo.IAPI.Examples.methoddbDataSet();
             this.label3 = new System.Windows.Forms.Label();
             this.upDownThreshold = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
-            this.table_precursorTableAdapter = new Thermo.IAPI.Examples.methoddbDataSetTableAdapters.Table_precursorTableAdapter();
             this.label4 = new System.Windows.Forms.Label();
             this.lblIsConnected = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -52,10 +46,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblInstrument = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableprecursorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,6 +94,7 @@
             this.txtDB.Name = "txtDB";
             this.txtDB.Size = new System.Drawing.Size(472, 20);
             this.txtDB.TabIndex = 4;
+            this.txtDB.Text = "C:\\Users\\Thermo\\Desktop\\iapi\\examples\\method-filter\\bin\\Debug\\methoddb.db";
             // 
             // label2
             // 
@@ -113,36 +107,14 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.precursorDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.tableprecursorBindingSource;
+            this.precursorDataGridViewTextBoxColumn,
+            this.ID});
             this.dataGridView1.Location = new System.Drawing.Point(15, 236);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(181, 278);
+            this.dataGridView1.Size = new System.Drawing.Size(271, 185);
             this.dataGridView1.TabIndex = 6;
-            // 
-            // precursorDataGridViewTextBoxColumn
-            // 
-            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
-            // 
-            // tableprecursorBindingSource
-            // 
-            this.tableprecursorBindingSource.DataMember = "Table_precursor";
-            this.tableprecursorBindingSource.DataSource = this.methoddbDataSetBindingSource;
-            // 
-            // methoddbDataSetBindingSource
-            // 
-            this.methoddbDataSetBindingSource.DataSource = this.methoddbDataSet;
-            this.methoddbDataSetBindingSource.Position = 0;
-            // 
-            // methoddbDataSet
-            // 
-            this.methoddbDataSet.DataSetName = "methoddbDataSet";
-            this.methoddbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label3
             // 
@@ -169,16 +141,12 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(565, 541);
+            this.btnStart.Location = new System.Drawing.Point(610, 248);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
-            // 
-            // table_precursorTableAdapter
-            // 
-            this.table_precursorTableAdapter.ClearBeforeFill = true;
             // 
             // label4
             // 
@@ -254,11 +222,22 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // precursorDataGridViewTextBoxColumn
+            // 
+            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 578);
+            this.ClientSize = new System.Drawing.Size(729, 783);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lblInstrument);
             this.Controls.Add(this.label5);
@@ -281,9 +260,6 @@
             this.Text = "Fusion - Method Filter Example";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableprecursorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -302,19 +278,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown upDownThreshold;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.BindingSource methoddbDataSetBindingSource;
-        private methoddbDataSet methoddbDataSet;
-        private System.Windows.Forms.BindingSource tableprecursorBindingSource;
-        private methoddbDataSetTableAdapters.Table_precursorTableAdapter table_precursorTableAdapter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblIsConnected;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblInstrument;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
     }
 }
 
