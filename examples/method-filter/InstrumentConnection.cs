@@ -16,14 +16,77 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
 
 namespace Thermo.IAPI.Examples
 {
-    sealed public class InstrumentConnection
+    sealed public class InstrumentAccessService
     {
+        public InstrumentInfo InstrumentInfo = new InstrumentInfo();
         IFusionInstrumentAccessContainer _instAccessContainer;
+
+        public IFusionInstrumentAccessContainer InstAccessContainer
+        {
+            get { return _instAccessContainer; }
+            set { _instAccessContainer = value; }
+        }
+
         IFusionInstrumentAccess _instAccess;
+
+        public IFusionInstrumentAccess InstAccess
+        {
+            get { return _instAccess; }
+            set { _instAccess = value; }
+        }
         IFusionMsScanContainer _instMSScanContainer;
+
+        public IFusionMsScanContainer InstMSScanContainer
+        {
+            get { return _instMSScanContainer; }
+            set { _instMSScanContainer = value; }
+        }
         IAcquisition _instAcq;
+
+        public IAcquisition InstAcq
+        {
+            get { return _instAcq; }
+            set { _instAcq = value; }
+        }
         IControl _instControl;
-        IInstrumentValues _instValues;
-        IScans _scans;
+        //IInstrumentValues _instValues;
+        //IScans _scans;
+
+        public InstrumentAccessService()
+        {
+            _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create();
+        }
+
+
+        public bool ServiceConnected { get { return _instAccessContainer.ServiceConnected; } }
+
+        internal void StartOnlineAccess()
+        {
+            _instAccessContainer.StartOnlineAccess();
+        }
+
+        internal void CloseConnection()
+        {
+            _instAccessContainer.Dispose();
+        }
+
+        internal void GetInstAccess(int p)
+        {
+            _instAccess = _instAccessContainer.Get(1);
+            _instControl = _instAccess.Control;
+            _instAcq = _instControl.Acquisition;
+            InstrumentInfo.InstrumentId = _instAccess.InstrumentId.ToString();
+            InstrumentInfo.InstrumentName = _instAccess.InstrumentName;
+        }
+
+        public bool InstrumentConnected { get { return _instAccess.Connected; } }
+    }
+
+    public class InstrumentInfo
+    {
+        public string InstrumentId { get; set; }
+        public string InstrumentName { get; set; }
     }
 }
+
+   

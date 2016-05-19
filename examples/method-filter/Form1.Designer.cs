@@ -36,6 +36,7 @@
             this.txtDB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableprecursorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.methoddbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.methoddbDataSet = new Thermo.IAPI.Examples.methoddbDataSet();
@@ -48,9 +49,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.lblInstrument = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableprecursorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.methoddbDataSetBindingSource)).BeginInit();
@@ -122,6 +123,12 @@
             this.dataGridView1.Size = new System.Drawing.Size(181, 278);
             this.dataGridView1.TabIndex = 6;
             // 
+            // precursorDataGridViewTextBoxColumn
+            // 
+            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            // 
             // tableprecursorBindingSource
             // 
             this.tableprecursorBindingSource.DataMember = "Table_precursor";
@@ -192,11 +199,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(383, 1);
+            this.button1.Location = new System.Drawing.Point(164, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(106, 23);
             this.button1.TabIndex = 12;
-            this.button1.Text = "Connect";
+            this.button1.Text = "Connect to Server";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -212,19 +219,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(464, 1);
+            this.button3.Location = new System.Drawing.Point(164, 63);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(80, 23);
             this.button3.TabIndex = 14;
             this.button3.Text = "Start Scan";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // precursorDataGridViewTextBoxColumn
-            // 
-            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
             // 
             // label5
             // 
@@ -243,11 +244,22 @@
             this.lblInstrument.Size = new System.Drawing.Size(0, 13);
             this.lblInstrument.TabIndex = 16;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(164, 34);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(122, 23);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Connect to Instrument";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 578);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.lblInstrument);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
@@ -302,6 +314,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblInstrument;
+        private System.Windows.Forms.Button button4;
     }
 }
 
