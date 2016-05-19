@@ -35,6 +35,8 @@
             this.txtDB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.upDownThreshold = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
@@ -46,8 +48,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblInstrument = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblScanNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).BeginInit();
             this.SuspendLayout();
@@ -115,6 +117,17 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(271, 185);
             this.dataGridView1.TabIndex = 6;
+            // 
+            // precursorDataGridViewTextBoxColumn
+            // 
+            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
             // 
             // label3
             // 
@@ -222,22 +235,31 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // precursorDataGridViewTextBoxColumn
+            // label6
             // 
-            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Current Scan #";
             // 
-            // ID
+            // lblScanNumber
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
+            this.lblScanNumber.AutoSize = true;
+            this.lblScanNumber.Location = new System.Drawing.Point(97, 73);
+            this.lblScanNumber.Name = "lblScanNumber";
+            this.lblScanNumber.Size = new System.Drawing.Size(13, 13);
+            this.lblScanNumber.TabIndex = 19;
+            this.lblScanNumber.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 783);
+            this.Controls.Add(this.lblScanNumber);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lblInstrument);
             this.Controls.Add(this.label5);
@@ -288,6 +310,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblScanNumber;
     }
 }
 

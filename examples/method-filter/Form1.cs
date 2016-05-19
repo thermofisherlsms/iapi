@@ -112,6 +112,8 @@ namespace Thermo.IAPI.Examples
             var lastScan1 =  ias.InstMSScanContainer.GetLastMsScan();
             var currentScan = e.GetScan();
 
+            UpdateScanNumber(currentScan);
+
             var header = currentScan.Header;
             int msOrder = int.Parse(header["MSOrder"]);
             if (msOrder < 2)
@@ -128,6 +130,16 @@ namespace Thermo.IAPI.Examples
                     DBHelper.StoreScan(currentScan);
                 }
             }
+        }
+
+        private void UpdateScanNumber(IMsScan currentScan)
+        {
+            Invoke(new Action(
+            () =>
+            {
+                lblScanNumber.Text = currentScan.Header["Scan"].ToString();
+            }));
+
         }
 
         private void button4_Click(object sender, EventArgs e)
