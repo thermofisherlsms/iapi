@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMethodPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -37,6 +36,7 @@
             this.txtDB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnStart = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblIsConnected = new System.Windows.Forms.Label();
@@ -50,46 +50,54 @@
             this.lblScanNumber = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Enabled = false;
-            this.label1.Location = new System.Drawing.Point(23, 169);
+            this.label1.Location = new System.Drawing.Point(22, 150);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Method";
+            this.label1.Visible = false;
             // 
             // txtMethodPath
             // 
             this.txtMethodPath.Enabled = false;
-            this.txtMethodPath.Location = new System.Drawing.Point(132, 169);
+            this.txtMethodPath.Location = new System.Drawing.Point(131, 150);
             this.txtMethodPath.Name = "txtMethodPath";
             this.txtMethodPath.Size = new System.Drawing.Size(472, 20);
             this.txtMethodPath.TabIndex = 1;
+            this.txtMethodPath.Visible = false;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(610, 168);
+            this.btnBrowse.Location = new System.Drawing.Point(609, 149);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(40, 23);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "...";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Visible = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnDatabase
             // 
-            this.btnDatabase.Location = new System.Drawing.Point(610, 204);
+            this.btnDatabase.Location = new System.Drawing.Point(609, 175);
             this.btnDatabase.Name = "btnDatabase";
             this.btnDatabase.Size = new System.Drawing.Size(40, 23);
             this.btnDatabase.TabIndex = 5;
@@ -99,7 +107,7 @@
             // 
             // txtDB
             // 
-            this.txtDB.Location = new System.Drawing.Point(132, 205);
+            this.txtDB.Location = new System.Drawing.Point(131, 176);
             this.txtDB.Name = "txtDB";
             this.txtDB.Size = new System.Drawing.Size(472, 20);
             this.txtDB.TabIndex = 4;
@@ -108,7 +116,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 205);
+            this.label2.Location = new System.Drawing.Point(21, 176);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -119,14 +127,23 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.precursorDataGridViewTextBoxColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(26, 231);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 49);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(156, 194);
+            this.dataGridView1.Size = new System.Drawing.Size(156, 158);
             this.dataGridView1.TabIndex = 6;
+            // 
+            // precursorDataGridViewTextBoxColumn
+            // 
+            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
+            dataGridViewCellStyle2.Format = "N2";
+            this.precursorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            this.precursorDataGridViewTextBoxColumn.ToolTipText = "Unique Precursors";
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(524, 231);
+            this.btnStart.Location = new System.Drawing.Point(10, 16);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(80, 35);
             this.btnStart.TabIndex = 9;
@@ -245,49 +262,92 @@
             this.label7.TabIndex = 21;
             this.label7.Text = "Output";
             // 
-            // precursorDataGridViewTextBoxColumn
-            // 
-            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            dataGridViewCellStyle4.Format = "N2";
-            this.precursorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
-            this.precursorDataGridViewTextBoxColumn.ToolTipText = "Unique Precursors";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1});
-            this.dataGridView2.Location = new System.Drawing.Point(314, 255);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(153, 170);
-            this.dataGridView2.TabIndex = 22;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "mz";
-            dataGridViewCellStyle5.Format = "N2";
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Product";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(314, 231);
+            this.label3.Location = new System.Drawing.Point(6, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Target Product";
+            this.label3.Size = new System.Drawing.Size(115, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Number of mz Records";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Location = new System.Drawing.Point(156, 13);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
+            this.numericUpDown1.TabIndex = 23;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(243, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(215, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Captures these many products per precursor";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(16, 212);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(693, 269);
+            this.tabControl1.TabIndex = 25;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(685, 243);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Record Database";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnStart);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(685, 243);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Do MS3 Scan";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 783);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.lblScanNumber);
@@ -300,8 +360,6 @@
             this.Controls.Add(this.btnISA);
             this.Controls.Add(this.lblIsConnected);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDatabase);
             this.Controls.Add(this.txtDB);
             this.Controls.Add(this.label2);
@@ -312,7 +370,11 @@
             this.Text = "Fusion - Method Filter Example";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,9 +403,12 @@
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
