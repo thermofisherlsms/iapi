@@ -67,7 +67,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Enabled = false;
-            this.label1.Location = new System.Drawing.Point(22, 150);
+            this.label1.Location = new System.Drawing.Point(13, 115);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 0;
@@ -77,7 +77,7 @@
             // txtMethodPath
             // 
             this.txtMethodPath.Enabled = false;
-            this.txtMethodPath.Location = new System.Drawing.Point(131, 150);
+            this.txtMethodPath.Location = new System.Drawing.Point(127, 115);
             this.txtMethodPath.Name = "txtMethodPath";
             this.txtMethodPath.Size = new System.Drawing.Size(472, 20);
             this.txtMethodPath.TabIndex = 1;
@@ -86,7 +86,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(609, 149);
+            this.btnBrowse.Location = new System.Drawing.Point(605, 114);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(40, 23);
             this.btnBrowse.TabIndex = 2;
@@ -97,7 +97,7 @@
             // 
             // btnDatabase
             // 
-            this.btnDatabase.Location = new System.Drawing.Point(609, 175);
+            this.btnDatabase.Location = new System.Drawing.Point(605, 140);
             this.btnDatabase.Name = "btnDatabase";
             this.btnDatabase.Size = new System.Drawing.Size(40, 23);
             this.btnDatabase.TabIndex = 5;
@@ -107,16 +107,16 @@
             // 
             // txtDB
             // 
-            this.txtDB.Location = new System.Drawing.Point(131, 176);
+            this.txtDB.Location = new System.Drawing.Point(127, 141);
             this.txtDB.Name = "txtDB";
             this.txtDB.Size = new System.Drawing.Size(472, 20);
             this.txtDB.TabIndex = 4;
-            this.txtDB.Text = "C:\\Users\\Thermo\\Desktop\\iapi\\examples\\method-filter\\bin\\Debug\\methoddb.db";
+            this.txtDB.Text = "C:\\Users\\Thermo\\Desktop\\SpectralDB\\Test.sqlite";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 176);
+            this.label2.Location = new System.Drawing.Point(12, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -129,7 +129,7 @@
             this.precursorDataGridViewTextBoxColumn});
             this.dataGridView1.Location = new System.Drawing.Point(5, 49);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(156, 158);
+            this.dataGridView1.Size = new System.Drawing.Size(156, 121);
             this.dataGridView1.TabIndex = 6;
             // 
             // precursorDataGridViewTextBoxColumn
@@ -311,10 +311,10 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(16, 212);
+            this.tabControl1.Location = new System.Drawing.Point(12, 177);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(693, 269);
+            this.tabControl1.Size = new System.Drawing.Size(693, 232);
             this.tabControl1.TabIndex = 25;
             // 
             // tabPage1
@@ -326,7 +326,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(685, 243);
+            this.tabPage1.Size = new System.Drawing.Size(685, 206);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Record Database";
             this.tabPage1.UseVisualStyleBackColor = true;

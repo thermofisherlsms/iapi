@@ -88,6 +88,14 @@ namespace Thermo.IAPI.Examples
         public string InstrumentId { get; set; }
         public string InstrumentName { get; set; }
     }
+
+    public class Centroid
+    {
+        public double Mz;
+        public double Precursor;
+        public double Intensity;
+    }
+
 }
 
    

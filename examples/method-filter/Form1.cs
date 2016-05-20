@@ -98,9 +98,10 @@ namespace Thermo.IAPI.Examples
             btnInstrument.Enabled = false;
             btnScan.Enabled = false;
         }
-
+        int maxTargets = 25;
         private void button3_Click(object sender, EventArgs e)
         {
+            maxTargets = (int)numericUpDown1.Value;
             ias.InstMSScanContainer = ias.InstAccess.GetMsScanContainer(0);
             ias.InstMSScanContainer.MsScanArrived += OnMsScanArrived;
             ias.InstMSScanContainer.AcquisitionStreamOpening += OnAcquisitionStreamOpening;
@@ -138,7 +139,7 @@ namespace Thermo.IAPI.Examples
                 if(DBHelper.precursors.ContainsKey((int)precursorMass))
                 {
                     //put the top 100 in the second table.
-                    DBHelper.StoreScan(currentScan);
+                    DBHelper.StoreScan(currentScan, maxTargets);
                 }
             }
         }
