@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMethodPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -35,10 +37,6 @@
             this.txtDB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.upDownThreshold = new System.Windows.Forms.NumericUpDown();
             this.btnStart = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblIsConnected = new System.Windows.Forms.Label();
@@ -52,8 +50,12 @@
             this.lblScanNumber = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.precursorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -116,55 +118,21 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.precursorDataGridViewTextBoxColumn,
-            this.ID});
+            this.precursorDataGridViewTextBoxColumn});
             this.dataGridView1.Location = new System.Drawing.Point(26, 231);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(271, 185);
+            this.dataGridView1.Size = new System.Drawing.Size(156, 194);
             this.dataGridView1.TabIndex = 6;
-            // 
-            // precursorDataGridViewTextBoxColumn
-            // 
-            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
-            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 431);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Dot Product Threshold";
-            // 
-            // upDownThreshold
-            // 
-            this.upDownThreshold.DecimalPlaces = 1;
-            this.upDownThreshold.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.upDownThreshold.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.upDownThreshold.Location = new System.Drawing.Point(156, 431);
-            this.upDownThreshold.Name = "upDownThreshold";
-            this.upDownThreshold.Size = new System.Drawing.Size(78, 20);
-            this.upDownThreshold.TabIndex = 8;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(164, 92);
+            this.btnStart.Location = new System.Drawing.Point(524, 231);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(80, 23);
+            this.btnStart.Size = new System.Drawing.Size(80, 35);
             this.btnStart.TabIndex = 9;
-            this.btnStart.Text = "Start";
+            this.btnStart.Text = "Start MS3";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // label4
             // 
@@ -277,11 +245,49 @@
             this.label7.TabIndex = 21;
             this.label7.Text = "Output";
             // 
+            // precursorDataGridViewTextBoxColumn
+            // 
+            this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
+            dataGridViewCellStyle4.Format = "N2";
+            this.precursorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
+            this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
+            this.precursorDataGridViewTextBoxColumn.ToolTipText = "Unique Precursors";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dataGridView2.Location = new System.Drawing.Point(314, 255);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(153, 170);
+            this.dataGridView2.TabIndex = 22;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "mz";
+            dataGridViewCellStyle5.Format = "N2";
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Product";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(314, 231);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Target Product";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 783);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.lblScanNumber);
@@ -295,8 +301,6 @@
             this.Controls.Add(this.lblIsConnected);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.upDownThreshold);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDatabase);
             this.Controls.Add(this.txtDB);
@@ -308,7 +312,7 @@
             this.Text = "Fusion - Method Filter Example";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,8 +327,6 @@
         private System.Windows.Forms.TextBox txtDB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown upDownThreshold;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblIsConnected;
@@ -334,12 +336,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblInstrument;
         private System.Windows.Forms.Button btnInstrument;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblScanNumber;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

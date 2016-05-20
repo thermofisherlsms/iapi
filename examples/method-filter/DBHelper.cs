@@ -14,7 +14,7 @@ namespace Thermo.IAPI.Examples
         static SQLiteConnection mConn;
         static SQLiteDataAdapter mAdapter;
         static DataTable mTable;
-        public static Dictionary<int, int> precursors = new Dictionary<int, int>();
+        public static Dictionary<decimal, int> precursors = new Dictionary<decimal, int>();
 
         internal static void Init(string dbName)
         {
@@ -33,8 +33,7 @@ namespace Thermo.IAPI.Examples
             precursors.Clear();
             for (int i = 0; i < mTable.Rows.Count; i++)
             {
-                int precursor = (int)decimal.Parse(mTable.Rows[i]["Precursor"].ToString());
-                //int id = int.Parse(mTable.Rows[i]["ID"].ToString());                
+                decimal precursor = decimal.Parse(mTable.Rows[i]["Precursor"].ToString());
                 precursors[precursor] = i+1;
             }
             return mTable.DefaultView;

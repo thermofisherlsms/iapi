@@ -63,8 +63,15 @@ namespace Thermo.IAPI.Examples
 
         private void btnDatabase_Click(object sender, EventArgs e)
         {
-            txtDB.Text = IOHelper.OpenFile("SQLite Database files (*.db)|*.db");
+            var filter = "SQLite Files|*.db;*.sqlite;*.sqlite3";
+            txtDB.Text = IOHelper.OpenFile(filter);
+            if(string.IsNullOrWhiteSpace(txtDB.Text))
+            {
+                Log("Unable to open database file...");
+                return;
+            }
             DBHelper.Init(txtDB.Text);
+            dataGridView1.DataSource = DBHelper.GetPrecursorTable();
         }
         #endregion
         
@@ -178,6 +185,11 @@ namespace Thermo.IAPI.Examples
             {
                 txtMessage.Text += DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " " + msg + Environment.NewLine;
             }));
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Log("MS3 Scan started...");            
         }
     }
 }
