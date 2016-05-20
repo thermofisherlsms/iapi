@@ -42,14 +42,16 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblIsConnected = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnISA = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnScan = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblInstrument = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnInstrument = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lblScanNumber = new System.Windows.Forms.Label();
+            this.txtMessage = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownThreshold)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(23, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
@@ -65,6 +68,7 @@
             // 
             // txtMethodPath
             // 
+            this.txtMethodPath.Enabled = false;
             this.txtMethodPath.Location = new System.Drawing.Point(132, 169);
             this.txtMethodPath.Name = "txtMethodPath";
             this.txtMethodPath.Size = new System.Drawing.Size(472, 20);
@@ -72,6 +76,7 @@
             // 
             // btnBrowse
             // 
+            this.btnBrowse.Enabled = false;
             this.btnBrowse.Location = new System.Drawing.Point(610, 168);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(40, 23);
@@ -113,7 +118,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.precursorDataGridViewTextBoxColumn,
             this.ID});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 236);
+            this.dataGridView1.Location = new System.Drawing.Point(26, 231);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(271, 185);
             this.dataGridView1.TabIndex = 6;
@@ -132,7 +137,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 541);
+            this.label3.Location = new System.Drawing.Point(23, 431);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 13);
             this.label3.TabIndex = 7;
@@ -147,16 +152,16 @@
             0,
             0,
             65536});
-            this.upDownThreshold.Location = new System.Drawing.Point(144, 541);
+            this.upDownThreshold.Location = new System.Drawing.Point(156, 431);
             this.upDownThreshold.Name = "upDownThreshold";
             this.upDownThreshold.Size = new System.Drawing.Size(78, 20);
             this.upDownThreshold.TabIndex = 8;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(610, 248);
+            this.btnStart.Location = new System.Drawing.Point(164, 92);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(80, 23);
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -178,15 +183,15 @@
             this.lblIsConnected.Size = new System.Drawing.Size(0, 13);
             this.lblIsConnected.TabIndex = 11;
             // 
-            // button1
+            // btnISA
             // 
-            this.button1.Location = new System.Drawing.Point(164, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Connect to Server";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnISA.Location = new System.Drawing.Point(164, 1);
+            this.btnISA.Name = "btnISA";
+            this.btnISA.Size = new System.Drawing.Size(106, 23);
+            this.btnISA.TabIndex = 12;
+            this.btnISA.Text = "Connect to Server";
+            this.btnISA.UseVisualStyleBackColor = true;
+            this.btnISA.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -198,15 +203,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // btnScan
             // 
-            this.button3.Location = new System.Drawing.Point(164, 63);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Start Scan";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnScan.Enabled = false;
+            this.btnScan.Location = new System.Drawing.Point(164, 63);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(80, 23);
+            this.btnScan.TabIndex = 14;
+            this.btnScan.Text = "Start Scan";
+            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Click += new System.EventHandler(this.button3_Click);
             // 
             // label5
             // 
@@ -225,15 +231,16 @@
             this.lblInstrument.Size = new System.Drawing.Size(0, 13);
             this.lblInstrument.TabIndex = 16;
             // 
-            // button4
+            // btnInstrument
             // 
-            this.button4.Location = new System.Drawing.Point(164, 34);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(122, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Connect to Instrument";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnInstrument.Enabled = false;
+            this.btnInstrument.Location = new System.Drawing.Point(164, 34);
+            this.btnInstrument.Name = "btnInstrument";
+            this.btnInstrument.Size = new System.Drawing.Size(122, 23);
+            this.btnInstrument.TabIndex = 17;
+            this.btnInstrument.Text = "Connect to Instrument";
+            this.btnInstrument.UseVisualStyleBackColor = true;
+            this.btnInstrument.Click += new System.EventHandler(this.button4_Click);
             // 
             // label6
             // 
@@ -253,19 +260,38 @@
             this.lblScanNumber.TabIndex = 19;
             this.lblScanNumber.Text = "0";
             // 
+            // txtMessage
+            // 
+            this.txtMessage.Location = new System.Drawing.Point(18, 503);
+            this.txtMessage.Multiline = true;
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Size = new System.Drawing.Size(691, 268);
+            this.txtMessage.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 484);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Output";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 783);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.lblScanNumber);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnInstrument);
             this.Controls.Add(this.lblInstrument);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnScan);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnISA);
             this.Controls.Add(this.lblIsConnected);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnStart);
@@ -302,16 +328,18 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblIsConnected;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnISA;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblInstrument;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnInstrument;
         private System.Windows.Forms.DataGridViewTextBoxColumn precursorDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblScanNumber;
+        private System.Windows.Forms.TextBox txtMessage;
+        private System.Windows.Forms.Label label7;
     }
 }
 

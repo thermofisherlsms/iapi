@@ -25,13 +25,12 @@ namespace Thermo.IAPI.Examples
 {
     public partial class Form1 : Form
     {
-        InstrumentAccessService ias;
-        List<int> precursors = new List<int>();
+        InstrumentAPI ias;
 
         public Form1()
         {
             InitializeComponent();
-            ias = new InstrumentAccessService();
+            ias = new InstrumentAPI();
             ias.InstAccessContainer.ServiceConnectionChanged += ConnectionChanged;
             ias.InstAccessContainer.MessagesArrived += OnMessagesArrived;
         }
@@ -42,12 +41,17 @@ namespace Thermo.IAPI.Examples
             () =>
             {
                 lblIsConnected.Text = ias.ServiceConnected ? "Connected!" : "Not Connected!";
+                btnInstrument.Enabled = ias.ServiceConnected;
+                Log("Instrument Service Connected");
             }));
         }
 
         void OnMessagesArrived(object sender, MessagesArrivedEventArgs e)
         {
-                        
+            foreach (var msg in e.Messages)
+            {
+                Log(msg.Message);
+            }
         }
 
 
@@ -72,20 +76,20 @@ namespace Thermo.IAPI.Examples
             //this.table_precursorTableAdapter.Fill(this.methoddbDataSet.Table_precursor);
             DBHelper.Init(txtDB.Text);
             // store scans only that matches the master table.            
-            precursors.Add(524);
-            precursors.Add(197);
             dataGridView1.DataSource = DBHelper.GetPrecursorTable();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ias.StartOnlineAccess();
+            ias.StartOnlineAccess();            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             ias.CloseConnection();
             this.Text = "Disconnected";
+            btnInstrument.Enabled = false;
+            btnScan.Enabled = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -139,7 +143,6 @@ namespace Thermo.IAPI.Examples
             {
                 lblScanNumber.Text = currentScan.Header["Scan"].ToString();
             }));
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -148,7 +151,9 @@ namespace Thermo.IAPI.Examples
              ias.InstAcq.StateChanged += OnAcquisitionStateChanged;
              ias.InstAccess.ConnectionChanged += OnInstAccessConnectionChanged;
              lblInstrument.Text = ias.InstrumentConnected ? "Connected!" : "Not Connected!";
+             btnScan.Enabled = ias.InstrumentConnected;
              this.Text = "Connected to " + ias.InstrumentInfo.InstrumentName;
+             Log(this.Text);
         }
 
         void OnAcquisitionStateChanged(object sender, StateChangedEventArgs e)
@@ -162,6 +167,16 @@ namespace Thermo.IAPI.Examples
             () =>
             {
                 lblInstrument.Text = ias.InstrumentConnected ? "Connected!" : "Not Connected!";
+                btnScan.Enabled = ias.InstrumentConnected;
+            }));
+        }
+
+        void Log(string msg)
+        {
+            Invoke(new Action(
+            () =>
+            {
+                txtMessage.Text += DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " " + msg + Environment.NewLine;
             }));
         }
     }

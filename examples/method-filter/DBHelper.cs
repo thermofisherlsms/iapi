@@ -39,17 +39,17 @@ namespace Thermo.IAPI.Examples
             }
             return mTable.DefaultView;
         }
-        static int lastID = 1;
         internal static void StoreScan(IMsScan currentScan)
         {
             int precursorMass = (int)decimal.Parse(currentScan.Header["PrecursorMass[0]"]);
 
             if (precursors.ContainsKey(precursorMass))
             {
-                using (SQLiteCommand command = new SQLiteCommand("insert into Table_Product (ID, PrecursorID, mz, INT) values (@ID, @PrecursorID,@mz,@INT)", mConn))
+                using (SQLiteTransaction transaction = mConn.BeginTransaction())
                 {
+                    SQLiteCommand command = new SQLiteCommand("insert into Table_Product (ID, PrecursorID, mz, INT) values (@ID, @PrecursorID,@mz,@INT)", mConn);
                     //Do this for all the centroids.
-                    var sortedCentroids = currentScan.Centroids.OrderByDescending(c=>c.Intensity).Take(100);
+                    var sortedCentroids = currentScan.Centroids.OrderByDescending(c => c.Intensity).Take(100);
                     foreach (var centroid in sortedCentroids)
                     {
                         if (centroid.Intensity > 0)
@@ -62,6 +62,7 @@ namespace Thermo.IAPI.Examples
                             command.ExecuteNonQuery();
                         }
                     }
+                    transaction.Commit();
                 }
             }
         }

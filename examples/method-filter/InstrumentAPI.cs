@@ -16,7 +16,7 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
 
 namespace Thermo.IAPI.Examples
 {
-    sealed public class InstrumentAccessService
+    sealed public class InstrumentAPI
     {
         public InstrumentInfo InstrumentInfo = new InstrumentInfo();
         IFusionInstrumentAccessContainer _instAccessContainer;
@@ -52,7 +52,7 @@ namespace Thermo.IAPI.Examples
         //IInstrumentValues _instValues;
         //IScans _scans;
 
-        public InstrumentAccessService()
+        public InstrumentAPI()
         {
             _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create();
         }
