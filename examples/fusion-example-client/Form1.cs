@@ -154,11 +154,50 @@ namespace FusionExampleClient
             var lastScan2 = e.GetScan();
             if (lastScan1 == lastScan2)
                 totalScansArrived++;
+
+            string accessID = "n/a";
+            lastScan1.Trailer.TryGetValue("Access ID", out accessID);
+
             Invoke(new Action(
             () =>
             {
                 textBox1.Text = totalScansArrived.ToString();
+                textBox3.Text = accessID;
             }));
+
+
+            int msOrder = int.Parse(lastScan1.Header["MSOrder"]);
+            if (msOrder < 2)
+            {
+                return;
+            }
+
+            double precusor = double.Parse(lastScan1.Header["PrecursorMass[0]"]);
+
+            if (precusor > 524 && precusor < 525 && msOrder == 2)
+            {
+                ICustomScan customScan = _scans.CreateCustomScan();
+
+                customScan.SingleProcessingDelay = 5;
+
+                customScan.RunningNumber = long.Parse(textBox4.Text);
+
+                double topProd = double.Parse(lastScan1.Header["BasePeakMass"]);
+
+                customScan.Values["FirstMass"] = "150";
+                customScan.Values["LastMass"] = "600";
+                customScan.Values["ScanType"] = "MSn";
+                customScan.Values["Analyzer"] = "Orbitrap";
+                customScan.Values["OrbitrapResolution"] = "60000";
+                customScan.Values["AGCTarget"] = "2e5";
+                customScan.Values["PrecursorMass"] = string.Format("{0:F4};{1:F4}", precusor, topProd);
+                customScan.Values["CollisionEnergy"] = "30;25";
+                customScan.Values["MicroScans"] = "1";
+
+                _scans.SetCustomScan(customScan);
+
+            }
+
 
         }
 
@@ -178,11 +217,15 @@ namespace FusionExampleClient
         {           
             ICustomScan customScan = _scans.CreateCustomScan();
 
+            customScan.SingleProcessingDelay = 5;
+
+            customScan.RunningNumber = long.Parse(textBox4.Text);
+
             customScan.Values["FirstMass"] = "150";
             customScan.Values["LastMass"] = "600";
-            customScan.Values["ScanType"] = "Full";
-           // customScan.Values["PrecursorMass"] = "524.3";
-            //customScan.Values["CollisionEnergy"] = "25";
+            customScan.Values["ScanType"] = "MSn";
+            customScan.Values["PrecursorMass"] = "524.25;271.27";
+            customScan.Values["CollisionEnergy"] = "30;25";
             customScan.Values["MicroScans"] = "1";
 
             _scans.SetCustomScan(customScan);
@@ -191,6 +234,8 @@ namespace FusionExampleClient
         private void button8_Click(object sender, EventArgs e)
         {
             IRepeatingScan repeatScan = _scans.CreateRepeatingScan();
+
+            repeatScan.RunningNumber = long.Parse(textBox4.Text);
 
             repeatScan.Values["FirstMass"] = "500";
             repeatScan.Values["LastMass"] = "600";

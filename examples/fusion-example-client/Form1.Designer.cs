@@ -38,6 +38,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.serverConnectedTB = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.instrumentConnectedTB = new System.Windows.Forms.TextBox();
@@ -55,8 +57,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -171,6 +175,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ReadBacks";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(162, 112);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 120);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(150, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Ready To Receive Next Scan";
             // 
             // serverConnectedTB
             // 
@@ -318,27 +338,49 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // textBox2
+            // textBox3
             // 
-            this.textBox2.Location = new System.Drawing.Point(162, 112);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 14;
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(337, 42);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 14;
             // 
-            // label8
+            // label9
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 120);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Ready To Receive Next Scan";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(174, 44);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Running Number";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(353, 96);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 16;
+            this.textBox4.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(350, 77);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Running Number Set";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1086, 281);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -393,6 +435,10 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label10;
     }
 }
 
