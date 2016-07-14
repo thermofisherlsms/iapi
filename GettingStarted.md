@@ -1,4 +1,4 @@
-# Getting Started with the Insturment API
+# Getting Started with the Instrument API
 
 The following steps are needed to use the Instrument API (IAPI) with the Fusion mass spectromters.
 
