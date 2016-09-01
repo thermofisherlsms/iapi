@@ -12,3 +12,11 @@ Some basic usage examples...
 ## Examples
 
 Visit the [examples](https://github.com/thermofisherlsms/iapi/tree/master/examples) directory for some C# example programs.
+
+## Filing an Issue
+
+When filing an issue for the IAPI, please provide the following details:
+
+* Minimial workable example
+* Version of Tune used
+* Instrument Model
