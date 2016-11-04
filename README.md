@@ -3,6 +3,9 @@ Instrument Application Programming Interface for the Thermo Fisher Scientific Fu
 
 The IAPI is currently in a closed beta. To enter the beta, please follow the directions in the [getting started](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md) document. 
 
+Current API Version: [1.0.0.13 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog#2.2.172)
+Current Tune Version: [2.2.172 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog#2.2.172)
+
 ## Getting Started
 
 Visit the [getting started](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md) document for first-time setup and requirements

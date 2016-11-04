@@ -61,8 +61,28 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.rawfileTB = new System.Windows.Forms.TextBox();
+            this.methodBrowse = new System.Windows.Forms.Button();
+            this.methodTB = new System.Windows.Forms.TextBox();
+            this.numberOfMinutesUD = new System.Windows.Forms.NumericUpDown();
+            this.numberOfScansUD = new System.Windows.Forms.NumericUpDown();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.openMethodDialog = new System.Windows.Forms.OpenFileDialog();
+            this.rawfileDialogSave = new System.Windows.Forms.SaveFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfMinutesUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -372,11 +392,184 @@
             this.label10.TabIndex = 17;
             this.label10.Text = "Running Number Set";
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(6, 30);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(130, 23);
+            this.button11.TabIndex = 18;
+            this.button11.Text = "Start Acquisition";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(242, 30);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(130, 23);
+            this.button12.TabIndex = 19;
+            this.button12.Text = "Stop Acquisition";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button13);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.rawfileTB);
+            this.groupBox1.Controls.Add(this.methodBrowse);
+            this.groupBox1.Controls.Add(this.methodTB);
+            this.groupBox1.Controls.Add(this.numberOfMinutesUD);
+            this.groupBox1.Controls.Add(this.numberOfScansUD);
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.button11);
+            this.groupBox1.Controls.Add(this.button12);
+            this.groupBox1.Location = new System.Drawing.Point(31, 290);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(471, 194);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Acquisition Control";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(378, 166);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 32;
+            this.button13.Text = "Browse";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 171);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(42, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Rawfile";
+            // 
+            // rawfileTB
+            // 
+            this.rawfileTB.Location = new System.Drawing.Point(110, 168);
+            this.rawfileTB.Name = "rawfileTB";
+            this.rawfileTB.Size = new System.Drawing.Size(262, 20);
+            this.rawfileTB.TabIndex = 29;
+            // 
+            // methodBrowse
+            // 
+            this.methodBrowse.Location = new System.Drawing.Point(378, 133);
+            this.methodBrowse.Name = "methodBrowse";
+            this.methodBrowse.Size = new System.Drawing.Size(75, 23);
+            this.methodBrowse.TabIndex = 28;
+            this.methodBrowse.Text = "Browse";
+            this.methodBrowse.UseVisualStyleBackColor = true;
+            this.methodBrowse.Click += new System.EventHandler(this.methodBrowse_Click);
+            // 
+            // methodTB
+            // 
+            this.methodTB.Location = new System.Drawing.Point(110, 135);
+            this.methodTB.Name = "methodTB";
+            this.methodTB.Size = new System.Drawing.Size(262, 20);
+            this.methodTB.TabIndex = 27;
+            // 
+            // numberOfMinutesUD
+            // 
+            this.numberOfMinutesUD.DecimalPlaces = 2;
+            this.numberOfMinutesUD.Location = new System.Drawing.Point(110, 109);
+            this.numberOfMinutesUD.Name = "numberOfMinutesUD";
+            this.numberOfMinutesUD.Size = new System.Drawing.Size(120, 20);
+            this.numberOfMinutesUD.TabIndex = 26;
+            this.numberOfMinutesUD.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            65536});
+            // 
+            // numberOfScansUD
+            // 
+            this.numberOfScansUD.Location = new System.Drawing.Point(110, 86);
+            this.numberOfScansUD.Name = "numberOfScansUD";
+            this.numberOfScansUD.Size = new System.Drawing.Size(120, 20);
+            this.numberOfScansUD.TabIndex = 25;
+            this.numberOfScansUD.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(16, 132);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(61, 17);
+            this.radioButton4.TabIndex = 23;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Method";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.acqCheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(16, 109);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(62, 17);
+            this.radioButton3.TabIndex = 22;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Minutes";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.acqCheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(16, 86);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(77, 17);
+            this.radioButton2.TabIndex = 21;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "# of Scans";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.acqCheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(16, 63);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(78, 17);
+            this.radioButton1.TabIndex = 20;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Continuous";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.acqCheckedChanged);
+            // 
+            // openMethodDialog
+            // 
+            this.openMethodDialog.Filter = "Method|*.meth";
+            this.openMethodDialog.InitialDirectory = "C:\\Xcalibur\\methods";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(511, 263);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(549, 195);
+            this.richTextBox1.TabIndex = 21;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 281);
+            this.ClientSize = new System.Drawing.Size(1086, 511);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label9);
@@ -396,9 +589,14 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfMinutesUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -439,6 +637,23 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button methodBrowse;
+        private System.Windows.Forms.TextBox methodTB;
+        private System.Windows.Forms.NumericUpDown numberOfMinutesUD;
+        private System.Windows.Forms.NumericUpDown numberOfScansUD;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox rawfileTB;
+        private System.Windows.Forms.OpenFileDialog openMethodDialog;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.SaveFileDialog rawfileDialogSave;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -17,6 +17,7 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
+using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow;
 
 namespace FusionExampleClient
 {
@@ -36,6 +37,7 @@ namespace FusionExampleClient
         public Form1()
         {
             InitializeComponent();
+
             _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create();
             _instAccessContainer.ServiceConnectionChanged += _instAccessContainer_ServiceConnectionChanged;
             _instAccessContainer.MessagesArrived += _instAccessContainer_MessagesArrived;
@@ -43,7 +45,23 @@ namespace FusionExampleClient
 
         void _instAccessContainer_MessagesArrived(object sender, MessagesArrivedEventArgs e)
         {
-
+            StringBuilder sb = new StringBuilder();
+            foreach(var message in e.Messages) 
+            {
+                string msg = string.Format("[{0}] ID: {1} Status: {2} Msg: {3}",
+                    message.CreationTime,
+                    message.MessageId,
+                    message.Status,
+                    string.Format(message.Message, message.MessageArgs));
+              
+                sb.AppendLine(msg);
+            }
+                
+            Invoke(new Action(
+            () =>
+            {
+                richTextBox1.AppendText(sb.ToString());
+            }));
         }
 
         void _instAccessContainer_ServiceConnectionChanged(object sender, EventArgs e)
@@ -253,6 +271,89 @@ namespace FusionExampleClient
         private void button10_Click(object sender, EventArgs e)
         {
             _scans.CancelCustomScan();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            IAcquisitionWorkflow acq = null;
+
+            if (radioButton1.Checked)
+            {
+                acq = _instControl.Acquisition.CreatePermanentAcquisition();              
+            }
+            else if (radioButton2.Checked)
+            {
+                acq = _instControl.Acquisition.CreateAcquisitionLimitedByCount((int)numberOfScansUD.Value);     
+            }
+            else if (radioButton3.Checked)
+            {
+                 acq = _instControl.Acquisition.CreateAcquisitionLimitedByDuration(TimeSpan.FromMinutes((double)numberOfMinutesUD.Value));   
+            }            
+            else if (radioButton4.Checked)
+            {
+                 acq = _instControl.Acquisition.CreateMethodAcquisition(methodTB.Text);   
+            }
+            else
+            {
+                throw new Exception();
+            }
+           
+            acq.RawFileName = rawfileTB.Text;
+            acq.Comment = "Made with love from the API :)";
+            acq.SingleProcessingDelay = 0;
+            acq.WaitForContactClosure = false;
+
+            _instControl.Acquisition.StartAcquisition(acq);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            _instControl.Acquisition.CancelAcquisition();
+        }
+        
+        private void acqCheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                numberOfMinutesUD.Enabled = numberOfScansUD.Enabled = methodBrowse.Enabled = methodTB.Enabled = false;
+            }
+            else if (radioButton2.Checked)
+            {
+                numberOfScansUD.Enabled = true;
+                numberOfMinutesUD.Enabled = methodBrowse.Enabled = methodTB.Enabled = false;
+            }
+            else if (radioButton3.Checked)
+            {
+                numberOfMinutesUD.Enabled = true;
+                numberOfScansUD.Enabled = methodBrowse.Enabled = methodTB.Enabled = false;
+            }
+            else if (radioButton4.Checked)
+            {
+                methodBrowse.Enabled = methodTB.Enabled = true;
+                numberOfMinutesUD.Enabled = numberOfScansUD.Enabled = false;
+            }
+        }
+
+        private void methodBrowse_Click(object sender, EventArgs e)
+        {
+            if(openMethodDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                methodTB.Text = openMethodDialog.FileName;
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if(rawfileDialogSave.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                rawfileTB.Text = rawfileDialogSave.FileName;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            radioButton1.Checked = true;
+            acqCheckedChanged(null, EventArgs.Empty);
         }
 
 
