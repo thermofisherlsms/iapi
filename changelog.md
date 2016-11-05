@@ -10,6 +10,7 @@ This file will summarize the changes and bug fixes by Tune version.
 	* Added IFusionControl interface that extends IControl and provides a way to access the ISyringePumpControl interface
 * Implemented syringe pump control for API in Tune.
 * Updated example 'FusionExampleClient' project with basic syringe pump readbacks and controls
+* Added basic xml documentation
 
 ## 2.2.172 (Nov 3, 2016)
 
