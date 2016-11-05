@@ -1,0 +1,20 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Thermo Fisher Instrument API Documentation</title>
+</head>
+<body class="vendor-book">
+    <div class="details">
+        <span class="vendor">Vendor Name</span>
+        <span class="locale">en-us</span>
+        <span class="product">Thermo Fisher Instrument API Documentation</span>
+        <span class="name">Thermo Fisher Instrument API Documentation</span>
+    </div>
+    <div class="package-list">
+        <div class="package">
+            <!-- NOTE: The "name" span value cannot contain any periods! -->
+            <span class="name">IAPI Documentation</span>
+            <a class="current-link" href="IAPI Documentation.mshc">IAPI Documentation.mshc</a>
+        </div>
+    </div>
+</body>
+</html>
