@@ -18,6 +18,9 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow;
+using Thermo.Interfaces.FusionAccess_V1.Control.Peripherals;
+using Thermo.Interfaces.FusionAccess_V1.Control;
+using System.Reflection;
 
 namespace FusionExampleClient
 {
@@ -27,18 +30,18 @@ namespace FusionExampleClient
         IFusionInstrumentAccess _instAccess;
         IFusionMsScanContainer _instMSScanContainer;
         IAcquisition _instAcq;
-        IControl _instControl;
+        IFusionControl _instControl;
         IInstrumentValues _instValues;
         IScans _scans;
+        ISyringePumpControl _syringe;
 
         int totalScansArrived = 0;
         int customScans = 0;
 
         public Form1()
         {
-            InitializeComponent();
-
-            _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create();
+            InitializeComponent();        
+            _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create(); 
             _instAccessContainer.ServiceConnectionChanged += _instAccessContainer_ServiceConnectionChanged;
             _instAccessContainer.MessagesArrived += _instAccessContainer_MessagesArrived;
         }
@@ -90,7 +93,7 @@ namespace FusionExampleClient
             instrumentIdTB.Text = _instAccess.InstrumentId.ToString();
             instrumentNameTB.Text = _instAccess.InstrumentName;
             instrumentConnectedTB.Text = _instAccess.Connected.ToString();
-
+        
             _instControl = _instAccess.Control;
             _instAccess.ConnectionChanged += _instAccess_ConnectionChanged;
             _instAcq = _instControl.Acquisition;
@@ -103,6 +106,20 @@ namespace FusionExampleClient
             _scans.CanAcceptNextCustomScan += _scans_CanAcceptNextCustomScan;
             _scans.PossibleParametersChanged += _scans_PossibleParametersChanged;
 
+            _syringe = _instControl.SyringePumpControl;
+            _syringe.ParameterValueChanged += _syringe_ParameterValueChanged;
+            _syringe.StatusChanged += _syringe_StatusChanged;
+            updateSyringeReadbacks(true);
+        }
+
+        void _syringe_StatusChanged(object sender, EventArgs e)
+        {
+            updateSyringeReadbacks();
+        }
+
+        void _syringe_ParameterValueChanged(object sender, EventArgs e)
+        {
+            updateSyringeReadbacks();
         }
 
         void _scans_PossibleParametersChanged(object sender, EventArgs e)
@@ -356,6 +373,54 @@ namespace FusionExampleClient
             acqCheckedChanged(null, EventArgs.Empty);
         }
 
+        private void button14_Click(object sender, EventArgs e)
+        {
+            _syringe.Start();
+        }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            _syringe.Stop();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            _syringe.Toggle();
+        }
+
+        private void updateSyringeReadbacks(bool setControls = false)
+        {
+            Invoke(new Action(
+             () =>
+             {
+                 diamterRB.Text = _syringe.Diameter.ToString("g3");
+                 volumeRB.Text = _syringe.Volume.ToString("g3");
+                 flowrateRB.Text = _syringe.FlowRate.ToString("g3");
+                 syringeStatusTB.Text = _syringe.Status.ToString();
+
+                 if (setControls)
+                 {
+                     numericUpDown1.Value = decimal.Parse(diamterRB.Text);
+                     numericUpDown2.Value = decimal.Parse(volumeRB.Text);
+                     numericUpDown3.Value = decimal.Parse(flowrateRB.Text);
+                 }
+
+             }));
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            _syringe.SetDiameter((double)numericUpDown1.Value);
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            _syringe.SetVolume((double)numericUpDown2.Value);
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            _syringe.SetFlowRate((double)numericUpDown3.Value);
+        }
     }
 }

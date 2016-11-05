@@ -3,9 +3,15 @@ Instrument Application Programming Interface for the Thermo Fisher Scientific Fu
 
 The IAPI is currently in a closed beta. To enter the beta, please follow the directions in the [getting started](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md) document. 
 
-Current API Version: [1.0.0.13 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22172-nov-3-2016)
+## Version Information
 
-Current Tune Version: [2.2.172 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22172-nov-3-2016)
+Versioning for the API will follow [Semantic Versioning](http://semver.org/). Major version changes reflect breaking changes to the public API. Minor version changes reflect backwards-compatible feature additions. And patch version changes reflect backwards-compatible bug fixes. *Versioning for Tune does not follow semantic versioning as there is no public API associated with it directly.*
+
+Current Instrument API Version: [1.0.0.13 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22172-nov-3-2016)
+
+Current Fusion API Version: [1.1.0.0 (Nov 4, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22174-nov-4-2016)
+
+Current Tune Version: [2.2.174 (Nov 3, 2016)](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22174-nov-4-2016)
 
 ## Getting Started
 

@@ -2,6 +2,15 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 2.2.174 (Nov 4, 2016)
+* Fusion API is updated to 1.1.0.0
+	* Added ISyringePumpControl interface	
+		* Contains properties and methods for controlling the syringe pump
+		* Added SyringePumpStatus enum for determining pump status
+	* Added IFusionControl interface that extends IControl and provides a way to access the ISyringePumpControl interface
+* Implemented syringe pump control for API in Tune.
+* Updated example 'FusionExampleClient' project with basic syringe pump readbacks and controls
+
 ## 2.2.172 (Nov 3, 2016)
 
 * API is updated to 1.0.0.13

@@ -78,11 +78,29 @@
             this.openMethodDialog = new System.Windows.Forms.OpenFileDialog();
             this.rawfileDialogSave = new System.Windows.Forms.SaveFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.flowrateRB = new System.Windows.Forms.Label();
+            this.volumeRB = new System.Windows.Forms.Label();
+            this.diamterRB = new System.Windows.Forms.Label();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.syringeStatusTB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfMinutesUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -310,12 +328,26 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.syringeStatusTB);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.button16);
+            this.tabPage2.Controls.Add(this.button15);
+            this.tabPage2.Controls.Add(this.button14);
+            this.tabPage2.Controls.Add(this.flowrateRB);
+            this.tabPage2.Controls.Add(this.volumeRB);
+            this.tabPage2.Controls.Add(this.diamterRB);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.numericUpDown3);
+            this.tabPage2.Controls.Add(this.numericUpDown2);
+            this.tabPage2.Controls.Add(this.numericUpDown1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(545, 218);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Syringe Control";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button7
@@ -563,11 +595,154 @@
             this.richTextBox1.TabIndex = 21;
             this.richTextBox1.Text = "";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 3;
+            this.numericUpDown1.Location = new System.Drawing.Point(85, 23);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 3;
+            this.numericUpDown2.Location = new System.Drawing.Point(85, 49);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 1;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.DecimalPlaces = 3;
+            this.numericUpDown3.Location = new System.Drawing.Point(85, 75);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown3.TabIndex = 2;
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(17, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Diameter";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(17, 51);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(42, 13);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Volume";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(17, 77);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Flow Rate";
+            // 
+            // flowrateRB
+            // 
+            this.flowrateRB.AutoSize = true;
+            this.flowrateRB.Location = new System.Drawing.Point(211, 77);
+            this.flowrateRB.Name = "flowrateRB";
+            this.flowrateRB.Size = new System.Drawing.Size(55, 13);
+            this.flowrateRB.TabIndex = 8;
+            this.flowrateRB.Text = "Flow Rate";
+            // 
+            // volumeRB
+            // 
+            this.volumeRB.AutoSize = true;
+            this.volumeRB.Location = new System.Drawing.Point(211, 51);
+            this.volumeRB.Name = "volumeRB";
+            this.volumeRB.Size = new System.Drawing.Size(42, 13);
+            this.volumeRB.TabIndex = 7;
+            this.volumeRB.Text = "Volume";
+            // 
+            // diamterRB
+            // 
+            this.diamterRB.AutoSize = true;
+            this.diamterRB.Location = new System.Drawing.Point(211, 25);
+            this.diamterRB.Name = "diamterRB";
+            this.diamterRB.Size = new System.Drawing.Size(49, 13);
+            this.diamterRB.TabIndex = 6;
+            this.diamterRB.Text = "Diameter";
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(20, 110);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(75, 23);
+            this.button14.TabIndex = 9;
+            this.button14.Text = "Start";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(20, 139);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.TabIndex = 10;
+            this.button15.Text = "Stop";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(20, 168);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(75, 23);
+            this.button16.TabIndex = 11;
+            this.button16.Text = "Toggle";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(113, 120);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Status";
+            // 
+            // syringeStatusTB
+            // 
+            this.syringeStatusTB.Enabled = false;
+            this.syringeStatusTB.Location = new System.Drawing.Point(156, 117);
+            this.syringeStatusTB.Name = "syringeStatusTB";
+            this.syringeStatusTB.Size = new System.Drawing.Size(100, 20);
+            this.syringeStatusTB.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 511);
+            this.ClientSize = new System.Drawing.Size(1086, 559);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
@@ -593,10 +768,15 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfMinutesUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -654,6 +834,20 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.SaveFileDialog rawfileDialogSave;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Label flowrateRB;
+        private System.Windows.Forms.Label volumeRB;
+        private System.Windows.Forms.Label diamterRB;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox syringeStatusTB;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button15;
     }
 }
 
