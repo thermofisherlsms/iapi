@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thermo.TNG.Factory</name>
+    </assembly>
+    <members>
+        <member name="M:Thermo.TNG.Factory.Factory`1.Create(System.Object[])">
+            <summary>
+            Creates an instance of the provided type
+            </summary>
+            <param name="args">Optional parameters</param>
+            <returns>An instance of the created type</returns>
+        </member>
+    </members>
+</doc>

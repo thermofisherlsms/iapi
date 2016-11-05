@@ -1,0 +1,2608 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API-2.0</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs">
+             <summary>
+             This implementation of EventArgs carries a list of <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IAcquisitionError"/>s.
+             This class will not be used for status reports or messages of the
+             transport layer.
+             </summary>
+             <remarks>
+             An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.AcquisitionErrorsArrived"/>.
+             </remarks>
+             <example>
+             This example shows how to use this class. The removal of the handler is not shown.
+             <code>
+             /// &lt;summary>
+             /// Set up all the instrument.
+             /// &lt;/summary>
+             /// &lt;param name="instrument">instrument for which errors shall be logged&lt;/param>
+             void Init(IInstrumentAccess instrument)
+             {
+            	    InstrumentInstance.AcquisitionErrorsArrived += new EventHandler&lt;AcquisitionErrorsArrivedEventArgs>(Instrument_AcquisitionErrorsArrived);
+             }
+            
+             /// &lt;summary>
+             /// When errors from the instrument arrived we publish them.
+             /// &lt;/summary>
+             /// &lt;param name="sender">doesn't matter&lt;/param>
+             /// &lt;param name="e">contains the messages to be dumped&lt;/param>
+             private void Instrument_AcquisitionErrorsArrived(object sender, AcquisitionErrorsArrivedEventArgs e)
+             {
+            	    foreach (IAcquisitionError error in e.Errors)
+            	    {
+            	        Console.WriteLine("ERROR>>> " + error.Content);
+            	    }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs.Errors">
+            <summary>
+            Get access to the errors that have arrived from the instrument.
+            </summary>	
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.AnalogTracePointEventArgs">
+            <summary>
+            This implementation of EventArgs carries an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTracePoint"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer"/> for an example how this class can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.AnalogTracePointArrived"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.AnalogTracePointEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.AnalogTracePointEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.AnalogTracePointEventArgs.TracePoint">
+            <summary>
+            Get access to the analog trace point that has just arrived from the instrument.
+            It has replaced already the LastValue in the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer">
+            <summary>
+            All analog trace points of the instrument can be accessed by using this
+            interface.
+            <para>
+            The last-seen value is accessible all the time but may change frequently.
+            It is also possible to get notice of a new value as soon as it is accessible.
+            </para>
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetAnalogTraceContainer(System.Int32)"/>.
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.DetectorClass">
+            <summary>
+            Get access to the detector class.
+            <para>
+            Example: The detector name may be "PDA", but "Analog Input Channel 1"
+            or something similar is also possible.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.Minimum">
+            <summary>
+            Get access to the lowest possible value of the detector or analog input.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.Maximum">
+            <summary>
+            Get access to the highest possible value of the detector or analog input.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.UpdateFrequencyHz">
+            <summary>
+            Get access to acquisition frequency of the values. null is returned if the
+            system has no specific frequency. The value is returned in 1/s (Hertz).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.LastValue">
+            <summary>
+            Get access to the last value seen in the system.
+            The value can be null initially.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.AnalogTracePointArrived">
+            <summary>
+            This event will be fired when a new analog value has been emitted by the
+            instrument. There may be no specific update frequency.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTracePoint">
+            <summary>
+            An IAnalogTracePoint describes a value of an analog detector.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTraceContainer.LastValue"/> or by
+            <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.AnalogTracePointEventArgs.TracePoint"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTracePoint.Value">
+            <summary>
+            The value of the analog detector.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.IAnalogTracePoint.Occurrence">
+            <summary>
+            The time difference between acquisition start and the arrival of the analog value.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer.NamespaceDoc">
+            <summary>
+            This namespace covers those interfaces for sole use by analog trace devices.
+            Such devices are PDAs, UVs, etc.
+            <para>
+            Call <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess"/>.<see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetAnalogTraceContainer(System.Int32)"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition">
+            <summary>
+            This interface allows the direct access to method/acquisition starts, to
+            wait for contact closure or to extend the delay between the start of
+            the acquisition process and the real start of the first scan
+            programmatically. 
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Acquisition"/>.
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.State">
+            <summary>
+            Get access to the current state of the instrument.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StateChanged">
+            <summary>
+            This event will be fired after <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.State"/> has changed its value. The current
+            instrument state will be carried along.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CanPause">
+            <summary>
+            Will it be possible to pause the current operation?
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CanResume">
+            <summary>
+            Will it be possible to pause the current operation?
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)">
+            <summary>
+            Transport a new state change request to the instrument. Even if the command has been
+            submitted successfully to the instrument it may still be possible that the instrument
+            rejects the request because it has entered a different state in between.
+            </summary>
+            <param name="newMode">The new mode that shall be assumed by the instrument.</param>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.ArgumentException">The mode change request has illegal values.</exception>
+            <exception cref="T:System.FormatException">The mode change request is of an unknown type. Use <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> to generate a valid type.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.Pause">
+            <summary>
+            Pause the current operation.
+            </summary>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.Resume">
+            <summary>
+            Resume the current operation.
+            </summary>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateOnMode">
+            <summary>
+            Create a new state change object that can put the instrument in the On state.
+            No data acquisition will be performed, a separate command/logic exists for this purpose.
+            </summary>
+            <returns>The created state change object can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)"/> to set the new state.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateOffMode">
+            <summary>
+            Create a new state change object that can put the instrument in the Off state.
+            </summary>
+            <returns>The created state change object can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)"/> to set the new mode.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateStandbyMode">
+            <summary>
+            Create a new state change object that can put the instrument in the Standby state.
+            </summary>
+            <returns>The created state change object can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)"/> to set the new state.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateForcedOffMode">
+            <summary>
+            Create a new state change object that can put the instrument in the Off state unconditionally. A running acquisition even started by a a foreign control may be terminated.
+            </summary>
+            <returns>The created state change object can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)"/> to set the new mode.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateForcedStandbyMode">
+            <summary>
+            Create a new state change object that can put the instrument in the Standby state unconditionally. A running acquisition even started by a a foreign control may be terminated.
+            </summary>
+            <returns>The created state change object can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.SetMode(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode)"/> to set the new state.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.WaitFor(System.TimeSpan,System.Func{Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState,Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode,System.Boolean})">
+            <summary>
+            Wait for the instrument to assume a given state. The function <paramref name="continuation"/> will be called on
+            state change and should return true when an acceptable state has been reached for continuation.
+            <para>
+            Waiting will end after duration.
+            </para>
+            </summary>
+            <param name="duration">non-negative duration this call shall wait at most</param>
+            <param name="continuation">Function returning true if the passed states allow continuation. On return of true, the WaitFor call will immediately end also with the return value of true.</param>
+            <returns>true if condition as returned true, false if duration has expired</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)">
+            <summary>
+            Start an acquisition providing a workflow for this operation. The instrument must be on mode "On".
+            There must not be any pending acquisition. The new acquisition will run under direct control.
+            </summary>
+            <param name="acquisition">workflow of the new acquisition.</param>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.ArgumentException">The request has illegal values.</exception>
+            <exception cref="T:System.FormatException">The request is of an unknown type. Use <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> to generate a valid type.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition">
+            <summary>
+            Cancel any pending acquisition that is started under direct control.
+            </summary>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreatePermanentAcquisition">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition"/>.
+            </para>
+            </summary>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateAcquisitionLimitedByCount(System.Int32)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the specified amount of scans have been taken.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            </summary>
+            <param name="count">The number of scans to be taken during this acquisition. The number must be positive and must not exceed 1000000.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateAcquisitionLimitedByDuration(System.TimeSpan)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the the specified time span has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            </summary>
+            <param name="duration">The amount of time of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateMethodAcquisition(System.String)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            a method-based acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            Tune data will be retrieved from those files present in the method.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the duration specified in the method has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Xcalibur.
+            </para>
+            </summary>
+            <param name="methodFileName">name of the method to execute.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateMethodAcquisition(System.String,System.TimeSpan)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            a method-based acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            Tune data will be retrieved from those files present in the method.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the the specified time span has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Xcalibur.
+            </para>
+            </summary>
+            <param name="methodFileName">name of the method to execute.</param>
+            <param name="duration">The amount of time of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState">
+            <summary>
+            This enumeration defines the instrument state during an acquisition. The enumeration
+            is the so called DeviceStatus of Thermo Fisher virtual instruments.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this enumeration can be used.
+            </remarks>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Initializing">
+            <summary>
+            "Initializing"<br/>
+            Set during boot up or initialization of an acquisition service.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.ReadyToDownload">
+            <summary>
+            "Ready to Download"<br/>
+            The instrument is ready to load a method, but any other mode is also possible.
+            <para>This state will be used even in case of power saving.</para>
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Downloading">
+            <summary>
+            "Downloading"<br/>
+            The instrument downloads a method.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.PreparingForRun">
+            <summary>
+            "Preparing for Run"<br/>
+            After method downloading the instrument sets up everything to start immediately without
+            actually starting.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.ReadyForRun">
+            <summary>
+            "Ready for Run"<br/>
+            The instrument is ready to run, but it still awaits the go.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.WaitingForContactClosure">
+            <summary>
+            "Waiting for contact closure"<br/>
+            The instrument has been started but waits for a contact closure or another trigger.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Running">
+            <summary>
+            "Running"<br/>
+            The instrument acquires data. The instrument closes the data file before it leaves this state.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.PostRun">
+            <summary>
+            "Post Run"<br/>
+            The instrument is doing some post cleanup.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Error">
+            <summary>
+            "Error"<br/>
+            The instrument entered an error condition. The user must start the instrument setup
+            program to resolve the error.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Busy">
+            <summary>
+            "Busy"<br/>
+            The instrument is busy somehow, usually due to a maintenance operation.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.NotConnected">
+            <summary>
+            "Not Connected"<br/>
+            The instrument software has lost the connection to the instrument.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.StandBy">
+            <summary>
+            "Stand By"<br/>
+            From the standby state it should take a very short time to be able to continue
+            work.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.Off">
+            <summary>
+            "Off"<br/>
+            As much hardware as possible is turned off by software. Some amount of time should be expected so that
+            operation can be performed with best precision.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.ServerFailed">
+            <summary>
+            "Not Connected" in Xcalibur's run manager.<br/>
+            There exists no connection to the service keeping the connection to the instrument.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.LampWarmup">
+            <summary>
+            "Lamp Warmup"<br/>
+            Typically used by UV devices to indicate when they are waiting for their lamp to become ready.
+            This may include lamps of the APPI source.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.NotReady">
+            <summary>
+            "Not Ready"<br/>
+            The instrument is not  ready to perform any operation.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.InstrumentState.DirectControl">
+            <summary>
+            "Direct Control"<br/>
+            The device is under direct control of a user or GUI program.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState">
+            <summary>
+            This interface describes the current system and acquisition state.
+            <para>
+            A missing connection can be detected by examining <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState.SystemState"/>.
+            NotConnected informs about a missing link between driver and instrument,
+            ServerFailed about a missing link between the current software and the driver.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState.SystemMode">
+            <summary>
+            The system mode returns the processing mode the instrument is currently in.
+            Another state information is <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState.SystemState"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState.SystemState">
+            <summary>
+            The system state returns the instrument state with respect to data acquisition.
+            Another state information is <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState.SystemMode"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedOffMode">
+            <summary>
+            This mode lets an instrument enter the Off state. The request will be honoured even if the
+            instrument is within an acquisition or another state where it is usually better to continue.
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedOffMode"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateForcedOffMode"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedStandbyMode">
+            <summary>
+            This mode lets an instrument enter the Standby state. The request will be honoured even if the
+            instrument is within an acquisition or another state where it is usually better to continue.
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedOffMode"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateForcedStandbyMode"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode">
+            <summary>
+            A mode is a more or less complex information that selects a new operation mode of an instrument.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode.ToString">
+            <summary>
+            This is an informational description of the new mode.
+            </summary>
+            <returns>The returned string gives a short description of the mode.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode.AdditionalValues">
+            <summary>
+            Get access to a collection of additional values. This will not be used in most cases.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode.ValueNames">
+            <summary>
+            Get access to the list of all possible names to be used in <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IMode.AdditionalValues"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IOffMode">
+            <summary>
+            This mode lets an instrument enter the Off state. The request may be rejected if the instrument
+            is in a state that should not be disturbed. See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedOffMode"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateOffMode"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IOnMode">
+            <summary>
+            This mode lets an instrument enter the On state or change the behaviour in the On state.
+            The request may be rejected if the instrument is in a state that should not be disturbed. See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedStandbyMode"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateOnMode"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IStandbyMode">
+            <summary>
+            This mode lets an instrument enter the Standby state. The request may be rejected if the instrument
+            is in a state that should not be disturbed. See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.IForcedStandbyMode"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CreateStandbyMode"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes.NamespaceDoc">
+            <summary>
+            This namespace covers the various modes which can be assumed by the instrument such as On, Off, Standby.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.NamespaceDoc">
+            <summary>
+            This namespace covers the functionality that a user may have to start or stop the acquisition of scans.
+            <para>
+            Obtain <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>.<see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Acquisition"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.StateChangedEventArgs">
+            <summary>
+            This implementation of EventArgs carries an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this class can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StateChanged"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.StateChangedEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.StateChangedEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.StateChangedEventArgs.State">
+            <summary>
+            Get access to the current state of the instrument.
+            It has replaced already the State in the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode">
+            <summary>
+            This enumeration returns the overall system mode the instrument currently is in.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this enumeration can be used.
+            </remarks>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Malconfigured">
+            <summary>
+            The instrument description within the PC does not allow a proper connection to the instrument.
+            This is a very rare condition.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Disconnected">
+            <summary>
+            The instrument is not connected to the service or the current program is not connected.
+            This state is also entered when the instrument reboots.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.On">
+            <summary>
+            The instrument is on. Other values in <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IState"/> show if an acquisition is ongoing.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Standby">
+            <summary>
+            The instrument is on standby and ready for another operation mode.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Off">
+            <summary>
+            The instrument is off and may need some time for perfect operation if it is set to on.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.RemoteControl">
+            <summary>
+            The instrument is under remote control, usually by a program of Thermo Fisher.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.DirectControl">
+            <summary>
+            The instrument is under direct control, usually by a user or GUI program.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Maintenance">
+            <summary>
+            The instrument or its driver entered the maintenance mode.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Calibration">
+            <summary>
+            The instrument performs a calibration.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Evaluation">
+            <summary>
+            A system evaluation is pending.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.Bakeout">
+            <summary>
+            The instrument performs a bakeout.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.AutoTune">
+            <summary>
+            The instrument is optimizing its internal system parameters.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.CalibrationPaused">
+            <summary>
+            The instrument performs a calibration, but the operation pauses.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.EvaluationPaused">
+            <summary>
+            A system evaluation is pending, but the evaluation pauses.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.BakeoutPaused">
+            <summary>
+            The instrument performs a bakeout, but that operation pauses.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.AutoTunePaused">
+            <summary>
+            The instrument is optimizing its internal system parameters, but the process pauses.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.SystemMode.DirectControlPaused">
+            <summary>
+            The instrument is under direct control and acquires data, but storing data has been paused.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation">
+            <summary>
+            Defines what shall happen when an acquisition request ended.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.StayOn">
+            <summary>
+            The instrument will continue to run, but no method execution is performed nor is
+            data written to a raw file.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.Standby">
+            <summary>
+            The instrument enters the standby state.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.Off">
+            <summary>
+            The instrument enters the off state.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByCount">
+            <summary>
+            This special workflow restricts an acquisition to a specific count of scans
+            to be taken by the instrument. Scans acquired using the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> interface
+            are not counted.
+            <para>
+            The current tune parameters of the instrument will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByCount.NumberOfScans">
+            <summary>
+            The number of scans to be taken during this acquisition. The number must
+            be positive and must not exceed 1000000.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByTime">
+            <summary>
+            This special workflow restricts an acquisition to a specific duration.
+            <para>
+            The current tune parameters of the instrument will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByTime.Duration">
+            <summary>
+            Access to the duration of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun">
+            <summary>
+            This special workflow selects a method to be executed. No further instruments like AS, LC or GC will be
+            driven. The duration of the method can be enhanced or reduced.
+            <para>
+            The tune parameters taken of the method's tune file(s) will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun.MethodName">
+            <summary>
+            Access to the method name to be used during an acquisition.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun.Duration">
+            <summary>
+            Access to the duration of the acquisition. Setting this to null choses the duration chosen in the method
+            itself. The lower limit is 0.01 min and the maximum 15000 min.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow">
+            <summary>
+            This workflow base class contains properties available in all acquisition workflows.
+            Default values are "empty" for no rawfile acquisition, without sample name. etc.
+            Continuation defaults to StayOn. WaitForContactClosure is false.
+            </summary>
+            <remarks>
+            <para>
+            Note that no other device will be instructed to take scans.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.RawFileName">
+            <summary>
+            Access to the raw file name to be used during an acquisition. Setting this value to null lets the instrument
+            take acquisitions without storing in a separate file. 
+            <para>
+            An evaluation of this value will happen on submission to <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.Continuation">
+            <summary>
+            This property defines what shappens when the acquisition stops.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.SampleName">
+            <summary>
+            This property defines the arbitrary sample name. 
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.Comment">
+            <summary>
+            This property defines an arbitrary comment. 
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.SingleProcessingDelay">
+            <summary>
+            The instrument will not execute any scan
+            if this property is positive until the delay has expired
+            or a new custom scan has been defined.
+            <para>
+            It will be quaranteed that after the event <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening"/>
+            no <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.MsScanArrived"/> will be populated or written to the rawfile
+            if this delay is pending and no custom scan has been placed.
+            </para>
+            <para>
+            The unit of this property is seconds and possible values are
+            between 0 and 600 inclusively. The default value is 0.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.WaitForContactClosure">
+            <summary>
+            This flag decides whether the instruments waits for contact closure signal before starting
+            acquisition.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.NamespaceDoc">
+            <summary>
+            This namespace contains classes needed to start an acquisition
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs">
+            <summary>
+            This implementation of EventArgs carries an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.ContentChanged"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs.Content">
+            <summary>
+            Get access to the content of the value that has changed.
+            It has replaced already the Content in the referenced <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent">
+            <summary>
+            A value content describes the content of an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback"/> or <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue"/> representation
+            of the instrument.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues"/> or <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for examples how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Content"/> or by
+            <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs.Content"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent.Content">
+            <summary>
+            The current content of the instrument's value representation. Every content is a string,
+            a numerical content will be encoded according to en-US rules.
+            <para>
+            The content will be null if the instrument is not connected or if the IReadback is unknown
+            to the instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent.Unit">
+            <summary>
+            The unit of the <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent.Content"/> is the empty string in most cases, value of the
+            instrument's value representation. All values are strings,
+            numerical values will be encoded according to en-US rules.
+            <para>
+            The unit will be null if the instrument is not connected or if the IReadback is unknown
+            to the instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent.Status">
+            <summary>
+            The status of a value will be 0 for OK, 1 if the value represents an information,
+            2 describes a warning, 3 an error and 4 a fatal error. The value will be -1 if the
+            status is unknown.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IContent.Help">
+            <summary>
+            The help string may be set only in some cases and gives a brief description of this Value.
+            <para>
+            The help will be null if the information is not present due to various reasons.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl">
+            <summary>
+            This interface covers all control functionality of an instrument.
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.Control"/>.
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.InstrumentValues">
+            <summary>
+            Get access to the instrument values that can be accessed individually.
+            The returned instance is helpful for status control and direct value
+            manipulation.
+            <para>
+            A synchroneous change of several scan-related elements should better
+            be performed using <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.GetScans(System.Boolean)"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Methods">
+            <summary>
+            Get access to the method interface. The interface should be used
+            for method-based data acquisition and for method-based information
+            access.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.GetScans(System.Boolean)">
+            <summary>
+            Get access to the scans interface. This interface allows to execute
+            repeating and custum scans during a method or any other execution.
+            <para>
+            Calling this method will lock that interface until it is disposed.
+            The instrument will not stop its current operation for the first.
+            If exclusive access is requested it will be guaranteed that no other
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> interface is in use and that any further request for
+            such an interface no matter whether exclusive or cooperative will be
+            rejected. If non-exclusive access is requested it will not be
+            satisfied if an exclusive access is already granted.
+            </para>
+            </summary>
+            <param name="exclusiveAccess">request for exclusive access(true) or cooperative access (false)</param>
+            <returns>The <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> interface being capable to receive user commands.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Acquisition">
+            <summary>
+            Get access to the acquisition interface.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues">
+            <summary>
+            IInstrumentValues allow access to instrument values on an individual basis.
+            It is helpful for status control and direct value manipulation (e.g. system
+            status, source voltages, etc).
+            <para>
+            A synchroneous change of several scan-related elements should better
+            be performed using <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/>.
+            </para>
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.InstrumentValues"/>.
+            </remarks>	
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.String)">
+            <summary>
+            Get access to an instrument value by its name.
+            <para>
+            Each name has also a numeric representation, see <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.UInt64)"/>.
+            </para>
+            </summary>
+            <param name="name">The name of the value</param>
+            <returns>null is returned for an invalid or unknown name, otherwise the value linked with the passed name is returned.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.UInt64)">
+            <summary>
+            Get access to an instrument value by its number.
+            </summary>
+            <param name="number">The number of the value</param>
+            <returns>The value linked with the passed name is returned. Nodes unknown to the instrument may return in a dumb value instance.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.ValueNames">
+            <summary>
+            Get access to the list of all possible names for <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.String)"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue">
+            <summary>
+            This interface describes the methods and properties of a value. An IValue
+            is a representation of a value of various purposes in the instrument.
+            <para>
+            The content of the value can be taken from the property <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Content"/>.
+            </para>
+            <para>
+            A request for a value change will be sent to the instrument by using
+            <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.Set(System.String)"/>, but there is no guarantee for acceptance or execution at all.
+            The <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Content"/> or other values can be observed to test for a proper response.
+            </para>
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.UInt64)"/> or
+            by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.String)"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.Id">
+            <summary>
+            Get access to the ID of the value.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.SetParameterDescription">
+            <summary>
+            Get a description about the parameter to the set access to a list of available commands.
+            The list may change if the user role changes.
+            Any executed command name will be tested against this list.
+            <para>
+            The commands will be null if the instrument is not connected or if the IValue is unknown
+            to the instrument or if <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.Set(System.String)"/> cannot be performed for this value.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.Set(System.String)">
+            <summary>
+            Set the content of the value. The command will be verified using <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.SetParameterDescription"/>.
+            </summary>
+            <param name="argument">null or the argument of the command.</param>
+            <returns>true if the value change command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.NamespaceDoc">
+            <summary>
+            This namespace covers the direct control functionality that a user may have to manage an instrument.
+            Such a control is not permitted all the time for each Value/Readback and allows 
+            the change of values individually.
+            <para>
+            The use of this namespace should be avoided if individual scans should be placed. Better use
+            the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> interface instead.
+            </para>
+            <para>
+            Obtain <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>.<see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.InstrumentValues"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription">
+            <summary>
+            This interface has information about a possible Set argument for an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue"/> or
+            a property in a Scan parameter set.
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue.SetParameterDescription"/> or by
+            <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.PossibleParameters"/>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription.Name">
+            <summary>
+            This is the name of the command/property this parameter description belongs to.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription.Selection">
+            <summary>
+            The selection is a little bit complicated. It can have these values:
+            <list type="table">
+            <listheader><description>value/example</description><description>description</description></listheader>
+            <item><description>empty</description><description>This empty string is allowed and doesn't allow the user any selection</description></item>
+            <item><description>string</description><description>This special value (verbatim "string") allows the user to enter an arbitrary string</description></item>
+            <item><description>num1-num2</description><description>Integer selection between num1 and num2 inclusively</description></item>
+            <item><description>num1.frac-num2.frac</description><description>Floating point selection between num1.frac and num2.frac inclusively, frac may be "0"</description></item>
+            <item><description>selection1,selection2,...</description><description>lets the user select one of the shown values</description></item>
+            </list>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription.DefaultValue">
+            <summary>
+            This value will be the default value for the argument or
+            the empty string if it is unknown.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription.Help">
+            <summary>
+            This returns the empty string or some help about the command/property.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback">
+            <summary>
+            This interface describes the methods and properties of a readback. An IReadback
+            is a representation of a item that provides information but does not accept any command
+            or set value.
+            <para>
+            The content of the readback can be taken from the property <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Content"/>.
+            </para>
+            </summary>
+            <remarks>
+            <para>
+            The interface <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue"/> derives from this interface.
+            </para>
+            <para>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> for an example how this interface can be used.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Name">
+            <summary>
+            Get access to the name of the value.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.Content">
+            <summary>
+            Get access to the content of the readback. The access to this property is sufficient in most
+            cases, but for values that change frequently like logging information it might be better
+            to rely on the information passed along by the <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.ContentChanged"/> event.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.IReadback.ContentChanged">
+            <summary>
+            This event will be fired when the content of the readback has changed. The calling thread
+            should not be blocked by complex actions. A long-term data processing should move the
+            processing into a separate thread and copy the content of this event into a queue.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IExclusionTable">
+            <summary>
+            This flag interface defines a table which carries exclusion items.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IInclusionTable">
+            <summary>
+            This flag interface defines a table which carries inclusion items.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods">
+            <summary>
+            This interface defines all actions that belong to method-based data
+            acquisition and for method-based information access.
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>.<see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Methods"/>.
+            </remarks>
+            <example>
+            The following example demonstrates how to load an inclusion list, extend it by a new entry and apply
+            it to a running method.
+            <code>
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Text;
+            
+            using Thermo.Interfaces.InstrumentAccess_V1.Control.Methods;
+            
+            namespace UserAccess
+            {
+                /// &lt;summary>
+                /// This class provides a test for the IMethods interface. An inclusion list
+                /// will be loaded, extended and applied to the currently running method.
+                /// &lt;/summary>
+                internal class MethodsTest
+                {
+                    /// &lt;summary>
+                    /// Create a new &lt;see cref="MethodsTest"/> and start the performance immediately.
+                    /// &lt;/summary>
+                    /// &lt;param name="methods">the instrument's method object&lt;/param>
+                    /// &lt;param name="methodFileName">name of the method file&lt;/param>
+                    internal MethodsTest(IMethods methods, string methodFileName)
+                    {
+                        IEnumerable&lt;IInclusionItem> inclusions;
+                        methods.LoadTable(methodFileName, 1, out inclusions);
+                        List&lt;IInclusionItem> list = new List&lt;IInclusionItem>(inclusions);
+                        foreach (IInclusionItem incl in list)
+                        {
+                            Console.WriteLine("INCL = " + incl);
+                        }
+                        list.Add(methods.CreateInclusionItem(346.12199m, Polarity.Positive, 0, 10m, 35m, 1, "Omeprazole", null));
+                        Console.WriteLine("ReplaceTable done: " + methods.ReplaceTable(1, 42, list));
+                    }
+                }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods.CreateTable(System.Type)">
+            <summary>
+            Create a table of the passed type.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="tableType">Type of the table which has to derive from ITable like IInclusionTable</param>
+            <returns>The created table can be used to call <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods.ReplaceTable(System.Int32,System.Int64,Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods.ReplaceTable(System.Int32,System.Int64,Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable)">
+            <summary>
+            Replace a table currently used by the instrument.
+            </summary>
+            <param name="tableIndex">Index of the table starting from 1. Keep this on 1 in case of doubt.</param>
+            <param name="runningNumber">
+            This value will be reflected by the instrument in the scan so that the point
+            in time becomes clear when the instrument used the updated table the first time. It is under the responsibility
+            of the user to change this value. 0 is a reserved value.
+            <para>
+            The instrument reflects this parameter in <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.Trailer"/> in an item called "Access id:".
+            </para>
+            </param>
+            <param name="table">The new table to be used. The table can be empty, but null will raise an exception.</param>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable">
+            <summary>
+            This interface covers the methods and properties being accessible on tables that will
+            be used in the instruments like inclusion tables or exclusion tables.
+            <para>
+            The type of this interface cannot be used directly in <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods.CreateTable(System.Type)"/>,
+            please use <c>typeof(<see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IInclusionTable"/>)</c>, etc.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable.ColumnInfo">
+            <summary>
+            Return information about the columns in the table.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable.CreateRow">
+            <summary>
+            Create a new row which can be added to every table of the same type.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <returns>The created row can be used to extend <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable.Rows"/>.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable.Rows">
+            <summary>
+            Access to the rows of the table.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableColumnDescription">
+            <summary>
+            This interface allows one to retrieve information about a column of an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableColumnDescription.Optional">
+            <summary>
+            Returns whether the column is optional.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableColumnDescription.AcceptedHeaderNames">
+            <summary>
+            Get all alternate names to the header of the column. The standard name is returned in <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription.Name"/>.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableRow">
+            <summary>
+            A table item allows to set and retrieve column values of one row in a table.
+            <para>
+            A table item created for one table type cannot be used in another table of a different type.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableRow.ColumnValues">
+            <summary>
+            Get access to the set of cell data store values.
+            <para>
+            It is not possible to add keys for unknown columns. On assignment using
+            IDictionary.Add or the indexer, values will be tested for range conformance.
+            </para>
+            <para>
+            Requesting values with the indexer will return the <b>default value</b> of a
+            column if the cell hasn't been assigned already. Use ContainsKey or
+            TryGetValue to test for assigned values.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.NamespaceDoc">
+            <summary>
+            This namespace covers the functionality that a user may have to manipulate methods of an instrument.
+            These manipulations can be applied to the running acquisition.
+            <para>
+            Most functionality in this namespace is accessible offline.
+            </para>
+            <para>
+            Obtain <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>.<see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.Methods"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.NamespaceDoc">
+            <summary>
+            This namespace covers the control functionality that a user may have to manage an instrument.
+            Not all interfaces need to be implemented by a particular instrument.
+            <para>
+            Obtain <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess"/>.<see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.Control"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan">
+            <summary>
+            This scan definition can be placed in the instrument's
+            job queue with individual properties. A custom scan will
+            be executed only once.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CreateCustomScan"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan.SingleProcessingDelay">
+            <summary>
+            The instrument will not execute any further custom scan
+            if this property is positive until the delay has expired
+            or a new custom scan has been defined.
+            <para>
+            The unit of this property is seconds and possible values are
+            between 0 and 600 inclusively. The default value is 0.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan">
+            <summary>
+            This scan definition can be placed in the instrument's
+            job queue for repetition.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CreateRepeatingScan"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScanDefinition">
+            <summary>
+            This interface covers the functionality to define a custom or repeating scan.
+            </summary>
+            <remarks>
+            This is a base interface of <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan"/> and <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan"/>.
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScanDefinition.Values">
+            <summary>
+            Get access to the value set. Any value nor defined will be replaced by the
+            value defined in the default scan.
+            <para>
+            Illegal values will be ignored, values out of range will not be accepted.
+            </para>
+            <para>
+            The set of possible values can be queried by accessing PossibleParameters
+            in <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/>. The key must be an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IParameterDescription"/> Name,
+            the value must match the Selection definition.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScanDefinition.RunningNumber">
+            <summary>
+            This number will be passed along with the scan job and can be used
+            to identify it later when the acquired scan results arrive.
+            0 is a reserved value. The default value is 1.
+            <para>
+            A change of Values can be identified in <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.Trailer"/>.TryGetValue("Access id:", ...).
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans">
+            <summary>
+            This interface allows the control over the next scan to be performed by the
+            instrument with or without a method.
+            <para>
+            Either this interface or the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.IMethods"/> interface should be used.
+            </para>
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.GetScans(System.Boolean)"/>.
+            <para>
+            Using this interface allows one to insert some scans in the normal flow of
+            operation. It has several three layers of execution.
+            </para>
+            <para>
+            The lowest layer is defined by the instrument. It performs those steps that
+            are defined elsewhere, this can be either method execution, tuning or other things.
+            </para>
+            <para>
+            The next layer that has a higher priority is the repeated scans layer which are
+            defined here. If they are set they will be executed instead of the previous layer.
+            A further Set call replaces the previous repition. A Cancel call will stop
+            the repetition and operation falls back one layer. A custom scan can still be
+            defined, though. The repition can be switched on and off on demand as often
+            as desired.
+            </para>
+            <para>
+            The most prioritized layer is that of custom scans. They will be executed before
+            any furcher scan defined in the other layers. However, a Set operation may result
+            in undefined behaviour (but no system fault happens) if the previous scan has not been
+            started yet. It is best to avoid this situation. The custom scan will be scheduled and
+            the AcceptsNextScan event will be fired at the next possible point in time. If a
+            custom scan has a delay time set the instrument will wait this additional time
+            until it falls back to a lower layer; either the repetition scans if they are
+            defined or the normal operation mode.
+            </para>
+            </remarks>
+            <example>
+            The following code illustrates the use of most functionality in this namespace.
+            A running acquisition (Press "On" in Tune) will be modified so that the polarity
+            will be toggled between each scan.
+            <code>
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Text;
+            using System.Threading;
+            using System.Globalization;
+            
+            using Thermo.Interfaces.InstrumentAccess_V1;
+            using Thermo.Interfaces.InstrumentAccess_V1.Control;
+            using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
+            
+            namespace UserAccess
+            {
+                /// &lt;summary>
+                /// This class demonstrates the use of the &lt;see cref="IScans"/> interface.
+                /// &lt;/summary>
+                internal class ScansTest : IDisposable
+                {
+                    private IScans m_scans;
+                    private bool m_startCustomScan = true;
+                    private object m_lock = new object();
+                    private int m_disposed;
+                    private long m_runningNumber = 12345;	// start with an offset to make sure it's "us"
+                    private int m_polarity = 0;
+                    
+                    /// &lt;summary>
+                    /// Create a new &lt;see cref="ScansTest"/> and start the performance test immediately.
+                    /// &lt;/summary>
+                    /// &lt;param name="instrument">the instrument instance&lt;/param>
+                    /// &lt;param name="arguments">program arguments&lt;/param>
+                    internal ScansTest(IInstrumentAccess instrument)
+                    {
+                        m_scans = instrument.Control.GetScans(false);
+                        m_scans.CanAcceptNextCustomScan += new EventHandler(Scans_CanAcceptNextCustomScan);
+                        m_scans.PossibleParametersChanged += new EventHandler(Scans_PossibleParametersChanged);
+                        
+                        DumpPossibleParameters();
+                        bool startNewScan = false;
+                        lock (m_lock)
+                        {
+                            if (m_scans.PossibleParameters.Length > 0)
+                            {
+                                startNewScan = m_startCustomScan;
+                                m_startCustomScan = false;
+                            }
+                        }
+                        
+                        if (startNewScan)
+                        {
+                            StartNewScan();
+                        }
+                    }
+                    
+                    /// &lt;summary>
+                    /// The final destructor releases allocated system resources.
+                    /// &lt;/summary>
+                    ~ScansTest()
+                    {
+                        // Let the GC dispose managed members itself.
+                        Dispose(false);
+                    }
+                
+                    /// &lt;summary>
+                    /// Clean up any resources being used.
+                    /// &lt;/summary>
+                    /// &lt;param name="disposeEvenManagedStuff">true to dispose managed and unmanaged resources; false to dispose unmanaged resources&lt;/param>
+                    protected void Dispose(bool disposeEvenManagedStuff)
+                    {
+                        // prevent double disposing
+                        if (Interlocked.Exchange(ref m_disposed, 1) != 0)
+                        {
+                            return;
+                        }
+                    
+                        if (disposeEvenManagedStuff)
+                        {
+                            if (m_scans != null)
+                            {
+                                m_scans.CanAcceptNextCustomScan -= new EventHandler(Scans_CanAcceptNextCustomScan);
+                                m_scans.PossibleParametersChanged -= new EventHandler(Scans_PossibleParametersChanged);
+                                m_scans.Dispose();
+                                m_scans = null;
+                            }
+                        }
+                    }
+                    
+                    /// &lt;summary>
+                    /// Clean up any resources being used.
+                    /// &lt;/summary>
+                    virtual public void Dispose()
+                    {
+                        // Dispose managed and unmanaged resources and tell GC we don't need the destructor getting called.
+                        Dispose(true);
+                        GC.SuppressFinalize(this);
+                    }
+                    
+                    /// &lt;summary>
+                    /// Get access to the flag whether this object is disposed.
+                    /// &lt;/summary>
+                    internal bool Disposed { get { return m_disposed != 0; } }
+                    
+                    /// &lt;summary>
+                    /// Dump the list of possible commands.
+                    /// &lt;/summary>
+                    private bool DumpPossibleParameters()
+                    {
+                        IParameterDescription[] parameters = m_scans.PossibleParameters;
+                        if (parameters.Length == 0)
+                        {
+                            Console.WriteLine("No possible IScans parameters known.");
+                            return false;
+                        }
+                        
+                        Console.WriteLine("IScans parameters:");
+                        foreach (IParameterDescription parameter in parameters)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            sb.AppendFormat("   '{0}' ", parameter.Name);
+                            if (parameter.Selection == "")
+                            {
+                                sb.AppendFormat("doesn't accept an argument, help: {0}", parameter.Help);
+                            }
+                            else
+                            {
+                                sb.AppendFormat("accepts '{0}', default='{1}', help: {2}", parameter.Selection, parameter.DefaultValue, parameter.Help);
+                            }
+                            Console.WriteLine(sb.ToString());
+                        }
+                        return true;
+                    }
+                
+                    /// &lt;summary>
+                    /// Start a new custom scan.
+                    /// &lt;/summary>
+                    private void StartNewScan()
+                    {
+                        ICustomScan cs = m_scans.CreateCustomScan();
+                        cs.RunningNumber = m_runningNumber++;
+                        
+                        // Allow an extra delay of 500 ms, we will answer as fast as possible, so this is a maximum value.
+                        cs.SingleProcessingDelay = 0.50D;
+                        
+                        // Toggle the polarity:
+                        m_polarity = (m_polarity == 0) ? 1 : 0;
+                        cs.Values["Polarity"] = m_polarity.ToString(NumberFormatInfo.InvariantInfo);
+                        
+                        try
+                        {
+                            DateTime now = Instrument.Now;
+                            if (!m_scans.SetCustomScan(cs))
+                            {
+                                Console.WriteLine("NEW CUSTOM SCAN HAS NOT BEEN PLACED, CONNECTION TO SERVICE BROKEN.");
+                            }
+                            Console.WriteLine(now.ToString(Program.TimeFormat) + ": Placed a new custom scan(" + cs.RunningNumber + ")");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("PLACING A NEW SCAN: " + e.Message);
+                        }
+                    }
+                    
+                    /// &lt;summary>
+                    /// Called when the current custom scan has been processed and the next custom scan can be accepted.
+                    /// We start a new scan.
+                    /// &lt;/summary>
+                    /// &lt;param name="sender">doesn't matter&lt;/param>
+                    /// &lt;param name="e">doesn't matter&lt;/param>
+                    private void Scans_CanAcceptNextCustomScan(object sender, EventArgs e)
+                    {
+                        Console.WriteLine(Instrument.Now.ToString(Program.TimeFormat) + ": CanAcceptNextCustomScan");
+                        if ((m_scans != null) &amp;&amp; (m_scans.PossibleParameters.Length > 0))
+                        {
+                            // Assume we are able to place a new scan.
+                            StartNewScan();
+                        }
+                    }
+                  
+                    /// &lt;summary>
+                    /// Called when the list of possible commands have changed we dump them.
+                    /// Additionally we start a new scan.
+                    /// &lt;/summary>
+                    /// &lt;param name="sender">doesn't matter&lt;/param>
+                    /// &lt;param name="e">doesn't matter&lt;/param>
+                    private void Scans_PossibleParametersChanged(object sender, EventArgs e)
+                    {
+                        if (!DumpPossibleParameters())
+                        {
+                            return;
+                        }
+                     
+                        bool startNewScan = false;
+                        lock (m_lock)
+                        {
+                            if (m_scans.PossibleParameters.Length > 0)
+                            {
+                                startNewScan = m_startCustomScan;
+                                m_startCustomScan = false;
+                            }
+                        }
+                        
+                        if (startNewScan)
+                        {
+                            StartNewScan();
+                        }
+                    }
+                }
+            }    
+            </code>
+            </example>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.PossibleParameters">
+            <summary>
+            All possible parameters of a scan will be listed here.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.PossibleParametersChanged">
+            <summary>
+            This event will be fired when the <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.PossibleParameters"/>
+            have received an update. The initial parameter set may be void
+            during initialization or after an instrument reconnect.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetRepetitionScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan)">
+            <summary>
+            Define or replace the repetition scan to be performed.
+            <para>
+            The scan may be partially defined in which case the properties of the previously
+            executed scan will be used. At least one property needs to be specified.
+            </para>
+            </summary>
+            <param name="scan">object containing new default scan definitions</param>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CancelRepetition">
+            <summary>
+            Cancels any repetition of scans that have been defined by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetRepetitionScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan)"/>.
+            </summary>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetCustomScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan)">
+            <summary>
+            Define a scan to be performed next. The current standard operation (method, prepetition scan, etc)
+            will continue after this scan and maybe following custom scans have been acquired.
+            <para>
+            The operation on the instrument is undefined if several custom scans are set without having the
+            instrument dealt with the previous custom scans. However, the instrument will not stop
+            to run, choke or show any other fatal error.
+            </para>
+            <para>
+            The event <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CanAcceptNextCustomScan"/> is fired once after the instrument has processed a
+            custom scan. The further custom scan can be set then or within the delay time that
+            might have been defined in <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan.SingleProcessingDelay"/>.
+            </para>
+            <para>
+            The scan may be partially defined in which case the properties of the previously
+            executed scan will be used. At least one property needs to be specified.
+            </para>
+            </summary>
+            <param name="scan">object containing custom scan definitions</param>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CancelCustomScan">
+            <summary>
+            Cancels any custom scan and/or the delay after that custom scan defined by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetCustomScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan)"/>.
+            </summary>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CanAcceptNextCustomScan">
+            <summary>
+            The instrument raises this event when it has processed a custom scan defined by
+            <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetCustomScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan)"/>. It will accept a further custom scan until the
+            <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan.SingleProcessingDelay"/> has expired or an instrument specific
+            delay of few milliseconds has passed. After this time, the instrument continues
+            with the previous action, usually a method or a repetition.
+            <para>
+            The event should be handled as fast as possible.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CreateRepeatingScan">
+            <summary>
+            Create an empty <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan"/> implementation.
+            </summary>
+            <returns>
+            The return value will be a newly created repeating scan with default values. Assignment of properties
+            is needed to let the call of <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetRepetitionScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IRepeatingScan)"/> have an effect.
+            </returns>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.CreateCustomScan">
+            <summary>
+            Create an empty <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan"/> implementation.
+            </summary>
+            <returns>
+            The return value will be a newly created repeating scan with default values. Assignment of properties
+            is needed to let the call of <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans.SetCustomScan(Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.ICustomScan)"/> have an effect.
+            </returns>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.NamespaceDoc">
+            <summary>
+            This namespace covers the functionality that a user needs to place invididual scans or repeating scans
+            that are not part of a method.
+            <para>
+            Obtain <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>.<see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.GetScans(System.Boolean)"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IAcquisitionError">
+            <summary>
+            An IAcquisitionError describes an error coming from the instrument during an acquisition.
+            This interface will not be used for status reports or messages of the
+            transport layer.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.AcquisitionErrorsArrivedEventArgs.Errors"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IAcquisitionError.Content">
+            <summary>
+            The textual content of the error.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IAcquisitionError.Occurrence">
+            <summary>
+            The time difference between acquisition start and this error occurred.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IClient">
+            <summary>
+            This interface gives access to values helpful to identify a client process
+            or some kind of caller.
+            <para>
+            The instrument itself can also be treated as a caller. All values will be null
+            except for <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.ComputerName"/>, which will be the name of the instrument.
+            The <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.ProcessId"/> will be negative in that case.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.ComputerName">
+            <summary>
+            Name of the computer to be identified. For an instrument, this will be the instrument name.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.AccountName">
+            <summary>
+            Name of the account to be identified. For an instrument, this will be null. An example can be "EMEA\joe.smith".
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.UserName">
+            <summary>
+            Name of the user of the account to be identified. For an instrument, this will be null. An example can be "Joe Smith".
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.ApplicationName">
+            <summary>
+            Name of the application to be identified. For an instrument, this will be null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IClient.ProcessId">
+            <summary>
+            ID of the application to be identified. For an instrument, this will be the negative instrument id.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess">
+            <summary>
+            This interface describes the access to one particular instrument both for reading data
+            as for managing access or behaviour of the instrument.
+            <para>
+            An instance of this class will be return by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.Get(System.Int32)"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.InstrumentId">
+            <summary>
+            Access to the id of the instrument. This is the same id as used
+            to get access to this instance.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.InstrumentName">
+            <summary>
+            Access to the name of the instrument.
+            <para>
+            Example: The instrument name may be "Thermo Orbitrap Velos Pro", the
+            detector class may be "Hybrid LinearIonTrap Orbitrap" and the
+            scan detector name may be "LinearIonTrap".
+            </para>
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.Connected">
+            <summary>
+            Get access to the connection state of the instrument and of this driver to
+            the communication layer. Most functionality is not available if the instrument
+            is not connected.
+            <para>
+            This property is accessible offline.
+            </para>
+            <para>
+            See <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.StartOnlineAccess"/> for initiating online access.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.ConnectionChanged">
+            <summary>
+            This event will be fired when the connection to the instrument changes.
+            Note that the initial connection state will be disconnected until a
+            connection has been established to the instrument.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.AcquisitionErrorsArrived">
+            <summary>
+            This event will be thrown when at least one error arrived from the instrument
+            during an acquisition.
+            This event handler will not be used for status reports or messages of the
+            transport layer.
+            <para>
+            For regular messages see <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.MessagesArrived"/>
+            </para>
+            <para>
+            This event handler is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.CountMsDetectors">
+            <summary>
+            Return the number of available mass spectrometer detectors accessible by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetMsScanContainer(System.Int32)"/>.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.DetectorClasses">
+            <summary>
+            Get access to the names of detectors available. This property corresponds both with <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.CountMsDetectors"/>
+            and <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetMsScanContainer(System.Int32)"/>.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetMsScanContainer(System.Int32)">
+            <summary>
+            Get access to the container of MS scan information to be accessible
+            by a a specific MS detector set.
+            </summary>
+            <param name="msDetectorSet">index of the detector starting from 0</param>
+            <remarks>
+            Hybrid machines may only offer one detector set because they cannot be
+            operated separately. However, it is possible that they offer detector
+            specific subsets. The standard detector set has a smaller
+            detector set number.
+            </remarks>
+            <returns>
+            Returns a particular mass spectrometer detector set or null if a
+            detector with the specific index is not present in the instrument.
+            </returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.CountAnalogChannels">
+            <summary>
+            Return the number of available analog channels accessible by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetAnalogTraceContainer(System.Int32)"/>.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetAnalogTraceContainer(System.Int32)">
+            <summary>
+            Get access to the container of analog trace information to be accessible
+            by a a specific analog detector set (UV, PDA, etc).
+            </summary>
+            <param name="analogDetectorSet">index of the detector starting from 0</param>
+            <returns>
+            Returns a particular analog detector set or null if a
+            detector with the specific index is not present in the instrument.
+            </returns>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.Control">
+            <summary>
+            Get access to the interface covering all control functionality of an instrument.
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer">
+            <summary>
+            This interface is the central access point for a direct access of an instrument.
+            It covers both online functionality as well as offline manipulation of methods.
+            <para>
+            Use the instrument container to get access to a particular instrument accessor by means of
+            <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.Get(System.Int32)"/>
+            </para>
+            </summary>	
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.StartOnlineAccess">
+            <summary>
+            The API allows both online and offline functionality. Offline functionality is always available,
+            but online functionality requires a connection to the service hosting the instrument.
+            <para>
+            No online instrument connection is possible without an online connection to the service.
+            </para>
+            <para>
+            This call initiates the connection. Check <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnectionChanged"/> and <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnected"/> for success.
+            </para>
+            <para>
+            Further calls to this method don't have any effect. Once, this method has been called, am automatic reconnect will be scheduled
+            if the connection breaks.
+            </para>
+            </summary>
+            <exception cref="T:System.Exception">Some exceptions will be thrown if it isn't possible to reach the service at all.</exception>
+            <remarks>It is recommended to call this function as soon as possible if online access is desired.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnected">
+            <summary>
+            Return whether this API instance connected to the service. This will always be false until a call to <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.StartOnlineAccess"/>
+            has been performed.
+            <para>
+            A value change can we watched by registering to <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnectionChanged"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnectionChanged">
+            <summary>
+            This event handler will be fired when <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.ServiceConnected"/> has changed its value. This method will never be called if
+            <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.StartOnlineAccess"/> has not been called.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.Get(System.Int32)">
+            <summary>
+            Get access to a particular instrument accessor using this method.
+            </summary>
+            <param name="index">
+            Index of the instrument starting from 1. Values of 2 or more need additional
+            instruments attached to the data system.
+            </param>
+            <returns>
+            The return value allows access to a particular instrument. If one service hosts
+            several instruments in parallel, this value can be of a different type for each.
+            Furthermore, the return class instance may implement other interfaces beside
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess"/>.
+            </returns>
+            <remarks>This functionality is available offline.</remarks>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.MessagesArrived">
+            <summary>
+            This event will be thrown when at least one error arrived from the instrument
+            during an acquisition.
+            This event handler will not be used for status reports or messages of the
+            transport layer.
+            <para>
+            For messages during acquisitions see <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.AcquisitionErrorsArrived"/>.
+            </para>
+            <para>
+            This event handler is accessible offline.
+            </para>
+            </summary>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IMessage">
+            <summary>
+            An IMessage describes a message coming from an instrument.
+            This interface will also be used for status reports or messages of the transport layer.
+            <para>
+            The final message should be constructed by the client by use of string.Format(message, messageArgs).
+            Only strings can be transmitted.
+            </para>
+            <example>
+            The instruments sends message="Just a message.", messageArgs=null (or with arbitrary content) should be formatted as "Just a message.".
+            </example>
+            <example>
+            The instruments sends message="Just a message {0}.", messageArgs=null should be formatted as "Just a message ." because missing elements
+            will be ignored.
+            </example>
+            <example>
+            The instruments sends message="Just a message {0}.", messageArgs={ "for you" } should be formatted as "Just a message for you.".
+            </example>
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs.Messages"/>.
+            </para>
+            <para>
+            The base interface gives information about the source of the message.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.InstrumentId">
+            <summary>
+            0 for the transport layer of the ID of the instrument starting from 1.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.InstrumentName">
+            <summary>
+            null for messages of the transport layer of the name of the instrument.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.MessageId">
+            <summary>
+            The unique ID of the message type. Background is that messages with the same
+            message ID describe the same problem.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.CreationTime">
+            <summary>
+            The time the message occured in UTC.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.Status">
+            <summary>
+            Status is a set of flags and values which encode the severity of the message.
+            Values can be combined of not stated otherwise.
+            <para>
+            1 = The message is very informational as for debug messages and should be used
+            rarely. This value is mutually exclusive with any other value between 1 and 7.
+            </para>
+            <para>
+            2 = The message is significant, but doesn't show any defect. The message can
+            be used for messages showing 'success'.
+            This value is mutually exclusive with any other value between 1 and 7.
+            </para>
+            <para>
+            3 = The message is indicating a warning. Warnings have to be made prominent,
+            but there is no reason to stop any ongoing process.
+            This value is mutually exclusive with any other value between 1 and 7.
+            </para>
+            <para>
+            4 = This value shall be used for messages indicate a severe lack of functionality.
+            The system may come back in a stable state by maintenance operations or user
+            interaction. This value is mutually exclusive with any other value between 1 and 7.
+            </para>
+            <para>
+            16 = The message is a debug message. It is not intended to store this message.
+            </para>
+            <para>
+            256 = The message should be placed in a local log file. It is not intended to "publish" this message to a higher level.
+            </para>
+            <para>
+            512 = An error occurred that requires that requires the reboot of the instrument / driver to come back into a stable state.
+            </para>
+            <para>
+            1024 = An error occurred that requires physical activity or maintenance.
+            </para>
+            <para>
+            2048 = An error occurred that voids the outcome of the current acquisition.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.Message">
+            <summary>
+            Content of the message including its format. The language is always English. It will be used together with <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.MessageArgs"/>.
+            The final usage will be similar to string.Format(Message, MessageArgs);
+            <para>
+            References to elements in MessageArgs can be done by a number starting with 0 in braces.
+            </para>
+            </summary>
+            <example>
+            "The instrument power supply will lose power in {0} seconds."
+            </example>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.MessageArgs">
+            <summary>
+            These are the arguments to <see cref="P:Thermo.Interfaces.InstrumentAccess_V1.IMessage.Message"/> to create the final message. Content is transferred using the independent locale
+            in English.
+            <para>
+            All parameters in messageFormat must be addressed, at least.
+            </para>
+            </summary>
+            <example>
+            Message = "The instrument power supply will lose power in {0} seconds.";<br/>
+            MessageArgs = { "17" };
+            </example>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs">
+             <summary>
+             This implementation of EventArgs carries a list of <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IMessage"/>s.
+             This class will be used for status reports or messages of the
+             transport layer and all instruments.
+             </summary>
+             <remarks>
+             An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.MessagesArrived"/>.
+             </remarks>
+             <example>
+             This example shows how to use this class. The removal of the handler is not shown.
+             <code>
+             /// &lt;summary>
+             /// Set up all the instrument.
+             /// &lt;/summary>
+             /// &lt;param name="instrument">instrument for which errors shall be logged&lt;/param>
+             void Init(IInstrumentAccessContainer container)
+             {
+            	    container.MessagesArrived += new EventHandler&lt;MessagesArrivedEventArgs>(MessagesArrived);
+             }
+            
+             /// &lt;summary>
+             /// When messages from instruments or the transport layer arrive, we publish them.
+             /// &lt;/summary>
+             /// &lt;param name="sender">doesn't matter&lt;/param>
+             /// &lt;param name="e">contains the messages to be dumped&lt;/param>
+             private void MessagesArrived(object sender, MessagesArrivedEventArgs e)
+             {
+            	    foreach (IMessage message in e.Messages)
+            	    {
+            	        Console.WriteLine("MESSAGE>>> " + error.Content);
+            	    }
+             }
+             </code>
+             </example>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MessagesArrivedEventArgs.Messages">
+            <summary>
+            Get access to the messages that have arrived from all instrument and the transport layer.
+            </summary>	
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan">
+            <summary>
+            This class deals with scan specific information. The class is disposable, but the
+            content will be released only under these circumstances:
+            <list type="bullet">
+            <item><description>The last IMsScan reference has been released.</description></item>
+            <item><description>The <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/>'s LastScan property has changed.</description></item>
+            </list>
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/> for an example how this interface can be used.
+            <para>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.GetLastMsScan"/> or by
+            <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsScanEventArgs.GetScan"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.Header">
+            <summary>
+            Get access to the information coming from the header. It is a set of name/value pairs.
+            A pure name has a value of null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.TuneData">
+            <summary>
+            Get access to the TuneData information source. This is mostly accessible at acquisition start.
+            Text representation of numbers will always appear in the independant (US) locale.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.Trailer">
+            <summary>
+            Get access to the Trailer information source.
+            Text representation of numbers will always appear in the independant (US) locale.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.StatusLog">
+            <summary>
+            Get access to the StatusLog information source.
+            Text representation of numbers will always appear in the independant (US) locale.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer">
+            <summary>
+            All MS scans of the instrument can be accessed by using this
+            interface.
+            <para>
+            The last-seen scan is accessible all the time but may change frequently.
+            It is also possible to get notice of a new scan as soon as it is accessible.
+            </para>
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetMsScanContainer(System.Int32)"/>.
+            </remarks>
+            <example>
+            In the following example it is assumed that the instrument has at least one
+            MS device. Most functions and classes of this namesspace are used.
+            <code>
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Text;
+            
+            using Thermo.Interfaces.InstrumentAccess_V1;
+            using Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer;
+            
+            using IMsScan = Thermo.Interfaces.InstrumentAccess_V2.MsScanContainer.IMsScan;
+            using ICentroid = Thermo.Interfaces.InstrumentAccess_V2.MsScanContainer.ICentroid;
+            
+            namespace UserAccess
+            {
+            	/// &lt;summary>
+            	/// This class presents the output of the scans being acquired by the instrument.
+            	/// &lt;/summary>
+            	internal class ScansOutput
+            	{
+            		/// &lt;summary>
+            		/// Crate a new &lt;see cref="ScansOutput"/>
+            		/// &lt;/summary>
+            		/// &lt;param name="instrument">the instrument instance&lt;/param>
+            		internal ScansOutput(IInstrumentAccess instrument)
+            		{
+            			ScanContainer = instrument.GetMsScanContainer(0);
+            			Console.WriteLine("Detector class: " + ScanContainer.DetectorClass);
+            
+            			ScanContainer.AcquisitionStreamOpening += new EventHandler&lt;MsAcquisitionOpeningEventArgs>(ScanContainer_AcquisitionStarted);
+            			ScanContainer.AcquisitionStreamClosing += new EventHandler(ScanContainer_AcquisitionEnded);
+            			ScanContainer.MsScanArrived += new EventHandler&lt;MsScanEventArgs>(ScanContainer_ScanArrived);
+            		}
+            
+            		/// &lt;summary>
+            		/// Show the last acquired scan if that exists and cleanup.
+            		/// &lt;/summary>
+            		internal void CloseDown()
+            		{
+            			// Be tolerant to thread-switches
+            			IMsScanContainer scanContainer = ScanContainer;
+            			ScanContainer = null;
+            
+            			if (scanContainer != null)
+            			{
+            				scanContainer.MsScanArrived -= new EventHandler&lt;MsScanEventArgs>(ScanContainer_ScanArrived);
+            				scanContainer.AcquisitionStreamClosing -= new EventHandler(ScanContainer_AcquisitionEnded);
+            				scanContainer.AcquisitionStreamOpening -= new EventHandler&lt;MsAcquisitionOpeningEventArgs>(ScanContainer_AcquisitionStarted);
+            				using (IMsScan scan = (/* V2 */ IMsScan) scanContainer.GetLastMsScan())
+            				{
+            					DumpScan("GetLastScan()", scan);
+            				}
+            			}
+            		}
+            
+            		/// &lt;summary>
+            		/// Access to the scan container hosted by this instance.
+            		/// &lt;/summary>
+            		private IMsScanContainer ScanContainer { get; set; }
+            
+            		/// &lt;summary>
+            		/// When a new acquisition starts we dump that information.
+            		/// &lt;/summary>
+            		/// &lt;param name="sender">doesn't matter&lt;/param>
+            		/// &lt;param name="e">doesn't matter&lt;/param>
+            		private void ScanContainer_AcquisitionStarted(object sender, EventArgs e)
+            		{
+            			Console.WriteLine("START OF ACQUISITION");
+            		}
+            
+            		/// &lt;summary>
+            		/// When an acquisitions ends we dump that information.
+            		/// &lt;/summary>
+            		/// &lt;param name="sender">doesn't matter&lt;/param>
+            		/// &lt;param name="e">doesn't matter&lt;/param>
+            		private void ScanContainer_AcquisitionEnded(object sender, EventArgs e)
+            		{
+            			Console.WriteLine("END OF ACQUISITION");
+            		}
+            
+            		/// &lt;summary>
+            		/// When a new scan arrives we dump that information in verbose mode.
+            		/// &lt;/summary>
+            		/// &lt;param name="sender">doesn't matter&lt;/param>
+            		/// &lt;param name="e">used to access the scan information&lt;/param>
+            		private void ScanContainer_ScanArrived(object sender, MsScanEventArgs e)
+            		{
+            			Console.WriteLine("Scan arrived");
+            			// As an example we access all centroids
+            			using (IMsScan scan = (/* V2 */ IMsScan) e.GetScan())
+            			{
+            				DumpScan("Scan arrived", scan);
+            			}
+            		}
+            
+            		/// &lt;summary>
+            		/// Dump a scan and prepend it with an intro string.
+            		/// &lt;/summary>
+            		/// &lt;param name="intro">string to prepend&lt;/param>
+            		/// &lt;param name="scan">thing to dump&lt;/param>
+            		private void DumpScan(string intro, IMsScan scan)
+            		{
+            			StringBuilder sb = new StringBuilder();
+            			sb.AppendFormat(Instrument.Now.ToString(Program.TimeFormat));
+            			sb.Append(": ");
+            			sb.Append(intro);
+            			sb.Append(", ");
+            			if (scan == null)
+            			{
+            				sb.Append("(empty scan)");
+            				Console.WriteLine(sb.ToString());
+            				return;
+            			}
+            			else
+            			{
+            				sb.Append("detector=");
+            				sb.Append(scan.DetectorName);
+            				string id;
+            				if (scan.SpecificInformation.TryGetValue("Access Id:", out id))
+            				{
+            					sb.Append(", id=");
+            					sb.Append(id);
+            				}
+            				Console.WriteLine(sb.ToString());
+            			}
+            
+            			// This is rather noisy, dump all variables:
+            			DumpVars(scan);
+            
+            			Console.Write("  Noise: ");
+            			foreach (INoiseNode noise in scan.NoiseBand)
+            			{
+            				Console.Write("[{0}, {1}], ", noise.Mz, noise.Intensity);
+            			}
+            			Console.WriteLine();
+            
+            			// Not so useful:
+            			Console.WriteLine("{0} centroids, {1} profile peaks", scan.CentroidCount ?? 0, scan.ProfileCount ?? 0);
+            
+            			// Iterate over all centroids and access dump all profile elements for each.
+            			foreach (ICentroid centroid in scan.Centroids)
+            			{
+            				Console.WriteLine(" {0,10:F5}, I={1:E5}, C={2}, E={3,-5} F={4,-5} M={5,-5} R={6,-5} Res={7}",
+            									centroid.Mz, centroid.Intensity, centroid.Charge ?? -1, centroid.IsExceptional, centroid.IsFragmented, centroid.IsMerged, centroid.IsReferenced, centroid.Resolution);
+            			if (scan.HasProfileInformation)
+            			{
+            				Console.Write("    Profile:");
+            				try
+            				{
+            					foreach (IMassIntensity profilePeak in centroid.Profile)
+            					{
+            						Console.Write(" [{0,10:F5},{1:E5}] ", profilePeak.Mz, profilePeak.Intensity);
+            					}
+            				}
+            				catch
+            				{
+            				}
+            				Console.WriteLine();
+            			}
+            		}
+            
+            		/// &lt;summary>
+            		/// Dump all variables belonging to a scan
+            		/// &lt;/summary>
+            		/// &lt;param name="scan">the scan for which to dump all variables&lt;/param>
+            		private void DumpVars(IMsScan scan)
+            		{
+            			Console.WriteLine("  COMMON");
+            			DumpVars(scan.CommonInformation);
+            			Console.WriteLine("  SPECIFIC");
+            			DumpVars(scan.SpecificInformation);
+            		}
+            
+            		/// &lt;summary>
+            		/// Dump all scan variables belonging to a specific container in a scan.
+            		/// &lt;/summary>
+            		/// &lt;param name="container">container to dump all contained variables for&lt;/param>
+            		private void DumpVars(IInfoContainer container)
+            		{
+            			foreach (string s in container.Names)
+            			{
+            				DumpVar(container, s);
+            			}
+            		}
+            
+            		/// &lt;summary>
+            		/// Dump the content of a single variable to the console after testing the consistency.
+            		/// &lt;/summary>
+            		/// &lt;param name="container">container that variable belongs to&lt;/param>
+            		/// &lt;param name="name">name of the variable&lt;/param>
+            		/// &lt;param name="sb">buffer to be reused for speed&lt;/param>
+            		private void DumpVar(IInfoContainer container, string name)
+            		{
+            			object o = null;
+            			string s = null;
+            			MsScanInformationSource i = MsScanInformationSource.Unknown;
+            
+            			if (container.TryGetValue(name, out s, ref i))
+            			{
+            				// i should have a reasonable value now
+            				if (container.TryGetRawValue(name, out o, ref i))
+            				{
+            					Console.WriteLine("  {0}: type={1}, text='{2}', raw='{3}'",
+            						name, i, s, o);
+            				}
+            			}
+            		}
+            	}
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.DetectorClass">
+            <summary>
+            Get access to the detector class. The class should include describe
+            the instrument detector set precisely, although the individual
+            detector type of a scan uses only a part of the instrument set.
+            <para>
+            Example: The instrument name may be "Thermo Orbitrap Velos Pro", the
+            detector class may be "Hybrid LinearIonTrap Orbitrap" and the
+            scan detector name may be "LinearIonTrap".
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.GetLastMsScan">
+            <summary>
+            Get access to the last scan seen in the system.
+            The value can be null initially.
+            <para>
+            Note that accessing this property forces the consumer to dispose
+            the item as soon as possible in order to free its shared memory resources.
+            </para>
+            </summary>
+            <returns>The method returns the latest scan the framework is aware off. It may be null. It is castable to an Thermo.Interfaces.InstrumentAccess_V2.MsScanContainer.IMsScan</returns>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.MsScanArrived">
+            <summary>
+            This event will be fired when a new scan has been emitted by the
+            instrument.
+            <para>
+            Any listener to this event must handle the event as fast as possible.
+            It is good practice by analyzing tool to enqueue the scan into
+            queue and process that queue in another thread.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening">
+            <summary>
+            This event will be fired when a new acquisition is started and the system
+            is about to open rawfiles, etc.
+            <para>
+            Scans may be created without an explicite acquisition if the instrument is
+            'just' set to running. An acquisition is not necessarily bound to a
+            rawfile, but it is in most cases.
+            </para>
+            <para>
+            The individual information of a scan will reflect the information whether
+            a scan belongs to an acquisition or not.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamClosing">
+            <summary>
+            This event will be fired when the current acquisition ended.
+            <para>
+            Scans may be created without an explicite acquisition, so further scans may
+            arrive after an acquisition stopped. It may even be possible that few scans
+            belonging to the last acquisition may arrive and that an opened rawfile
+            will gather them because of a flushing data queue on the transport layer.
+            </para>
+            <para>
+            The specific information of a scan will reflect the information whether
+            a scan belongs to an acquisition or not.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs">
+            <summary>
+            This implementation of EventArgs carries information about further
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>s to be acquired.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/> for an example how this class can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs.StartingInformation">
+            <summary>
+            Get access to the information being available at the start of an acquisition.
+            Text representation of numbers will always appear in the independant (US) locale.
+            <para>
+            The information is very similar to that of a scan but covers only those information
+            that is available before a scan has been acquired.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsScanEventArgs">
+            <summary>
+            This implementation of EventArgs carries an <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/> for an example how this class can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.MsScanArrived"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsScanEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsScanEventArgs"/>.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsScanEventArgs.GetScan">
+            <summary>
+            Get the scan that has just arrived from the instrument.
+            It has replaced already the LastScan in the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/>.
+            <para>
+            Note that accessing this method forces the consumer to dispose
+            the item as soon as possible in order to free its shared memory resources.
+            </para>
+            </summary>
+            <returns>The method returns the scan data of a scan event. It is castable to an Thermo.Interfaces.InstrumentAccess_V2.MsScanContainer.IMsScan</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.NamespaceDoc">
+            <summary>
+            This namespace covers those interfaces for sole use by mass spectrometers.
+            <para>
+            Call <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess"/>.<see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.GetMsScanContainer(System.Int32)"/>
+            to create the desired base class.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.NamespaceDoc">
+            <summary>
+            This namespace covers the central access to standard instruments of the new generation. The
+            central access point is <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer"/> which serves as a master
+            to get access to all other interfaces in this namespace and all contained namespaces.
+            <para>
+            See the documentation of <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer"/>
+            for an example how to get access to this primary interface.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Properties.Resources.link">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>

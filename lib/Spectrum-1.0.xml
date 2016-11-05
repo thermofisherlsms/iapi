@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spectrum-1.0</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.ICentroid">
+            <summary>
+            This interface describes information about a centroid peak.
+            </summary>
+            <remarks>
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsExceptional">
+            <summary>
+            Get access to the flag whether this peak is an artificial exception.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsReferenced">
+            <summary>
+            Get access to the flag whether this peak is a referenced (lock mass) peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMerged">
+            <summary>
+            Get access to the flag whether this peak is a merged peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsFragmented">
+            <summary>
+            Get access to the flag whether this peak is a fragmented peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMonoisotopic">
+            <summary>
+            Get access to the flag whether this peak is a monoisotopic peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Charge">
+            <summary>
+            Get access to the charge state.
+            null is returned if this value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Profile">
+            <summary>
+            Get access to the profile information. The return value
+            will be an empty array if no profile information is related to this
+            centroid.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Resolution">
+            <summary>
+            Get access to the resolution information. The return value
+            will be null if the resolution is not available for the peak, otherwise it contains the resolution.
+            centroid.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsotopeClusterId">
+            <summary>
+            Get access to the isotope cluster ID. The value is optional and depends on the availability of information
+            in the instrument and proper identification.
+            <para>
+            If available, all centroids with the same cluster ID belong to the same molecule having a specific isotope
+            configuration. This requires the presence of <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Charge"/> information.
+            </para>
+            <para>
+            A value of null doesn't necessarily mean that other centroids do not belong to the same molecule than
+            this centroid.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess">
+            <summary>
+            This interface defines the functionality to access a particular information source which
+            is usually TuneData, Trailer or StatusLog (wording known to Xcalibur users).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.ItemNames">
+            <summary>
+            Access to the items by use of their name. The returned value is sorted according
+            to its original order and contains also comment entries.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.TryGetRawValue(System.String,System.Object@)">
+            <summary>
+            Try to retrieve the value of an item.
+            </summary>
+            <param name="name">The name for that the content shall be returned</param>
+            <param name="value">value of the item</param>
+            <returns>Returns true if the item has been found, false otherwise.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.TryGetValue(System.String,System.String@)">
+            <summary>
+            Try to retrieve the textual representation of an item.
+            </summary>
+            <param name="name">The name for that the content shall be returned</param>
+            <param name="value">textual representation of the value of the item</param>
+            <returns>Returns true if the item has been found, false otherwise.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.Available">
+            <summary>
+            Return whether this particular information source has been made available by the instrument.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.Valid">
+            <summary>
+            Return whether this particular information source block matches the expected format.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity">
+            <summary>
+            This interface is used to store the basic information about peaks.
+            </summary>
+            <remarks>
+            <para>
+            Derived classes are <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.ICentroid"/> and <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode"/>.
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Profile"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity.Mz">
+            <summary>
+            m/z value of the information.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity.Intensity">
+            <summary>
+            Intensity at the given m/z value.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum">
+            <summary>
+            This class describes a spectrum without information coming alongh with it.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.DetectorName">
+            <summary>
+            Get access to the name of the detector that acquired this scan.
+            <para>
+            Example: The instrument name may be "Thermo Orbitrap Velos Pro", the
+            detector class may be "Hybrid LinearIonTrap Orbitrap" and the
+            scan detector name may be "LinearIonTrap".
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseCount">
+            <summary>
+            Get access to the number of noise in this scan. The value is null if the detector
+            is not capable to provide noise. The value may also be null if a computation
+            cannot be performed.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseBand">
+            <summary>
+            Get access to the noise information. The noise nodes form a polygon that covers the noise area.
+            An empty enumeration is returned if noise information is not present.
+            This value will not be null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.CentroidCount">
+            <summary>
+            Get access to the number of centroids in this scan. The value is null if the detector
+            is not capable to provide centroids. The value may also be null if a computation
+            cannot be performed.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids">
+            <summary>
+            Get access to the centroids and further information to those peaks.
+            An empty enumeration is returned if centroid information is not present.
+            This value will not be null.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode">
+            <summary>
+            One noise node is part of a set of noise nodes which describe the individual noise
+            by interpolation at a specific point. Each noise node should be combined with its
+            neightbors in a polygonial way.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode.Baseline">
+            <summary>
+            Baseline of the noise node. The value will be null if no baseline is available.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.NamespaceDoc">
+            <summary>
+            This namespace covers the definition of a customer-accessible spectrum. A customer can be
+            an API or a consuming program.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.Properties.Resources.link">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>
