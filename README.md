@@ -10,8 +10,8 @@ Versioning for the API will follow [Semantic Versioning](http://semver.org/). Ma
 | Module | Version | Date |
 |-----|---------|------|
 |[Instrument API](https://github.com/thermofisherlsms/iapi/blob/master/lib/API-2.0.dll) | [1.0.0.13](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22172-nov-3-2016)|Nov 3, 2016|
-|[Fusion API](https://github.com/thermofisherlsms/iapi/blob/master/lib/fusion/Fusion.API-1.0.dll) |  [1.1.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22174-nov-4-2016)|Nov 4, 2016|
-|Tune |  [2.2.174](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22174-nov-4-2016)|Nov 4, 2016|
+|[Fusion API](https://github.com/thermofisherlsms/iapi/blob/master/lib/fusion/Fusion.API-1.0.dll) |  [1.2.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Nov 7, 2016|
+|Tune |  [2.2.178](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Nov 7, 2016|
 
 Please see the [Changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for a complete history of the versions.
 

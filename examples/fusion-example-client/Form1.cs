@@ -96,8 +96,11 @@ namespace FusionExampleClient
         
             _instControl = _instAccess.Control;
             _instAccess.ConnectionChanged += _instAccess_ConnectionChanged;
+            _instAccess.ContactClosureChanged += _instAccess_ContactClosureChanged;
+
             _instAcq = _instControl.Acquisition;
             _instAcq.StateChanged += Acquisition_StateChanged;
+           
             UpdateState(_instAcq.State);
 
 
@@ -110,6 +113,16 @@ namespace FusionExampleClient
             _syringe.ParameterValueChanged += _syringe_ParameterValueChanged;
             _syringe.StatusChanged += _syringe_StatusChanged;
             updateSyringeReadbacks(true);
+        }
+
+        void _instAccess_ContactClosureChanged(object sender, ContactClosureEventArgs e)
+        {
+            Invoke(new Action(
+             () =>
+             {
+                 risingTB.Text = e.RisingEdges.ToString();
+                 fallingTB.Text = e.FallingEdges.ToString();               
+             }));
         }
 
         void _syringe_StatusChanged(object sender, EventArgs e)
@@ -422,5 +435,7 @@ namespace FusionExampleClient
         {
             _syringe.SetFlowRate((double)numericUpDown3.Value);
         }
+
+
     }
 }

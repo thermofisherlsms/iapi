@@ -2,6 +2,15 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 2.2.178 (Nov 7, 2016)
+* Fusion API is updated to 1.2.0.0
+	* Added ContactClosureChanged event
+	* Added ContactClosureEventArgs for the event
+* Contact closure is implemented as a polling loop in the instrument firmware (~100 ms). 
+	* If the input for contact closure rises or falls multiple times within the polling period, they are grouped together in the ContactClosureEventArgs	
+* Fixed bug where MSn scans were not being taken even if the number of precursors > 1
+* Updated example 'FusionExampleClient' project with contact closure event handlers
+
 ## 2.2.174 (Nov 4, 2016)
 * Fusion API is updated to 1.1.0.0
 	* Added ISyringePumpControl interface	

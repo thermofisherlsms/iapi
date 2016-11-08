@@ -4,6 +4,36 @@
         <name>Fusion.API-1.0</name>
     </assembly>
     <members>
+        <member name="T:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs">
+            <summary>
+            The event data for when a contact closure occurs. This can happen on either the rising and/or falling edges.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.RisingEdges">
+            <summary>
+            The number of rising edges detected on the contact closure input since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.FallingEdges">
+            <summary>
+            The number of falling edges detected on the contact closure input since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.DidRise">
+            <summary>
+            Indicates if any rising edge events occured since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.DidFall">
+            <summary>
+            Indicates if any falling edge events occured since it was last polled
+            </summary>
+        </member>
         <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.IFusionControl.SyringePumpControl">
             <summary>
             Get access to the syringe pump control interface. This interface allows
@@ -84,6 +114,11 @@
         <member name="E:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.ParameterValueChanged">
             <summary>
             Occurs whenever a parameter value changes. 
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.FusionAccess_V1.IFusionInstrumentAccess.ContactClosureChanged">
+            <summary>
+            Occurs whenever the contact closure detects a rising and/or falling edge.
             </summary>
         </member>
     </members>
