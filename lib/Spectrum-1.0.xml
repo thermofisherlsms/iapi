@@ -38,12 +38,6 @@
             null is returned if the value couldn't be determined.
             </summary>
         </member>
-        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMonoisotopic">
-            <summary>
-            Get access to the flag whether this peak is a monoisotopic peak.
-            null is returned if the value couldn't be determined.
-            </summary>
-        </member>
         <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Charge">
             <summary>
             Get access to the charge state.
@@ -61,22 +55,77 @@
             <summary>
             Get access to the resolution information. The return value
             will be null if the resolution is not available for the peak, otherwise it contains the resolution.
-            centroid.
             </summary>
         </member>
-        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsotopeClusterId">
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.ChargeEnvelopeIndex">
             <summary>
-            Get access to the isotope cluster ID. The value is optional and depends on the availability of information
+            Get access to the charge envelope index. The value is optional and depends on the availability of information
             in the instrument and proper identification.
             <para>
-            If available, all centroids with the same cluster ID belong to the same molecule having a specific isotope
-            configuration. This requires the presence of <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Charge"/> information.
+            If available, all centroids with the same charge envelope index belong to the same molecule having a specific isotope
+            configuration. Properties of the charge envelope can be examined by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.ChargeEnvelopes"/>[ChargeEnvelopeIndex].
             </para>
             <para>
             A value of null doesn't necessarily mean that other centroids do not belong to the same molecule than
             this centroid.
             </para>
             </summary>
+            <remarks>This is an enhancement for better centroid characterization done in 2016.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMonoisotopic">
+            <summary>
+            Get access to the flag whether this peak is a monoisotopic peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+            <remarks>This is an enhancement for better centroid characterization done in 2016.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsClusterTop">
+            <summary>
+            Get access whether this centroid is identified as having the top-peak mass within the charge envelope.
+            </summary>
+            <remarks>
+            The top peak is that peak in a charge envelope that fulfils two requirements in this order: 1) never being considered
+            to be part of another charge envelope, and 2) having the highest abundance.
+            <para>
+            This is an enhancement for better centroid characterization done in 2016.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope">
+            <summary>
+            This interface covers charge envelopes. All isotopes just having a different charge belong to the same charge envelope.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass">
+            <summary>
+            This is the monoisotopic mass that a particular peak belongs to. The value is a calculated one,
+            it is very likely that this cannot be seen at all in the spectrum. But it is the reference point of all
+            members of one charge envelope.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.CrossCorrelation">
+            <summary>
+            This cross-correlation factor is the maximum of all cross-correlation values over all averagines. An averagine is a statistical model
+            of the isotope distribution of the same molecule (see remarks of <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope"/>) at a given charge. The observed peaks
+            within the spectrum are fitted to this, the overlap is calculated by a cross-correlation that only takes the intensities into account.
+            <para>
+            The averagine model is strongly linked to peptide analysis. As an example, averagine mass distribution for pesticides are totally different.
+            </para>
+            <para>
+            Cross-correlation factors vary in the range 0 to 1. 0 will be set if <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass"/> is also 0.
+            In this case, the fit was unsuccessful.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.TopPeakCentroidId">
+            <summary>
+            This is the index to the top peak centroid in the centroid list (<see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids"/>).
+            One can use this to get access to the mass of the so called top peak.
+            </summary>
+            <remarks>
+            The top peak is that peak in a charge envelope that fulfils two requirements in this order: 1) never being considered
+            to be part of another charge envelope, and 2) having the highest abundance.
+            </remarks>
         </member>
         <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess">
             <summary>
@@ -154,9 +203,10 @@
         </member>
         <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseCount">
             <summary>
-            Get access to the number of noise in this scan. The value is null if the detector
-            is not capable to provide noise. The value may also be null if a computation
-            cannot be performed.
+            Get access to the number of elements returned by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseBand"/>. The value will
+            be null if the detector doesn't support noise information at all. 0 will be returned if no
+            peaks below noise level were cut off, 1 will be returned for a constant level of the returned
+            intensity.
             </summary>
         </member>
         <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseBand">
@@ -178,6 +228,13 @@
             Get access to the centroids and further information to those peaks.
             An empty enumeration is returned if centroid information is not present.
             This value will not be null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.ChargeEnvelopes">
+            <summary>
+            Access to the array of all charge envelopes found in the spectrum. An empty array will be returned if nothing
+            had been found. null will be returned if the detector's processing software doesn't support detection of
+            charge envelopes for this scan.
             </summary>
         </member>
         <member name="T:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode">

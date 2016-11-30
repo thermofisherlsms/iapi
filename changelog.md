@@ -2,6 +2,23 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 3.0.1794 (Nov 30, 2016)
+* API is updated to 1.1.0.1
+	* Moved MsScanContainer.MsAcquisitionOpeningEventArgs to Acquisition.AcquisitionOpeningEventArgs
+	* Moved event handlers for Acquisition opening/closing from IMsScanConainter to Control.IAcquisition
+* Spectrum API is updated to 1.1.0.1 
+	* Added IChargeEnvelope interface for grouping peaks based on charge
+	* ICentroid
+		* Replaced IsotopeClusterId with ChargeEnvelopeId property
+		* Added IsClusterTop property
+	* ISpectrum
+		* Added ChargeEnvelopes array property	
+* Fusion API xml updated
+* Fixed stack overflow bug when loading other assmeblies
+* Internal refractoring of code
+* Updated client example program
+	* Shows scan properties in a datagridview for easier editing in GUI
+
 ## 2.2.178 (Nov 7, 2016)
 * Fusion API is updated to 1.2.0.0
 	* Added ContactClosureChanged event

@@ -176,6 +176,36 @@
             instrument state will be carried along.
             </summary>
         </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.AcquisitionStreamOpening">
+            <summary>
+            This event will be fired when a new acquisition is started and the system
+            is about to open rawfiles, etc.
+            <para>
+            Scans may be created without an explicite acquisition if the instrument is
+            'just' set to running. An acquisition is not necessarily bound to a
+            rawfile, but it is in most cases.
+            </para>
+            <para>
+            The individual information of a scan will reflect the information whether
+            a scan belongs to an acquisition or not.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.AcquisitionStreamClosing">
+            <summary>
+            This event will be fired when the current acquisition ended.
+            <para>
+            Scans may be created without an explicite acquisition, so further scans may
+            arrive after an acquisition stopped. It may even be possible that few scans
+            belonging to the last acquisition may arrive and that an opened rawfile
+            will gather them because of a flushing data queue on the transport layer.
+            </para>
+            <para>
+            The specific information of a scan will reflect the information whether
+            a scan belongs to an acquisition or not.
+            </para>
+            </summary>
+        </member>
         <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.CanPause">
             <summary>
             Will it be possible to pause the current operation?
@@ -255,7 +285,7 @@
             </para>
             </summary>
             <param name="duration">non-negative duration this call shall wait at most</param>
-            <param name="continuation">Function returning true if the passed states allow continuation. On return of true, the WaitFor call will immediately end also with the return value of true.</param>
+            <param name="continuation">Function returning true if the passed state allow continuation. On return of true, the WaitFor call will immediately end also with the return value of true.</param>
             <returns>true if condition as returned true, false if duration has expired</returns>
         </member>
         <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.StartAcquisition(Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)">
@@ -847,7 +877,7 @@
             if this property is positive until the delay has expired
             or a new custom scan has been defined.
             <para>
-            It will be quaranteed that after the event <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening"/>
+            It will be quaranteed that after the event <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.AcquisitionStreamOpening"/>
             no <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.MsScanArrived"/> will be populated or written to the rawfile
             if this delay is pending and no custom scan has been placed.
             </para>
@@ -866,6 +896,29 @@
         <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow.NamespaceDoc">
             <summary>
             This namespace contains classes needed to start an acquisition
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.AcquisitionOpeningEventArgs">
+            <summary>
+            This implementation of EventArgs carries information about further scans to be acquired.
+            </summary>
+            <remarks>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.AcquisitionStreamOpening"/>.
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.AcquisitionOpeningEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.AcquisitionOpeningEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.AcquisitionOpeningEventArgs.StartingInformation">
+            <summary>
+            Get access to the information being available at the start of an acquisition.
+            Text representation of numbers will always appear in the independent (US) locale.
+            <para>
+            The information is very similar to that of a scan but covers only those information
+            that is available before a scan has been acquired.
+            </para>
             </summary>
         </member>
         <member name="T:Thermo.Interfaces.InstrumentAccess_V1.Control.ContentChangedEventArgs">
@@ -1011,6 +1064,7 @@
             Each name has also a numeric representation, see <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues.Get(System.UInt64)"/>.
             </para>
             </summary>
+            <remarks>Accessing the same internal object twice just increments an internal reference, a further object will not be returned.</remarks>
             <param name="name">The name of the value</param>
             <returns>null is returned for an invalid or unknown name, otherwise the value linked with the passed name is returned.</returns>
         </member>
@@ -1018,6 +1072,7 @@
             <summary>
             Get access to an instrument value by its number.
             </summary>
+            <remarks>Accessing the same internal object twice just increments an internal reference, a further object will not be returned.</remarks>
             <param name="number">The number of the value</param>
             <returns>The value linked with the passed name is returned. Nodes unknown to the instrument may return in a dumb value instance.</returns>
         </member>
@@ -1387,7 +1442,7 @@
         </member>
         <member name="P:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScanDefinition.Values">
             <summary>
-            Get access to the value set. Any value nor defined will be replaced by the
+            Get access to the value set. Any value not defined will be replaced by the
             value defined in the default scan.
             <para>
             Illegal values will be ignored, values out of range will not be accepted.
@@ -2011,11 +2066,8 @@
             <para>
             For messages during acquisitions see <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccess.AcquisitionErrorsArrived"/>.
             </para>
-            <para>
-            This event handler is accessible offline.
-            </para>
             </summary>
-            <remarks>This event requires online access.</remarks>
+            <remarks>This functionality is available offline.</remarks>
         </member>
         <member name="T:Thermo.Interfaces.InstrumentAccess_V1.IMessage">
             <summary>
@@ -2204,19 +2256,19 @@
         <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.TuneData">
             <summary>
             Get access to the TuneData information source. This is mostly accessible at acquisition start.
-            Text representation of numbers will always appear in the independant (US) locale.
+            Text representation of numbers will always appear in the independent (US) locale.
             </summary>
         </member>
         <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.Trailer">
             <summary>
             Get access to the Trailer information source.
-            Text representation of numbers will always appear in the independant (US) locale.
+            Text representation of numbers will always appear in the independent (US) locale.
             </summary>
         </member>
         <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan.StatusLog">
             <summary>
             Get access to the StatusLog information source.
-            Text representation of numbers will always appear in the independant (US) locale.
+            Text representation of numbers will always appear in the independent (US) locale.
             </summary>
         </member>
         <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer">
@@ -2262,8 +2314,8 @@
             			ScanContainer = instrument.GetMsScanContainer(0);
             			Console.WriteLine("Detector class: " + ScanContainer.DetectorClass);
             
-            			ScanContainer.AcquisitionStreamOpening += new EventHandler&lt;MsAcquisitionOpeningEventArgs>(ScanContainer_AcquisitionStarted);
-            			ScanContainer.AcquisitionStreamClosing += new EventHandler(ScanContainer_AcquisitionEnded);
+            			instrument.Control.Acquisition.AcquisitionStreamOpening += new EventHandler(AcquisitionStarted);
+            			instrument.Control.Acquisition.AcquisitionStreamClosing += new EventHandler(AcquisitionEnded);
             			ScanContainer.MsScanArrived += new EventHandler&lt;MsScanEventArgs>(ScanContainer_ScanArrived);
             		}
             
@@ -2279,8 +2331,8 @@
             			if (scanContainer != null)
             			{
             				scanContainer.MsScanArrived -= new EventHandler&lt;MsScanEventArgs>(ScanContainer_ScanArrived);
-            				scanContainer.AcquisitionStreamClosing -= new EventHandler(ScanContainer_AcquisitionEnded);
-            				scanContainer.AcquisitionStreamOpening -= new EventHandler&lt;MsAcquisitionOpeningEventArgs>(ScanContainer_AcquisitionStarted);
+            				instrument.Control.Acquisition.AcquisitionStreamClosing -= new EventHandler(AcquisitionEnded);
+            				instrument.Control.Acquisition.AcquisitionStreamOpening -= new EventHandler(AcquisitionStarted);
             				using (IMsScan scan = (/* V2 */ IMsScan) scanContainer.GetLastMsScan())
             				{
             					DumpScan("GetLastScan()", scan);
@@ -2298,7 +2350,7 @@
             		/// &lt;/summary>
             		/// &lt;param name="sender">doesn't matter&lt;/param>
             		/// &lt;param name="e">doesn't matter&lt;/param>
-            		private void ScanContainer_AcquisitionStarted(object sender, EventArgs e)
+            		private void AcquisitionStarted(object sender, EventArgs e)
             		{
             			Console.WriteLine("START OF ACQUISITION");
             		}
@@ -2308,7 +2360,7 @@
             		/// &lt;/summary>
             		/// &lt;param name="sender">doesn't matter&lt;/param>
             		/// &lt;param name="e">doesn't matter&lt;/param>
-            		private void ScanContainer_AcquisitionEnded(object sender, EventArgs e)
+            		private void AcquisitionEnded(object sender, EventArgs e)
             		{
             			Console.WriteLine("END OF ACQUISITION");
             		}
@@ -2476,63 +2528,6 @@
             Any listener to this event must handle the event as fast as possible.
             It is good practice by analyzing tool to enqueue the scan into
             queue and process that queue in another thread.
-            </para>
-            </summary>
-        </member>
-        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening">
-            <summary>
-            This event will be fired when a new acquisition is started and the system
-            is about to open rawfiles, etc.
-            <para>
-            Scans may be created without an explicite acquisition if the instrument is
-            'just' set to running. An acquisition is not necessarily bound to a
-            rawfile, but it is in most cases.
-            </para>
-            <para>
-            The individual information of a scan will reflect the information whether
-            a scan belongs to an acquisition or not.
-            </para>
-            </summary>
-        </member>
-        <member name="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamClosing">
-            <summary>
-            This event will be fired when the current acquisition ended.
-            <para>
-            Scans may be created without an explicite acquisition, so further scans may
-            arrive after an acquisition stopped. It may even be possible that few scans
-            belonging to the last acquisition may arrive and that an opened rawfile
-            will gather them because of a flushing data queue on the transport layer.
-            </para>
-            <para>
-            The specific information of a scan will reflect the information whether
-            a scan belongs to an acquisition or not.
-            </para>
-            </summary>
-        </member>
-        <member name="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs">
-            <summary>
-            This implementation of EventArgs carries information about further
-            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>s to be acquired.
-            </summary>
-            <remarks>
-            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/> for an example how this class can be used.
-            <para>
-            An instance of this class will be created by <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.AcquisitionStreamOpening"/>.
-            </para>
-            </remarks>
-        </member>
-        <member name="M:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs.#ctor">
-            <summary>
-            Create a new <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs"/>.
-            </summary>
-        </member>
-        <member name="P:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.MsAcquisitionOpeningEventArgs.StartingInformation">
-            <summary>
-            Get access to the information being available at the start of an acquisition.
-            Text representation of numbers will always appear in the independant (US) locale.
-            <para>
-            The information is very similar to that of a scan but covers only those information
-            that is available before a scan has been acquired.
             </para>
             </summary>
         </member>

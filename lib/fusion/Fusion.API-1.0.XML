@@ -46,6 +46,26 @@
             Gives access to the syringe pump control.
             </summary>
         </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Volume">
+            <summary>
+            Get the currently set volume of the syringe in µL.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.FlowRate">
+            <summary>
+            Get the currently set flow rate of the pump in µL/min.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Diameter">
+            <summary>
+            Get the currently diameter of the syringe.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Status">
+            <summary>
+            Get the current status of the syringe pump.
+            </summary>
+        </member>
         <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Start">
             <summary>
             Starts the pumping if connected. If it was already pumping, it applies any
@@ -85,26 +105,6 @@
             the Diameter property will be updated accordingly.
             </summary>
             <param name="diameter">The diameter to set</param>
-        </member>
-        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Volume">
-            <summary>
-            Get the currently set volume of the syringe in µL.
-            </summary>
-        </member>
-        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.FlowRate">
-            <summary>
-            Get the currently set flow rate of the pump in µL/min.
-            </summary>
-        </member>
-        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Diameter">
-            <summary>
-            Get the currently diameter of the syringe.
-            </summary>
-        </member>
-        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Status">
-            <summary>
-            Get the current status of the syringe pump.
-            </summary>
         </member>
         <member name="E:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.StatusChanged">
             <summary>

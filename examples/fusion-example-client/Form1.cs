@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Thermo.TNG.Factory;
 using Thermo.Interfaces.InstrumentAccess_V1;
 using Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer;
 using Thermo.Interfaces.FusionAccess_V1;
 using Thermo.Interfaces.FusionAccess_V1.MsScanContainer;
-using Thermo.Interfaces.InstrumentAccess_V1.Control;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues;
@@ -20,7 +13,9 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow;
 using Thermo.Interfaces.FusionAccess_V1.Control.Peripherals;
 using Thermo.Interfaces.FusionAccess_V1.Control;
-using System.Reflection;
+using Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer;
+using System.Collections.Generic;
+using System.Data;
 
 namespace FusionExampleClient
 {
@@ -35,12 +30,20 @@ namespace FusionExampleClient
         IScans _scans;
         ISyringePumpControl _syringe;
 
+        IAnalogTraceContainer[] _analogTrace;
+        GroupBox[] analogGroupBoxes;
+
+        DataTable scanProperties;
+
         int totalScansArrived = 0;
         int customScans = 0;
 
         public Form1()
         {
-            InitializeComponent();        
+            InitializeComponent();
+
+            analogGroupBoxes = new GroupBox[] { groupBox3, groupBox4 };
+
             _instAccessContainer = Factory<IFusionInstrumentAccessContainer>.Create(); 
             _instAccessContainer.ServiceConnectionChanged += _instAccessContainer_ServiceConnectionChanged;
             _instAccessContainer.MessagesArrived += _instAccessContainer_MessagesArrived;
@@ -73,6 +76,7 @@ namespace FusionExampleClient
             () =>
             {
                 serverConnectedTB.Text = _instAccessContainer.ServiceConnected.ToString();
+                button3.Enabled = _instAccessContainer.ServiceConnected;
             }));
         }
 
@@ -98,21 +102,72 @@ namespace FusionExampleClient
             _instAccess.ConnectionChanged += _instAccess_ConnectionChanged;
             _instAccess.ContactClosureChanged += _instAccess_ContactClosureChanged;
 
+       
             _instAcq = _instControl.Acquisition;
             _instAcq.StateChanged += Acquisition_StateChanged;
-           
-            UpdateState(_instAcq.State);
+            _instAcq.AcquisitionStreamClosing += _instAcq_AcquisitionStreamClosing;
+            _instAcq.AcquisitionStreamOpening += _instAcq_AcquisitionStreamOpening;
 
+            UpdateState(_instAcq.State);
 
             _instValues = _instControl.InstrumentValues;
             _scans = _instControl.GetScans(false);
             _scans.CanAcceptNextCustomScan += _scans_CanAcceptNextCustomScan;
             _scans.PossibleParametersChanged += _scans_PossibleParametersChanged;
 
+            scanProperties = new DataTable();
+            var propColumn = scanProperties.Columns.Add("Property", typeof(string));
+            propColumn.ReadOnly = true;
+            scanProperties.Columns.Add("Value", typeof(string));
+            scanProperties.Columns.Add("Selection", typeof(string)).ReadOnly = true;
+            scanProperties.Columns.Add("Help", typeof(string)).ReadOnly = true;
+
+            BindingSource source = new BindingSource();
+            source.DataSource = scanProperties;
+
+            dataGridView1.DataSource = source;
+
+            UpdateScanProperties();
+
             _syringe = _instControl.SyringePumpControl;
             _syringe.ParameterValueChanged += _syringe_ParameterValueChanged;
             _syringe.StatusChanged += _syringe_StatusChanged;
             updateSyringeReadbacks(true);
+
+            _instMSScanContainer = _instAccess.GetMsScanContainer(0);          
+
+
+            // Analog Values
+            int numOfAnalogs = _instAccess.CountAnalogChannels;
+            _analogTrace = new IAnalogTraceContainer[numOfAnalogs];
+            for (int i = 0; i < numOfAnalogs; i++)
+            {                
+                var trace = _analogTrace[i] = _instAccess.GetAnalogTraceContainer(i);
+                if (trace != null)
+                {
+                    analogGroupBoxes[i].Text = trace.DetectorClass;
+                }           
+            }
+
+        }
+
+        private void _instAcq_AcquisitionStreamOpening(object sender, AcquisitionOpeningEventArgs e)
+        {
+            Invoke(new Action(
+          () =>
+          {
+              progressBar1.Style = ProgressBarStyle.Marquee;
+          }));
+        }
+
+        private void _instAcq_AcquisitionStreamClosing(object sender, EventArgs e)
+        {
+            Invoke(new Action(
+       () =>
+       {
+           progressBar1.Style = ProgressBarStyle.Continuous;
+           progressBar1.Value = 0;
+       }));
         }
 
         void _instAccess_ContactClosureChanged(object sender, ContactClosureEventArgs e)
@@ -135,9 +190,17 @@ namespace FusionExampleClient
             updateSyringeReadbacks();
         }
 
+        void UpdateScanProperties()
+        {
+            foreach (var property in _scans.PossibleParameters)
+            {
+                scanProperties.LoadDataRow(new string[] { property.Name, property.DefaultValue, property.Selection, property.Help }, LoadOption.OverwriteChanges);
+            }
+        }
+
         void _scans_PossibleParametersChanged(object sender, EventArgs e)
         {
-           // throw new NotImplementedException();
+            UpdateScanProperties();
         }
 
         void _scans_CanAcceptNextCustomScan(object sender, EventArgs e)
@@ -178,22 +241,23 @@ namespace FusionExampleClient
             }));
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        void _instMSScanContainer_AcquisitionStreamOpening(object sender, AcquisitionOpeningEventArgs e)
         {
-            _instMSScanContainer = _instAccess.GetMsScanContainer(0);
-            _instMSScanContainer.MsScanArrived += _instMSScanContainer_MsScanArrived;
-            _instMSScanContainer.AcquisitionStreamOpening += _instMSScanContainer_AcquisitionStreamOpening;
-            _instMSScanContainer.AcquisitionStreamClosing += _instMSScanContainer_AcquisitionStreamClosing;
-        }
-
-        void _instMSScanContainer_AcquisitionStreamOpening(object sender, MsAcquisitionOpeningEventArgs e)
-        {
-
+            Invoke(new Action(
+           () =>
+           {
+               progressBar1.Style = ProgressBarStyle.Marquee;
+           }));
         }
 
         void _instMSScanContainer_AcquisitionStreamClosing(object sender, EventArgs e)
         {
-
+            Invoke(new Action(
+         () =>
+         {
+             progressBar1.Style = ProgressBarStyle.Continuous;
+             progressBar1.Value = 0;
+         }));
         }
 
         void _instMSScanContainer_MsScanArrived(object sender, MsScanEventArgs e)
@@ -214,37 +278,7 @@ namespace FusionExampleClient
             }));
 
 
-            int msOrder = int.Parse(lastScan1.Header["MSOrder"]);
-            if (msOrder < 2)
-            {
-                return;
-            }
-
-            double precusor = double.Parse(lastScan1.Header["PrecursorMass[0]"]);
-
-            if (precusor > 524 && precusor < 525 && msOrder == 2)
-            {
-                ICustomScan customScan = _scans.CreateCustomScan();
-
-                customScan.SingleProcessingDelay = 5;
-
-                customScan.RunningNumber = long.Parse(textBox4.Text);
-
-                double topProd = double.Parse(lastScan1.Header["BasePeakMass"]);
-
-                customScan.Values["FirstMass"] = "150";
-                customScan.Values["LastMass"] = "600";
-                customScan.Values["ScanType"] = "MSn";
-                customScan.Values["Analyzer"] = "Orbitrap";
-                customScan.Values["OrbitrapResolution"] = "60000";
-                customScan.Values["AGCTarget"] = "2e5";
-                customScan.Values["PrecursorMass"] = string.Format("{0:F4};{1:F4}", precusor, topProd);
-                customScan.Values["CollisionEnergy"] = "30;25";
-                customScan.Values["MicroScans"] = "1";
-
-                _scans.SetCustomScan(customScan);
-
-            }
+     
 
 
         }
@@ -260,47 +294,49 @@ namespace FusionExampleClient
             IMode mode = _instControl.Acquisition.CreateOnMode();
             _instControl.Acquisition.SetMode(mode);
         }
+        
 
-        private void button7_Click(object sender, EventArgs e)
-        {           
-            ICustomScan customScan = _scans.CreateCustomScan();
+        private void UpdateScan(IScanDefinition scan)
+        {
+            foreach (DataRow row in scanProperties.Rows)
+            {
+                scan.Values[row[0].ToString()] = row[1].ToString();
+            }
+            scan.RunningNumber = (long)numericUpDown5.Value;
+        }
 
-            customScan.SingleProcessingDelay = 5;
+        private void SubmitScan()
+        {          
+            if (radioButton5.Checked)
+            {
+                IRepeatingScan rs = _scans.CreateRepeatingScan();
+                UpdateScan(rs);
+                _scans.SetRepetitionScan(rs);
+            }
+            else if (radioButton6.Checked)
+            {
+                ICustomScan cs = _scans.CreateCustomScan();
+                cs.SingleProcessingDelay = (double)numericUpDown4.Value;
+                UpdateScan(cs);              
+                _scans.SetCustomScan(cs);
+            }     
+        }
 
-            customScan.RunningNumber = long.Parse(textBox4.Text);
-
-            customScan.Values["FirstMass"] = "150";
-            customScan.Values["LastMass"] = "600";
-            customScan.Values["ScanType"] = "MSn";
-            customScan.Values["PrecursorMass"] = "524.25;271.27";
-            customScan.Values["CollisionEnergy"] = "30;25";
-            customScan.Values["MicroScans"] = "1";
-
-            _scans.SetCustomScan(customScan);
+        private void CancelScan()
+        {
+            if (radioButton5.Checked)
+            {
+                _scans.CancelRepetition();
+            }
+            else if (radioButton6.Checked)
+            {
+                _scans.CancelCustomScan();
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            IRepeatingScan repeatScan = _scans.CreateRepeatingScan();
-
-            repeatScan.RunningNumber = long.Parse(textBox4.Text);
-
-            repeatScan.Values["FirstMass"] = "500";
-            repeatScan.Values["LastMass"] = "600";
-            repeatScan.Values["ScanType"] = "SIM";
-            repeatScan.Values["MicroScans"] = "2";
-
-            _scans.SetRepetitionScan(repeatScan);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            _scans.CancelRepetition();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            _scans.CancelCustomScan();
+            SubmitScan();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -436,6 +472,86 @@ namespace FusionExampleClient
             _syringe.SetFlowRate((double)numericUpDown3.Value);
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {            
+            if (checkBox1.Checked)
+            {
+                _analogTrace[0].AnalogTracePointArrived += Form1_AnalogTracePointArrived;
+            }
+            else
+            {
+                _analogTrace[0].AnalogTracePointArrived -= Form1_AnalogTracePointArrived;
+            }
+        }
 
+        private void Form1_AnalogTracePointArrived(object sender, AnalogTracePointEventArgs e)
+        {
+            Invoke(new Action(
+           () =>
+           {
+               textBox5.Text = e.TracePoint.Value.ToString();
+               textBox6.Text = e.TracePoint.Occurrence.ToString();
+            }));
+        }
+
+        private void Form2_AnalogTracePointArrived(object sender, AnalogTracePointEventArgs e)
+        {
+            Invoke(new Action(
+           () =>
+           {
+               textBox8.Text = e.TracePoint.Value.ToString();
+               textBox7.Text = e.TracePoint.Occurrence.ToString();
+           }));
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                _analogTrace[1].AnalogTracePointArrived += Form2_AnalogTracePointArrived;
+            }
+            else
+            {
+                _analogTrace[1].AnalogTracePointArrived -= Form2_AnalogTracePointArrived;
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked)
+            {
+                _instMSScanContainer.MsScanArrived += _instMSScanContainer_MsScanArrived;
+            }
+            else
+            {
+                _instMSScanContainer.MsScanArrived -= _instMSScanContainer_MsScanArrived;
+            }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void UpdateScanDisplayRules()
+        {
+            numericUpDown4.Enabled = radioButton6.Checked;
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateScanDisplayRules();
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateScanDisplayRules();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            CancelScan();
+        }
+        
     }
 }
