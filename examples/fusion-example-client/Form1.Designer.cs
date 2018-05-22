@@ -85,6 +85,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label22 = new System.Windows.Forms.Label();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -115,7 +116,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,13 +127,13 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfMinutesUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).BeginInit();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -214,10 +214,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(511, 12);
+            this.tabControl1.Location = new System.Drawing.Point(408, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(548, 247);
+            this.tabControl1.Size = new System.Drawing.Size(398, 312);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -240,7 +240,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(540, 221);
+            this.tabPage1.Size = new System.Drawing.Size(390, 286);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ReadBacks";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -251,7 +251,7 @@
             this.groupBox2.Controls.Add(this.fallingTB);
             this.groupBox2.Controls.Add(this.risingTB);
             this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Location = new System.Drawing.Point(315, 94);
+            this.groupBox2.Location = new System.Drawing.Point(9, 202);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(212, 82);
             this.groupBox2.TabIndex = 26;
@@ -292,7 +292,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(162, 112);
+            this.textBox2.Location = new System.Drawing.Point(161, 172);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 14;
@@ -300,7 +300,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 120);
+            this.label8.Location = new System.Drawing.Point(5, 180);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(150, 13);
             this.label8.TabIndex = 15;
@@ -308,7 +308,7 @@
             // 
             // serverConnectedTB
             // 
-            this.serverConnectedTB.Location = new System.Drawing.Point(110, 7);
+            this.serverConnectedTB.Location = new System.Drawing.Point(161, 5);
             this.serverConnectedTB.Name = "serverConnectedTB";
             this.serverConnectedTB.Size = new System.Drawing.Size(100, 20);
             this.serverConnectedTB.TabIndex = 21;
@@ -316,7 +316,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 10);
+            this.label7.Location = new System.Drawing.Point(6, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 13);
             this.label7.TabIndex = 20;
@@ -324,7 +324,7 @@
             // 
             // instrumentConnectedTB
             // 
-            this.instrumentConnectedTB.Location = new System.Drawing.Point(427, 63);
+            this.instrumentConnectedTB.Location = new System.Drawing.Point(161, 144);
             this.instrumentConnectedTB.Name = "instrumentConnectedTB";
             this.instrumentConnectedTB.Size = new System.Drawing.Size(100, 20);
             this.instrumentConnectedTB.TabIndex = 19;
@@ -332,7 +332,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(296, 66);
+            this.label6.Location = new System.Drawing.Point(6, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(111, 13);
             this.label6.TabIndex = 18;
@@ -340,7 +340,7 @@
             // 
             // instrumentIdTB
             // 
-            this.instrumentIdTB.Location = new System.Drawing.Point(427, 36);
+            this.instrumentIdTB.Location = new System.Drawing.Point(161, 117);
             this.instrumentIdTB.Name = "instrumentIdTB";
             this.instrumentIdTB.Size = new System.Drawing.Size(100, 20);
             this.instrumentIdTB.TabIndex = 17;
@@ -348,7 +348,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(337, 41);
+            this.label5.Location = new System.Drawing.Point(6, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 16;
@@ -356,7 +356,7 @@
             // 
             // instrumentNameTB
             // 
-            this.instrumentNameTB.Location = new System.Drawing.Point(427, 10);
+            this.instrumentNameTB.Location = new System.Drawing.Point(161, 91);
             this.instrumentNameTB.Name = "instrumentNameTB";
             this.instrumentNameTB.Size = new System.Drawing.Size(100, 20);
             this.instrumentNameTB.TabIndex = 15;
@@ -364,7 +364,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(338, 15);
+            this.label4.Location = new System.Drawing.Point(6, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 14;
@@ -372,7 +372,7 @@
             // 
             // systemStateTB
             // 
-            this.systemStateTB.Location = new System.Drawing.Point(110, 62);
+            this.systemStateTB.Location = new System.Drawing.Point(161, 60);
             this.systemStateTB.Name = "systemStateTB";
             this.systemStateTB.Size = new System.Drawing.Size(100, 20);
             this.systemStateTB.TabIndex = 13;
@@ -380,7 +380,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 67);
+            this.label3.Location = new System.Drawing.Point(6, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 12;
@@ -388,7 +388,7 @@
             // 
             // systemModeTB
             // 
-            this.systemModeTB.Location = new System.Drawing.Point(110, 36);
+            this.systemModeTB.Location = new System.Drawing.Point(161, 34);
             this.systemModeTB.Name = "systemModeTB";
             this.systemModeTB.Size = new System.Drawing.Size(100, 20);
             this.systemModeTB.TabIndex = 11;
@@ -396,7 +396,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 39);
+            this.label2.Location = new System.Drawing.Point(6, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 10;
@@ -421,7 +421,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(540, 221);
+            this.tabPage2.Size = new System.Drawing.Size(504, 286);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Syringe Control";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -576,7 +576,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(540, 221);
+            this.tabPage3.Size = new System.Drawing.Size(504, 286);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Analog Inputs";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -588,7 +588,7 @@
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.checkBox2);
             this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Location = new System.Drawing.Point(212, 10);
+            this.groupBox4.Location = new System.Drawing.Point(6, 116);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 100);
             this.groupBox4.TabIndex = 1;
@@ -713,30 +713,48 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(540, 221);
+            this.tabPage4.Size = new System.Drawing.Size(390, 286);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Scan Control";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDown5.Location = new System.Drawing.Point(142, 258);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(71, 20);
+            this.numericUpDown5.TabIndex = 23;
+            this.numericUpDown5.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.numericUpDown4.DecimalPlaces = 1;
-            this.numericUpDown4.Location = new System.Drawing.Point(332, 168);
+            this.numericUpDown4.Location = new System.Drawing.Point(142, 230);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             600,
             0,
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown4.Size = new System.Drawing.Size(71, 20);
             this.numericUpDown4.TabIndex = 22;
             // 
             // label22
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(205, 170);
+            this.label22.Location = new System.Drawing.Point(6, 234);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(121, 13);
             this.label22.TabIndex = 21;
@@ -747,7 +765,7 @@
             this.radioButton6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton6.AutoSize = true;
             this.radioButton6.Checked = true;
-            this.radioButton6.Location = new System.Drawing.Point(114, 168);
+            this.radioButton6.Location = new System.Drawing.Point(114, 208);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(85, 17);
             this.radioButton6.TabIndex = 20;
@@ -760,7 +778,7 @@
             // 
             this.radioButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 168);
+            this.radioButton5.Location = new System.Drawing.Point(6, 207);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(102, 17);
             this.radioButton5.TabIndex = 19;
@@ -780,13 +798,13 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 6);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(531, 156);
+            this.dataGridView1.Size = new System.Drawing.Size(381, 196);
             this.dataGridView1.TabIndex = 18;
             // 
             // button9
             // 
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button9.Location = new System.Drawing.Point(142, 192);
+            this.button9.Location = new System.Drawing.Point(219, 229);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 23);
             this.button9.TabIndex = 12;
@@ -797,7 +815,7 @@
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button8.Location = new System.Drawing.Point(6, 192);
+            this.button8.Location = new System.Drawing.Point(219, 257);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 23);
             this.button8.TabIndex = 11;
@@ -809,7 +827,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(340, 197);
+            this.label10.Location = new System.Drawing.Point(6, 262);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 13);
             this.label10.TabIndex = 17;
@@ -870,7 +888,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button12);
-            this.groupBox1.Location = new System.Drawing.Point(12, 172);
+            this.groupBox1.Location = new System.Drawing.Point(12, 131);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(390, 194);
             this.groupBox1.TabIndex = 20;
@@ -1010,9 +1028,9 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(511, 265);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 326);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(544, 195);
+            this.richTextBox1.Size = new System.Drawing.Size(790, 134);
             this.richTextBox1.TabIndex = 21;
             this.richTextBox1.Text = "";
             // 
@@ -1041,29 +1059,11 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Spectra";
             // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown5.Location = new System.Drawing.Point(453, 194);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(71, 20);
-            this.numericUpDown5.TabIndex = 23;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1081, 467);
+            this.ClientSize = new System.Drawing.Size(818, 467);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
@@ -1093,6 +1093,7 @@
             this.groupBox3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -1101,7 +1102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numberOfScansUD)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             this.ResumeLayout(false);
 
         }

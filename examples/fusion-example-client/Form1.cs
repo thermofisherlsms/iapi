@@ -153,11 +153,20 @@ namespace FusionExampleClient
 
         private void _instAcq_AcquisitionStreamOpening(object sender, AcquisitionOpeningEventArgs e)
         {
-            Invoke(new Action(
+           Invoke(new Action(
           () =>
           {
+              richTextBox1.AppendText("==Starting Acquisition==\n");
+              foreach (var de in e.StartingInformation)
+              {
+                  richTextBox1.AppendText(string.Format(" {0} = {1}\n",de.Key,de.Value));
+              }
+              richTextBox1.ScrollToCaret();
+
               progressBar1.Style = ProgressBarStyle.Marquee;
           }));
+
+        
         }
 
         private void _instAcq_AcquisitionStreamClosing(object sender, EventArgs e)
@@ -165,6 +174,7 @@ namespace FusionExampleClient
             Invoke(new Action(
        () =>
        {
+           richTextBox1.AppendText("==Completed Acquisition==\n");
            progressBar1.Style = ProgressBarStyle.Continuous;
            progressBar1.Value = 0;
        }));
