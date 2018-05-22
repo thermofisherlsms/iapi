@@ -1,0 +1,101 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComprehensiveExample", "ComprehensiveExample\ComprehensiveExample.csproj", "{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{1B10432F-0B98-4BFF-B461-73A580B0B401}"
+	ProjectSection(SolutionItems) = preProject
+		bin\API-1.0.dll = bin\API-1.0.dll
+		bin\API-1.0.pdb = bin\API-1.0.pdb
+		bin\API-1.0.xml = bin\API-1.0.xml
+		bin\API-1.1.dll = bin\API-1.1.dll
+		bin\API-1.1.pdb = bin\API-1.1.pdb
+		bin\API-1.1.xml = bin\API-1.1.xml
+		bin\ESAPI-1.0.dll = bin\ESAPI-1.0.dll
+		bin\ESAPI-1.0.pdb = bin\ESAPI-1.0.pdb
+		bin\ESAPI-1.0.xml = bin\ESAPI-1.0.xml
+		bin\ESAPI-1.1.dll = bin\ESAPI-1.1.dll
+		bin\ESAPI-1.1.pdb = bin\ESAPI-1.1.pdb
+		bin\ESAPI-1.1.xml = bin\ESAPI-1.1.xml
+		bin\VI-1.0.dll = bin\VI-1.0.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGuiExample", "SimpleGuiExample\SimpleGuiExample.csproj", "{0338A742-074A-4301-9F79-44FDD7C6C0D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{ABA41ADD-E3FE-4669-BFBB-08729A490165}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Readme.txt = Scripts\Readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Matlab", "Matlab", "{E2C52CCE-BECA-4626-AA20-92FF251D103E}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Matlab\AcquisitionByCount.m = Scripts\Matlab\AcquisitionByCount.m
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "powershell", "powershell", "{9B292B66-A62B-4F7C-8C01-B7C84C5B643F}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\powershell\AcquisitionByCount.ps1 = Scripts\powershell\AcquisitionByCount.ps1
+		Scripts\powershell\AcquisitionByCountWithQueue.ps1 = Scripts\powershell\AcquisitionByCountWithQueue.ps1
+		Scripts\powershell\StatusChangeNotify.ps1 = Scripts\powershell\StatusChangeNotify.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Overview", "Overview", "{31139E4A-FF62-443A-A12D-667CD4197C81}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ManagedCppLoad", "ManagedCppLoad\ManagedCppLoad.vcxproj", "{29E54557-E7AF-44FE-ABA4-323769700E46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|x86.ActiveCfg = Release|Any CPU
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Debug|x86.ActiveCfg = Debug|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Debug|x86.Build.0 = Debug|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Release|Any CPU.ActiveCfg = Release|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Release|x86.ActiveCfg = Release|x86
+		{0338A742-074A-4301-9F79-44FDD7C6C0D2}.Release|x86.Build.0 = Release|x86
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Debug|x86.ActiveCfg = Debug|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Debug|x86.Build.0 = Debug|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Release|Any CPU.ActiveCfg = Release|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Release|x86.ActiveCfg = Release|Win32
+		{29E54557-E7AF-44FE-ABA4-323769700E46}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E2C52CCE-BECA-4626-AA20-92FF251D103E} = {ABA41ADD-E3FE-4669-BFBB-08729A490165}
+		{9B292B66-A62B-4F7C-8C01-B7C84C5B643F} = {ABA41ADD-E3FE-4669-BFBB-08729A490165}
+	EndGlobalSection
+	GlobalSection(dummy) = preSolution
+	EndGlobalSection
+EndGlobal

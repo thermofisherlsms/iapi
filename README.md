@@ -1,7 +1,5 @@
 # iapi
-Instrument Application Programming Interface for the Thermo Fisher Scientific Fusion and Fusion Lumos Mass Spectrometers.
-
-The IAPI is currently in a closed beta. To enter the beta, please follow the directions in the [getting started](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md) document. 
+Instrument Application Programming Interface for the Thermo Fisher Scientific Fusion- and Exactive-series  Mass Spectrometers.
 
 ## Version Information
 
