@@ -214,7 +214,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(408, 13);
+            this.tabControl1.Location = new System.Drawing.Point(408, 14);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(398, 312);
@@ -421,7 +421,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(504, 286);
+            this.tabPage2.Size = new System.Drawing.Size(390, 286);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Syringe Control";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -576,7 +576,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(504, 286);
+            this.tabPage3.Size = new System.Drawing.Size(390, 286);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Analog Inputs";
             this.tabPage3.UseVisualStyleBackColor = true;

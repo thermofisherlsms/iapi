@@ -50,7 +50,9 @@ namespace MinifiedExample
         private static void FusionScanContainer_MsScanArrived(object sender, MsScanEventArgs e)
         {
             // Print out the scan number of the scan received to console
-            Console.WriteLine("Received MS Scan Number: {0}", e.GetScan().Header["Scan"]);
+            Console.WriteLine("[{0:HH:mm:ss.ffff}] Received MS Scan Number: {1}", 
+                DateTime.Now, e.GetScan().Header["Scan"]);
         }
+
     }
 }

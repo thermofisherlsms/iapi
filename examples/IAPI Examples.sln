@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGuiExample", "exactive\SimpleGuiExample\SimpleGuiExample.csproj", "{0338A742-074A-4301-9F79-44FDD7C6C0D2}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionExampleClient", "tribrid\fusion-example-client\FusionExampleClient.csproj", "{82492761-B68F-41C7-B4D7-E8B80D8607BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinifiedExample", "tribrid\MinifiedExample\MinifiedExample.csproj", "{B001FB30-6CF4-4317-8C7F-75E0F8801E28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComprehensiveExample", "exactive\ComprehensiveExample\ComprehensiveExample.csproj", "{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,14 @@ Global
 		{B001FB30-6CF4-4317-8C7F-75E0F8801E28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B001FB30-6CF4-4317-8C7F-75E0F8801E28}.Release|x86.ActiveCfg = Release|Any CPU
 		{B001FB30-6CF4-4317-8C7F-75E0F8801E28}.Release|x86.Build.0 = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Debug|x86.Build.0 = Debug|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +61,7 @@ Global
 		{0338A742-074A-4301-9F79-44FDD7C6C0D2} = {33A3FDE0-42F9-4A11-B72E-F6735BB113F0}
 		{82492761-B68F-41C7-B4D7-E8B80D8607BB} = {33BBAAEE-A80B-406F-95E0-CD587C89E155}
 		{B001FB30-6CF4-4317-8C7F-75E0F8801E28} = {33BBAAEE-A80B-406F-95E0-CD587C89E155}
+		{3C87F0A7-7DD2-4E79-93BC-6BC14A1A1291} = {33A3FDE0-42F9-4A11-B72E-F6735BB113F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FCA9415-C423-493F-ABAF-7CBD5F9146CC}
