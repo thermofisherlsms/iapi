@@ -52,9 +52,6 @@
     <ClCompile Include="ApiUsageTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClientValidation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HandlerToResetEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
