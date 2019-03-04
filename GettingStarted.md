@@ -1,32 +1,31 @@
 # Getting Started with the Instrument API
 
-The following steps are needed to use the Instrument API (IAPI) with the Fusion mass spectromters.
+The following steps are needed to use the Instrument API (IAPI) with the Tribrid-series mass spectromters.
 
-##Legal Requirements
+## Legal Requirements
 
 Use of the IAPI requires the following legal documents to be in place:
 
-  1. **Beta-Software Agreement for Tune 2.2**
-    * This is for using Thermo's pre-released software that has the IAPI enabled
-    * When Tune 2.2 is officially released, this agreement is no longer needed
-  2. **Fusion IAPI Software License Argreement**
-    * Stipulates the usage and rights of the IAPI
+  1. **Tribrid IAPI Software License Argreement**
+     - Stipulates the usage and rights of the IAPI
   
- *Both documents can be obtain by emailing Derek Bailey (derek.bailey at thermofisher.com) or Mike Senko (mike.senko at thermofisher.com)*
+ *Documents can be obtain by emailing Rajesh Raina (rajesh.raina at thermofisher.com) or Mike Senko (mike.senko at thermofisher.com)*
 
-##Configuration
+## Configuration
   
-Upon the representatives at Thermo receiving the above signed documents, the following steps are needed to configure an Fusion mass spectrometer to use the IAPI functions:
+Upon the representatives at Thermo receiving the above signed documents, the following steps are needed to configure an Tribrid-series mass spectrometer to use the IAPI:
 
-  1. Send the following file to Derek Bailey to enable the IAPI feature
-    * C:\Thermo\Instruments\TNG\ _InstrumentModel_ \2.2\System\MSI\TNGConfig.xmb
-  2. Replace the TNGConfig.xmb file with the one returned
-  3. Restart the Instrument Computer and Instrument
-  4. The IAPI should be functional at this point
+  1. Obtain and send the 'Instrument Identification' for the instrument to your IAPI contact at Thermo.
+     - This can be obtain from the Tune application 'About Tune' dialog box.
+     - They will generate a license file with the IAPI enabled and send back to you.
+  2. Load the license file into the Tune application 'About Tune' dialog box with the 'Add License' button.
+  3. Restart the Instrument Control Desktop computer.
+  4. Restart (electronics only) the instrument.
+  5. The IAPI should be functional at this point.
   
 ___
   
-##Example App
+## Example App
 
 To get started using the IAPI, either reference one of the pre-built [examples](https://github.com/thermofisherlsms/iapi/tree/master/examples) or the following steps:
   
