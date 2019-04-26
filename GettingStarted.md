@@ -9,7 +9,7 @@ Use of the IAPI requires the following legal documents to be in place:
   1. **Tribrid IAPI Software License Argreement**
      - Stipulates the usage and rights of the IAPI
   
- *Documents can be obtain by emailing Rajesh Raina (rajesh.raina at thermofisher.com) or Mike Senko (mike.senko at thermofisher.com)*
+ *Documents can be obtained by emailing info.IAPI at thermofisher.com*
 
 ## Configuration
   
