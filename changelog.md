@@ -2,6 +2,15 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 3.4.3072 (Sept 21 2020)
+* Fusion API updated to 1.3.0.0 (assembly name remains Fusion.API-1.0.dll)
+* Older version, compatible with earlier Tune versions, moved to lib/tribrid/previous-versions
+* Introduced tribrid-specific custom scan interface IFusionCustomScan, extending ICustomScan, with properties:
+	* IsPAGCScan: flag for generating PAGC data from current scan (limited to full scan, ion trap)
+	* PAGCGroupIndex: number indicating from which pAGC group this scan will obtain its pAGC data
+* Use of the properties in IFusionCustomScan enable custom AGC control
+* Example code not yet updated
+
 ## 3.0.1794 (Nov 30, 2016)
 * API is updated to 1.1.0.1
 	* Moved MsScanContainer.MsAcquisitionOpeningEventArgs to Acquisition.AcquisitionOpeningEventArgs

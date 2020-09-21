@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusion.API-1.0</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs">
+            <summary>
+            The event data for when a contact closure occurs. This can happen on either the rising and/or falling edges.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.RisingEdges">
+            <summary>
+            The number of rising edges detected on the contact closure input since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.FallingEdges">
+            <summary>
+            The number of falling edges detected on the contact closure input since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.DidRise">
+            <summary>
+            Indicates if any rising edge events occured since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.ContactClosureEventArgs.DidFall">
+            <summary>
+            Indicates if any falling edge events occured since it was last polled
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.IFusionControl.SyringePumpControl">
+            <summary>
+            Get access to the syringe pump control interface. This interface allows
+            the user to start and stop the syringe pump, set the volume and desired
+            flow rate, and the ability to listen to connection change event.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl">
+            <summary>
+            Gives access to the syringe pump control.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Volume">
+            <summary>
+            Get the currently set volume of the syringe in µL.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.FlowRate">
+            <summary>
+            Get the currently set flow rate of the pump in µL/min.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Diameter">
+            <summary>
+            Get the currently diameter of the syringe.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Status">
+            <summary>
+            Get the current status of the syringe pump.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Start">
+            <summary>
+            Starts the pumping if connected. If it was already pumping, it applies any
+            cached parameters and leaves it in a running state.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Stop">
+            <summary>
+            Stops the pumping if connected. If it was already stopped, it does nothing.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.Toggle">
+            <summary>
+            Toggles the Start/Stop of the pump if connected. 
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.SetVolume(System.Double)">
+            <summary>
+            This attempts to set the volume. The next call to Start (or Toggle) will
+            attempt to apply this value. If the pump successfully sets the value,
+            the Volume property will be updated accordingly.
+            </summary>
+            <param name="volume">The volume to set (µL)</param>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.SetFlowRate(System.Double)">
+            <summary>
+            This attempts to set the flow rate. The next call to Start (or Toggle) will
+            attempt to apply this value. If the pump successfully sets the value,
+            the FlowRate property will be updated accordingly.
+            </summary>
+            <param name="flowrate">The flow rate to set (µL/min)</param>
+        </member>
+        <member name="M:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.SetDiameter(System.Double)">
+            <summary>
+            This attempts to set the syringe diameter. The next call to Start (or Toggle) will
+            attempt to apply this value. If the pump successfully sets the value,
+            the Diameter property will be updated accordingly.
+            </summary>
+            <param name="diameter">The diameter to set</param>
+        </member>
+        <member name="E:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.StatusChanged">
+            <summary>
+            Occurs whenever the pumping state changes. 
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.FusionAccess_V1.Control.Peripherals.ISyringePumpControl.ParameterValueChanged">
+            <summary>
+            Occurs whenever a parameter value changes. 
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.FusionAccess_V1.IFusionInstrumentAccess.ContactClosureChanged">
+            <summary>
+            Occurs whenever the contact closure detects a rising and/or falling edge.
+            </summary>
+        </member>
+    </members>
+</doc>
