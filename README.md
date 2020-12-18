@@ -1,6 +1,10 @@
 # iapi
 Instrument Application Programming Interface for the Thermo Fisher Scientific Fusion- and Exactive-series  Mass Spectrometers.
 
+## About
+
+This repository is intended to be used for scholarly research, and is therefore made available as-is.  Ongoing maintenance and support is not generally available; however, issues and improvements will be considered on a case-by-case basis.
+
 ## Version Information
 
 Versioning for the API will follow [Semantic Versioning](http://semver.org/). Major version changes reflect breaking changes to the public API. Minor version changes reflect backwards-compatible feature additions. And patch version changes reflect backwards-compatible bug fixes. *Versioning for Tune does not follow semantic versioning as there is no public API associated with it directly.*
