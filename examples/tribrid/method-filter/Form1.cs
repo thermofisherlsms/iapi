@@ -74,8 +74,8 @@ namespace Thermo.IAPI.Examples
             dataGridView1.DataSource = DBHelper.GetPrecursorTable();
         }
         #endregion
-        
-        
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -104,8 +104,8 @@ namespace Thermo.IAPI.Examples
             maxTargets = (int)numericUpDown1.Value;
             ias.InstMSScanContainer = ias.InstAccess.GetMsScanContainer(0);
             ias.InstMSScanContainer.MsScanArrived += OnMsScanArrived;
-            ias.InstMSScanContainer.AcquisitionStreamOpening += OnAcquisitionStreamOpening;
-            ias.InstMSScanContainer.AcquisitionStreamClosing += OnAcquisitionStreamClosing;
+            ias.InstAcq.AcquisitionStreamOpening += OnAcquisitionStreamOpening;
+            ias.InstAcq.AcquisitionStreamClosing += OnAcquisitionStreamClosing;
         }
 
         private void OnAcquisitionStreamClosing(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace Thermo.IAPI.Examples
             
         }
 
-        private void OnAcquisitionStreamOpening(object sender, MsAcquisitionOpeningEventArgs e)
+        private void OnAcquisitionStreamOpening(object sender, AcquisitionOpeningEventArgs e)
         {
                         
         }

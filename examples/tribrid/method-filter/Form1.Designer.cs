@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMethodPath = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -135,8 +135,8 @@
             // precursorDataGridViewTextBoxColumn
             // 
             this.precursorDataGridViewTextBoxColumn.DataPropertyName = "Precursor";
-            dataGridViewCellStyle2.Format = "N2";
-            this.precursorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "N2";
+            this.precursorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.precursorDataGridViewTextBoxColumn.HeaderText = "Precursor";
             this.precursorDataGridViewTextBoxColumn.Name = "precursorDataGridViewTextBoxColumn";
             this.precursorDataGridViewTextBoxColumn.ToolTipText = "Unique Precursors";
@@ -337,7 +337,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(685, 243);
+            this.tabPage2.Size = new System.Drawing.Size(685, 206);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Do MS3 Scan";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -368,7 +368,6 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Fusion - Method Filter Example";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabControl1.ResumeLayout(false);

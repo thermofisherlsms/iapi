@@ -4,27 +4,37 @@ using Thermo.Interfaces.FusionAccess_V1.MsScanContainer;
 using Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer;
 using System;
 
+using System.Collections.Generic;
+using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
+using System.Linq;
+using Thermo.Interfaces.SpectrumFormat_V1;
+using Thermo.Interfaces.FusionAccess_V1.Control.Scans;
+
 namespace MinifiedExample
 {
     class Program
     {
+        static IFusionInstrumentAccessContainer _fusionContainer;
+        static IFusionInstrumentAccess _fusionAccess;
+        static IFusionMsScanContainer _fusionScanContainer;
+
         static void Main(string[] args)
         {
             // Use the Factory creation method to create a Fusion Access Container
-            IFusionInstrumentAccessContainer fusionContainer = Factory<IFusionInstrumentAccessContainer>.Create();
+            _fusionContainer = Factory<IFusionInstrumentAccessContainer>.Create();
 
             // Connect to the service by going 'online'
-            fusionContainer.StartOnlineAccess();
+            _fusionContainer.StartOnlineAccess();
 
             // Wait until the service is connected 
             // (better through the event, but this is nice and simple)
-            while (!fusionContainer.ServiceConnected);
+            while (!_fusionContainer.ServiceConnected);
 
             // From the instrument container, get access to a particular instrument
-            IFusionInstrumentAccess fusionAccess = fusionContainer.Get(1);
+            _fusionAccess = _fusionContainer.Get(1);
                  
             // Get the MS Scan Container from the fusion
-            IFusionMsScanContainer fusionScanContainer = fusionAccess.GetMsScanContainer(0);
+            _fusionScanContainer = _fusionAccess.GetMsScanContainer(0);
 
             // Run forever until the user Escapes
             ConsoleKeyInfo cki;
@@ -34,11 +44,11 @@ namespace MinifiedExample
                 {             
                     case ConsoleKey.S:
                         // Subscribe to whenever a new MS scan arrives
-                        fusionScanContainer.MsScanArrived += FusionScanContainer_MsScanArrived;
+                        _fusionScanContainer.MsScanArrived += FusionScanContainer_MsScanArrived;
                         break;
                     case ConsoleKey.U:
                         // Unsubscribe 
-                        fusionScanContainer.MsScanArrived -= FusionScanContainer_MsScanArrived;
+                        _fusionScanContainer.MsScanArrived -= FusionScanContainer_MsScanArrived;
                         break;
                     default:
                         Console.WriteLine("Unsupported Key: {0}", cki.Key);
