@@ -1,6 +1,10 @@
 # iapi
 Instrument Application Programming Interface for the Thermo Fisher Scientific Fusion- and Exactive-series  Mass Spectrometers.
 
+## News
+
+Tribrid Series 3.5 has been released!  Use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/20210722-patchForIAPI-for-35.zip).  
+
 ## About
 
 This repository is intended to be used for scholarly research, and is therefore made available as-is.  Ongoing maintenance and support is not generally available; however, issues and improvements will be considered on a case-by-case basis.

@@ -2,6 +2,19 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 3.5.3881.18 (July 2021)
+
+* Patch required for IAPI use with 3.5, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/20210722-patchForIAPI-for-35.zip)
+* No change to interface
+* Bug fix: event CanAcceptNextCustomScan now fires appropriately
+* Bug fix: ETciD and EThcD support fixed/added
+* Bug fix: pAGC group index is no longer always zero in scan header in RAW file
+* Feature added: high mass range support
+* Feature added: mass range mode support (IAPI strings: Normal; High)
+* Feature added: scan range mode support (IAPI strings: Auto; DefineFirstMass; DefineMZRange)
+* Feature added: multistage activation (MSA) support  (only active when activation type is CID; IAPI string: MSANeutralLossMAss)
+* Feature added: MSX SIM windows now have individiually calculated injection times
+
 ## 3.4.3072 (Sept 21 2020)
 * Fusion API updated to 1.3.0.0 (assembly name remains Fusion.API-1.0.dll)
 * Older version, compatible with earlier Tune versions, moved to lib/tribrid/previous-versions
