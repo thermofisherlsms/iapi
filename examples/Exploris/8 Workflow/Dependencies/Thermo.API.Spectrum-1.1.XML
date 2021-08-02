@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thermo.API.Spectrum-1.1</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1_1.ICentroidApd2">
+            <summary>
+            This interface offers some properties in addition to a standard <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.ICentroid"/>
+            <para>
+            The ICentroid implementation may also support this interface. This can be tested with
+            the language-specific functionality, e.g. <code>
+            ICentroidApd2 extra = spectrum.Centroids[0] as ICentroidApd2;
+            if (extra != null)
+            {
+               Console.WriteLine("peak is isotopically resolved: " + extra.IsIsotopicallyResolved);
+            }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.ICentroidApd2.IsIsotopicallyResolved">
+            <summary>
+            Get access to the flag whether this peak has been isotopically resolved.
+            As consequence, an <see cref="T:Thermo.Interfaces.SpectrumFormat_V1_1.IChargeEnvelopeApd2"/>, if assigned and given, will also have this flag assigned and monoisotopic mass was calculated if set to true.
+            The cross-correlation factor is also set in IChargeEnvelopeApd2.
+            <para>
+            The value will be null if no APD information is stored in the raw file.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1_1.IChargeEnvelopeApd2">
+            <summary>
+            This interface offers some properties in addition to a standard <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope"/>.
+            <para>
+            The IChargeEnvelope implementation may also support this interface. This can be tested with
+            the language-specific functionality, e.g. <code>
+            IChargeEnvelopeApd2 extra = spectrum.ChargeEnvelopes[0] as IChargeEnvelopeApd2;
+            if (extra != null)
+            {
+               Console.WriteLine("charge envelope is isotopically resolved: " + extra.IsIsotopicallyResolved);
+            }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.IChargeEnvelopeApd2.IsIsotopicallyResolved">
+            <summary>
+            Is this charge envelope created using isotopically resolved species? If so, 
+            <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass"/> will return the non-zero value,
+            but <see cref="P:Thermo.Interfaces.SpectrumFormat_V1_1.IChargeEnvelopeApd2.AverageMass"/> will return 0.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.IChargeEnvelopeApd2.AverageMass">
+            <summary>
+            When peaks are non-isotopically resolved, this value contains the average mass of all species in the envelope.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1_1.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1_1.Properties.Resources.link">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>
