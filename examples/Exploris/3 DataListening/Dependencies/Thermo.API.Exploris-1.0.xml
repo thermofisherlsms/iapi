@@ -1,0 +1,1214 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thermo.API.Exploris-1.0</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.ClientsEventArgs">
+            <summary>
+            This class extends an empty EventArgs by the content of a caller list.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.ClientsEventArgs.#ctor(Thermo.Interfaces.InstrumentAccess_V1.IClient[])">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.ClientsEventArgs"/> and assign values.
+            </summary>
+            <param name="availableClients">List of connected clients.</param>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.ClientsEventArgs.AvailableClients">
+            <summary>
+            Access to the list of connected clients. This is a list of all applications
+            no matter to which particular instrument they are connected.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.CallResult">
+            <summary>
+            This class defines the result of a generic call the API accepted.
+            A call can be processed asynchroneously. In that case, <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.HasFinished"/> will be
+            false and <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Result"/> will be null on return of <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.Call(System.Object)"/>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.CallResult.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.CallResult"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Request">
+            <summary>
+            This will contain the original request passed to <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.Call(System.Object)"/>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Result">
+            <summary>
+            This will be null until <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.HasFinished"/> becomes true. Accessing the value may throw an exception if
+            the request caused an exception during processing.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.HasFinished">
+            <summary>
+            True if the call has finished somehow, false otherwise. <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Result"/> will contain meaningful data only if
+            this property is true.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition">
+            <summary>
+            This interface describes the extensions to the acquisition interface by Exploris based instruments.
+            </summary>
+            <example>
+            In the following example "acquisition"
+            has to be assigned elsewhere.
+            <code>
+            IAcquisition acquisition;
+            IExplorisAcquisition explorisExtensions = acquisition as IExplorisAcquisition;
+            if (explorisExtensions != null)
+            {
+            	Console.WriteLine("Exploris extensions available");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.AcquisitionStreamOpening">
+            <summary>
+            This event will be fired when a new acquisition is started and the system
+            is about to open rawfiles, etc.
+            <para>
+            Scans may be created without an explicite acquisition if the instrument is
+            'just' set to running. An acquisition is not necessarily bound to a
+            rawfile, but it is in most cases.
+            </para>
+            <para>
+            The individual information of a scan will reflect the information whether
+            a scan belongs to an acquisition or not.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)">
+            <summary>
+            Start an acquisition providing a workflow for this operation. The instrument must be on mode "On".
+            There must not be any pending acquisition. The new acquisition will run under direct control.
+            </summary>
+            <param name="acquisition">workflow of the new acquisition.</param>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.ArgumentException">The request has illegal values.</exception>
+            <exception cref="T:System.FormatException">The request is of an unknown type. Use <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition"/> to generate a valid type.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition">
+            <summary>
+            Cancel any pending acquisition that is started under direct control.
+            </summary>
+            <exception cref="T:System.ServiceModel.CommunicationException">The connection to the instrument is not established.</exception>
+            <exception cref="T:System.AccessViolationException">The instrument is under exclusive use of a different component or software package.</exception>
+            <exception cref="T:System.InvalidOperationException">The instrument is not in the proper condition to accept the state change request.</exception>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CreatePermanentAcquisition">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition"/>.
+            </para>
+            </summary>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CreateAcquisitionLimitedByCount(System.Int32)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the specified amount of scans have been taken.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            </summary>
+            <param name="count">The number of scans to be taken during this acquisition. The number must be positive and must not exceed 1000000.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CreateAcquisitionLimitedByDuration(System.TimeSpan)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            an acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            The current set of tune data will be used. It can be changed during operation.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the the specified time span has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Tune.
+            </para>
+            </summary>
+            <param name="duration">The amount of time of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CreateMethodAcquisition(System.String)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            a method-based acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            Tune data will be retrieved from those files present in the method.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the duration specified in the method has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Xcalibur.
+            </para>
+            </summary>
+            <param name="methodFileName">name of the method to execute.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CreateMethodAcquisition(System.String,System.TimeSpan)">
+            <summary>
+            Create an object that will instruct the instrument on <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/> to start
+            a method-based acquisition. This kind of acquisition can be paused and resumed.
+            <para>
+            Tune data will be retrieved from those files present in the method.
+            </para>
+            <para>
+            The instrument operation mode will switch to DirectControl.
+            </para>
+            <para>
+            The acquisition can be stopped by calling <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.CancelAcquisition"/> and will implicitely terminated
+            after the the specified time span has elapsed.
+            </para>
+            <para>
+            The acquisition will be very similar to an acquisition started by Xcalibur.
+            </para>
+            </summary>
+            <param name="methodFileName">name of the method to execute.</param>
+            <param name="duration">The amount of time of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.</param>
+            <returns>The created acquisition workflow can be used in <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.NamespaceDoc">
+            <summary>
+            This namespace contains the extension to start acquisitions directly on Exploris based instruments.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation">
+            <summary>
+            Defines what shall happen when an acquisition request ended.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition"/> for an example how this enumeration can be used.
+            </remarks>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.StayOn">
+            <summary>
+            The instrument will continue to run, but no method execution is performed nor is
+            data written to a raw file.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.Standby">
+            <summary>
+            The instrument enters the standby state.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.AcquisitionContinuation.Off">
+            <summary>
+            The instrument enters the off state.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByCount">
+            <summary>
+            This special workflow restricts an acquisition to a specific count of scans
+            to be taken by the instrument. Scans acquired using the <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Scans.IScans"/> interface
+            are not counted.
+            <para>
+            The current tune parameters of the instrument will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByCount.NumberOfScans">
+            <summary>
+            The number of scans to be taken during this acquisition. The number must
+            be positive and must not exceed 1000000.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByTime">
+            <summary>
+            This special workflow restricts an acquisition to a specific duration.
+            <para>
+            The current tune parameters of the instrument will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionLimitedByTime.Duration">
+            <summary>
+            Access to the duration of the acquisition. The lower limit is 0.01 min and the maximum 15000 min.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun">
+            <summary>
+            This special workflow selects a method to be executed. No further instruments like AS, LC or GC will be
+            driven. The duration of the method can be enhanced or reduced.
+            <para>
+            The tune parameters taken of the method's tune file(s) will be used.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun.MethodName">
+            <summary>
+            Access to the method name to be used during an acquisition.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionMethodRun.Duration">
+            <summary>
+            Access to the duration of the acquisition. Setting this to null choses the duration chosen in the method
+            itself. The lower limit is 0.01 min and the maximum 15000 min.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow">
+            <summary>
+            This workflow base class contains properties available in all acquisition workflows.
+            Default values are "empty" for no rawfile acquisition, without sample name. etc.
+            Continuation defaults to StayOn. WaitForContactClosure is false.
+            </summary>
+            <remarks>
+            <para>
+            Note that no other device will be instructed to take scans.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.RawFileName">
+            <summary>
+            Access to the raw file name to be used during an acquisition. Setting this value to null lets the instrument
+            take acquisitions without storing in a separate file. 
+            <para>
+            An evaluation of this value will happen on submission to <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.StartAcquisition(Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow)"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.Continuation">
+            <summary>
+            This property defines what shappens when the acquisition stops.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.SampleName">
+            <summary>
+            This property defines the arbitrary sample name. 
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.Comment">
+            <summary>
+            This property defines an arbitrary comment. 
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.SingleProcessingDelay">
+            <summary>
+            The instrument will not execute any scan
+            if this property is positive until the delay has expired
+            or a new custom scan has been defined.
+            <para>
+            It will be quaranteed that after the event <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.IAcquisition.AcquisitionStreamOpening"/>
+            no <see cref="E:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer.MsScanArrived"/> will be populated or written to the rawfile
+            if this delay is pending and no custom scan has been placed.
+            </para>
+            <para>
+            The unit of this property is seconds and possible values are
+            between 0 and 600 inclusively. The default value is 0.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.IAcquisitionWorkflow.WaitForContactClosure">
+            <summary>
+            This flag decides whether the instruments waits for contact closure signal before starting
+            acquisition.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.Workflow.NamespaceDoc">
+            <summary>
+            This namespace contains classes needed to start an acquisition on Exploris based instruments.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.ExplorisAcquisitionOpeningEventArgs">
+            <summary>
+            This implementation of EventArgs carries additional information for analyzing binary data of scans later.
+            The content can be used to write Foundation rawfiles.
+            </summary>
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.IExplorisAcquisition.AcquisitionStreamOpening"/>.
+            </para>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.ExplorisAcquisitionOpeningEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.ExplorisAcquisitionOpeningEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Acquisition.ExplorisAcquisitionOpeningEventArgs.InitialDataBlock">
+            <summary>
+            Access to the initial data block which can be deserialized using the assembly for deconvoluting Orbitrap-like formats.
+            This information is needed to create rawfiles.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl">
+            <summary>
+            This interface describes the extensions to IControl by Exploris based instruments.
+            </summary>
+            <example>
+            In the following example "access"
+            has to be assigned elsewhere.
+            <code>
+            IInstrumentAccess access;
+            IControl control = access.Control;
+            IExplorisControl explorisControl = control as IExplorisControl;
+            if (explorisControl == null)
+            {
+            	Console.WriteLine("Exploris extensions are not available");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl.InstrumentValues">
+            <summary>
+            Get access to the instrument values that can be accessed individually.
+            The returned instance is helpful for status control and direct value
+            manipulation.
+            <para>
+            A synchroneous change of several scan-related elements should better
+            be performed using <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl.GetScans(System.Boolean)"/>.
+            </para>
+            <para>
+            This property is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl.Acquisition">
+            <summary>
+            Get access to the acquisition interface.
+            <para>
+            This property is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl.LoadMethodEditor(System.Object)">
+            <summary>
+            Return an object to perform method editor operations. The interface should be used
+            for method-based data acquisition and for method-based information
+            access.
+            <para>
+            </para>
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="source">Parent element of the "data" storage</param>
+            <returns>
+            The returned instance allows direct manipulation of a method. Method's content can be stored back to an IStorage interface or byte buffers.
+            The user is responsible to dispose the object as soon as possible.
+            </returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl.LoadMethodEditor(System.Byte[])">
+            <summary>
+            Return an object to perform method editor operations. The interface should be used
+            for method-based data acquisition and for method-based information
+            access.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="source">content of the "data" storage</param>
+            <returns>
+            The returned instance allows direct manipulation of a method. Method's content can be stored back to an IStorage interface or byte buffers.
+            The user is responsible to dispose the object as soon as possible.
+            </returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisInstrumentValues">
+            <summary>
+            This interface describes the extensions to IInstrumentValues by Exploris based instruments.
+            </summary>
+            <example>
+            In the following example "access"
+            has to be assigned elsewhere.
+            <code>
+            IInstrumentAccess access;
+            IControl control = access.Control;
+            IInstrumentValues values = control.InstrumentValues;
+            IExplorisInstrumentValues explorisValues = values as IExplorisInstrumentValues;
+            if (explorisValues == null)
+            {
+            	Console.WriteLine("Exploris extensions are not available");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisInstrumentValues.Get(System.String)">
+            <summary>
+            Get access to an instrument value by its name.
+            <para>
+            Each name has also a numeric representation, see <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisInstrumentValues.Get(System.UInt64)"/>.
+            </para>
+            <para>
+            This method is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            <remarks>Accessing the same internal object twice just increments an internal reference, a further object will not be returned.</remarks>
+            </summary>
+            <param name="name">The name of the value</param>
+            <returns>null is returned for an invalid or unknown name, otherwise the value linked with the passed name is returned.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisInstrumentValues.Get(System.UInt64)">
+            <summary>
+            Get access to an instrument value by its number.
+            <para>
+            This method is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            </summary>
+            <remarks>Accessing the same internal object twice just increments an internal reference, a further object will not be returned.</remarks>
+            <param name="number">The number of the value</param>
+            <returns>The value linked with the passed name is returned. Nodes unknown to the instrument may return in a dumb value instance.</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue">
+            <summary>
+            This interface describes the extensions to an instrument value by Exploris based instruments.
+            </summary>
+            <example>
+            In the following example "values"
+            has to be assigned elsewhere.
+            <code>
+            IInstrumentValues values;
+            IExplorisValue value = values.Get("InstrumentAcquisition") as IExplorisValue;
+            if (value != null)
+            {
+            	Console.WriteLine(value.Commands.Length + " commands available");
+            }
+            </code>
+            </example>
+            <example>
+            A full-file example can be found here: <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IInstrumentValues"/>.
+            </example>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.Commands">
+            <summary>
+            Get access to a list of available commands. The list may change if the user role changes.
+            Any executed command name will be tested against this list.
+            <para>
+            The commands will be null if the instrument is not connected or if the IValue is unknown
+            to the instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.CommandsChanged">
+            <summary>
+            This event will be fired when the set of commands have changed. The calling thread
+            should not be blocked by complex actions.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.Execute(System.String,System.String)">
+            <summary>
+            Execute a command on this value. The command will be verified using <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.Commands"/>.
+            </summary>
+            <param name="command">The command to the value.</param>
+            <param name="argument">null or the argument of the command.</param>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.RequestCommands">
+            <summary>
+            Request a fresh set of <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.Commands"/>. Those values will be updated asynchroneously.
+            <see cref="E:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue.CommandsChanged"/> will be fired on demand.
+            </summary>
+            <returns>true if the command has been sent to the instrument, false otherwise</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.NamespaceDoc">
+            <summary>
+            This namespace covers the single extension that Exploris-based instruments have in addition
+            to standard instruments' value control. Some Set/Readback values nodes allow to perform additional
+            actions on Exploris based instruments.
+            <para>
+            You can simply cast an
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues.IValue"/>
+            to an
+            <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.Control.InstrumentValues.IExplorisValue"/>
+            on an Exploris based instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor">
+            <summary>
+            This interface provides functionality to access the method editor
+            elements and to perform some actions on the method editor elements.
+            <para>
+            No content will be written on disposal, that needs to be done
+            previously by use of the Store() methods.
+            </para>
+            <para>
+            This interface is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Store(System.Object,System.String[0:,0:]@)">
+            <summary>
+            Store the current content of the method to the destination.
+            Exceptions will be thrown on error.
+            <para>
+            Storing of incomplete methods are allowed, but storing of
+            invalid methods are not. See properties <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Warnings"/>
+            and <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Errors"/> to retrieve these information items
+            in advance.
+            </para>
+            <para>
+            Calling this method successfully voids the current set of CFR21 records.
+            </para>
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="destination">Parent element of the "data" and "text" storage</param>
+            <param name="cfr21Records">This will be the set of CFR21 records explaining all changes since loading or the last store operation.</param>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Store(System.Byte[]@,System.Byte[]@,System.String[0:,0:]@)">
+            <summary>
+            Store the current content of the method to the byte buffers.
+            Exceptions will be thrown on error.
+            <para>
+            Storing of incomplete methods are allowed, but storing of
+            invalid methods are not. See properties <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Warnings"/>
+            and <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Errors"/> to retrieve these information items
+            in advance.
+            </para>
+            <para>
+            Calling this method successfully voids the current set of CFR21 records.
+            </para>
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="data">new content of the "data" storage</param>
+            <param name="text">new content of the "text" storage</param>
+            <param name="cfr21Records">This will be the set of CFR21 records explaining all changes since loading or the last store operation.</param>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Warnings">
+            <summary>
+            Get access to all warning messages about the method. This includes missing elements.
+            <para>
+            Calls to the Store methods will be processed if warnings are present. But see also
+            <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Errors"/>.
+            </para>
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Errors">
+            <summary>
+            Get access to all error messages about the method. This typically indicates values
+            that are incompatible or external files that are missing.
+            <para>
+            Calls to the Store methods will throw exceptions if errors are present.
+            </para>
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.Modified">
+            <summary>
+            Returns true if the method has been modified.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.LoadTable(System.Type,System.Int32)">
+            <summary>
+            Get the content of the selected table. Changes in the table will not cause any change
+            in the original method editor. A call to <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.StoreTable(Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable,System.Int32)"/> is needed.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="tableType">Type of the table which has to derive from ITable like IInclusionTable</param>
+            <param name="tableIndex">Index of the table starting from 1. Keep this on 1 in case of doubt.</param>
+            <returns>null if the table was not found, otherwise the table filled with found items.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.StoreTable(Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITable,System.Int32)">
+            <summary>
+            Replace the table in the method editor by that one in the argument.
+            <para>
+            This method is accessible offline.
+            </para>
+            </summary>
+            <param name="table">Table which has to derive from ITable like IInclusionTable, the content replaces a table in the method editor.</param>
+            <param name="tableIndex">Index of the table starting from 1. Keep this on 1 in case of doubt.</param>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueNames">
+            <summary>
+            Return all global value names. One can use the methods <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValue(System.String,System.ComponentModel.TypeConverter@)"/> and <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.SetGlobalValue(System.String,System.Object)"/>
+            to access individual values.
+            </summary>
+            <returns>The returned strings represent accessible global properties.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueName(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Return the representation of a global value name exposed to users in a specific locale.
+            </summary>
+            <param name="name">name returned by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueNames"/></param>
+            <param name="culture">culture for which a to return a UI representation of the name</param>
+            <returns>The returned string can be used in UIs to present end users a known value name.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValue(System.String,System.ComponentModel.TypeConverter@)">
+            <summary>
+            Return the content of a global value. The also returned type converter can be used to
+            translate the returned object into a human readable string.
+            </summary>
+            <param name="name">name returned by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueNames"/></param>
+            <param name="converter">
+            The converter which can be used to translate the returned object into a UI string or which
+            can be used to prepare a UI string to be passed back by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.SetGlobalValue(System.String,System.Object)"/>
+            </param>
+            <returns>The returned object is the value associated with the specified name. null may be a possible value.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.SetGlobalValue(System.String,System.Object)">
+            <summary>
+            Set the content of a global value.
+            </summary>
+            <param name="name">name returned by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueNames"/></param>
+            <param name="value">
+            New value of the name. The converter returned by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValue(System.String,System.ComponentModel.TypeConverter@)"/> can be used
+            for easy manipulation.
+            </param>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueHelp(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Return help for a global value exposed to users in a specific locale. The return value
+            may be the empty string.
+            </summary>
+            <param name="name">name returned by <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.IMethodEditor.GetGlobalValueNames"/></param>
+            <param name="culture">culture for which a to return the help</param>
+            <returns>The returned string can be used in UIs to present end users some help about a value. The string may be the empty string.</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.Methods.NamespaceDoc">
+            <summary>
+            This namespace covers the single extension that Exploris-based instruments have in addition
+            to standard instruments' methods.
+            <para>
+            You can simply cast an
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.Methods.ITableRow"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Control.NamespaceDoc">
+            <summary>
+            This namespace covers the extensions that Exploris-based instruments have in addition
+            to standard instruments. Exploris based systems have support for tunefiles where a bunch of
+            optimized instrument values are stored that usually be constant during an acquisition.
+            <para>
+            You can simply cast an
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.Control.IControl"/>
+            to an
+            <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.Control.IExplorisControl"/>
+            on an Exploris based instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess">
+            <summary>
+            This interface extends the standard instrument access interface by functionality present in Exploris based
+            instruments.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.GetMsScanContainer(System.Int32)">
+            <summary>
+            Get access to the container of MS scan information to be accessible
+            by a a specific MS detector set.
+            <para>
+            This property is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            </summary>
+            <param name="msDetectorSet">index of the detector starting from 0</param>
+            <returns>
+            Returns a particular mass spectrometer detector set or null if a
+            detector with the specific index is not present in the instrument.
+            </returns>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.Control">
+            <summary>
+            Get access to the interface covering all control functionality of an instrument.
+            <para>
+            This property is the instrument-specific implementation for Exploris-based instruments.
+            </para>
+            <para>
+            This property is accessible offline.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.CurrentUserRole">
+            <summary>
+            Access to the current user role the system has assumed. On set, an Exception will be thrown
+            if the instrument is not connected or if the intended user role is not available.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.Licenses">
+            <summary>
+            Get access to all currently useable licenses.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.CurrentUserRoleChanged">
+            <summary>
+            This event will be fired when the <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.CurrentUserRole"/> has changed.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.LicensesChanged">
+            <summary>
+            This event will be fired when the set of licenses for this instrument or the API consuming assemblies changed.
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.ConfigurationChanged">
+            <summary>
+            This event will be fired when the configuration of the instrument changed.
+            <para>
+            Appropriate action can be to restart the connection or to flush all caches.
+            </para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccess.LockChanged">
+            <summary>
+            The lock state of the instrument has changed. This may disable some functionality or re-enables
+            access to it.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer">
+            <summary>
+            This interface extends the standard API by functionality most probably specific to
+            Exploris-based instruments. The example of accessing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer"/>
+            can also be used to access this interface, with the appropriate cast, of course.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.Get(System.Int32)">
+            <summary>
+            Get access to a particular Exploris instrument accessor using this method.
+            </summary>
+            <param name="index">
+            Index of the instrument starting from 1. Values of 2 or more need additional
+            instruments attached to the data system.
+            </param>
+            <returns>
+            The return value allows access to a particular instrument. If one service hosts
+            several instruments in parallel, this value can be of a different type for each.
+            Any call to <see cref="M:Thermo.Interfaces.InstrumentAccess_V1.IInstrumentAccessContainer.Get(System.Int32)"/> will return
+            the same instance.
+            </returns>
+            <remarks>This functionality is available offline.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.ReceiveNonGlobalMessages">
+            <summary>
+            This flag allows to receive messages which have been generated by the connection service or the instrument
+            and which are intended for internal use only.
+            <para>See also <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.ReceiveApiDebugMessages"/></para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.ReceiveApiDebugMessages">
+            <summary>
+            This flag allows to receive messages which have been generated by the API itself or its communication layer
+            and which are intended for internal use only.
+            <para>See also <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.ReceiveNonGlobalMessages"/></para>
+            </summary>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.InstrumentClientStateChanged">
+            <summary>
+            This event will be fired when the list of clients change which interact with
+            the Exploris system.
+            </summary>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.GetClients">
+            <summary>
+            Get the list of active clients without the currently calling client. 
+            </summary>
+            <returns>Returns the list of clients to the Exploris system without the current instance.</returns>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.GetInstrumentIds">
+            <summary>
+            Get the list of active instruments hosted by the service. 
+            </summary>
+            <returns>Returns the list of instrument IDs hosted by the connected service.</returns>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.Call(System.Object)">
+            <summary>
+            This method can be used to call the inner parts of the system directly.
+            The functionality is determined by the argument <paramref name="request"/>,
+            which has to fulfil some conditions.
+            <para>
+            The functionality may be executed synchronously or asynchronously.
+            During execution, an exception may occur. When called asynchronously,
+            the access of the result in the return vallue will throw an exception.
+            </para>
+            </summary>
+            <param name="request">Command or request to be executed by the core of the driver.</param>
+            <returns>
+            The return value will have the flag <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.HasFinished"/> set if the called
+            ended synchronously. The actual result is placed in <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Result"/>.
+            <para>
+            An asynchronous execution will fire <see cref="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.AsyncResult"/> after the result is available.
+            The argument to the handler will contain the same ICallResult as returned here. Use either
+            this instance or <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Request"/> to identify the original request.
+            </para>
+            </returns>
+            <exception cref="T:System.ArgumentException">The argument does not fit the demands.</exception>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.AsyncResult">
+            <summary>
+            This handler will be executed when the result of an asynchronous execution of
+            <see cref="M:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer.Call(System.Object)"/> becomes available.
+            <para>
+            Either the ICallResult or <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Request"/> can be used for finding the
+            proper request if more than one is outstanding.
+            </para>
+            <para>
+            Accessing <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.CallResult.Request"/> may throw an exception if during processing of
+            the request an exception occured.
+            </para>
+            </summary>
+            <remarks>This event requires online access.</remarks>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo">
+            <summary>
+            This interface describes a single license used in the Exploris system.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.License">
+            <summary>
+            Get access to the full license text from which everything else in this class is extracted except of <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.AppliedExpirationTime"/>. For temporary licenses, this will be the empty string.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Target">
+            <summary>
+            Get access to the instrument id, usually a 12-digit hexadecimal number or the identification of an assembly, but it can be the empty string to address all instruments. The value is null for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.ExpirationTime">
+            <summary>
+            Get access to the expiration time of the license in local time. The value is DateTime.MinValue for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Emitter">
+            <summary>
+            Get access to the emitter of the license. The value is null for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.TargetSoftwareFamily">
+            <summary>
+            Get access to the target software system that has to be matched or the empty string if that does not matter. Example: "Exploris" for all Exploris Series instruments. The value is null for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.TargetSoftwareVersion">
+            <summary>
+            Get access to the target software version to match with abbreviations. "2" equals to major version 2, "2.1" for also addressing minor version 1, etc. The value is null for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Features">
+            <summary>
+            Get access to all features or user roles granted by this licenses. The value is null for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.AppliedExpirationTime">
+            <summary>
+            Get access to the expiration time of the license in local time or, if coming from a removed flash drive, when the tolerance time expires. The value is DateTime.MinValue for an invalid license (see <see cref="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags"/>).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.IExplorisLicenseInfo.Flags">
+            <summary>
+            Get access to the description about the license.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier">
+            <summary>
+            A license classifiers returns information about a particular license.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.Illegal">
+            <summary>
+            The license string could not be recognized as a license.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.Valid">
+            <summary>
+            The given license string is a valid license (but may be outdated or not applicable)
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.Expired">
+            <summary>
+            This license already has expired
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesAssembly">
+            <summary>
+            If set, the license is dedicated to an assembly. <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesOneInstrumentOnly"/>, <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesMultipleInstruments"/> and this flag are mutually exclusive.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesOneInstrumentOnly">
+            <summary>
+            If set, the license is dedicated to a particular instrument. <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesAssembly"/>, <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesMultipleInstruments"/> and this flag are mutually exclusive.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesMultipleInstruments">
+            <summary>
+            If set, the license is addressing all instruments. <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesAssembly"/>, <see cref="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.AddressesOneInstrumentOnly"/> and this flag are mutually exclusive.
+            </summary>
+        </member>
+        <member name="F:Thermo.Interfaces.ExplorisAccess_V1.ExplorisLicenseClassifier.Temporary">
+            <summary>
+            If set, the license is not stored on disk and will not be stored.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan">
+            <summary>
+            This interface describes the extensions to an instrument value by Exploris based instruments.
+            <para>The Clone() operation will be a shallow one, although a separate call to Dispose() will be required for the clone.</para>
+            </summary>
+            <example>
+            In the following example "values"
+            has to be assigned elsewhere.
+            <code>
+            IMsScanContainer container;
+            IExplorisMsScan value = container.GetLastMsScan as IExplorisMsScan;
+            if (value != null)
+            {
+            	Console.WriteLine("Exploris extensions are available");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetSpectrum(System.IntPtr@,System.Int64@,System.Int32@)">
+            <summary>
+            Get access to the spectrum binary data
+            </summary>
+            <param name="data">
+            The binary blob with spectrum data.
+            </param>
+            <param name="size">
+            Size of the data
+            </param>
+            <param name="spectrumType">
+            Identifies the type of the spectrum data. It is identical to numbering used in FileIO.
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+            <remarks>Information taken from this call must not be used after disposing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetTrailer(System.IntPtr@,System.Int64@)">
+            <summary>
+            Get access to the trailer information.
+            </summary>
+            <param name="data">
+            The binary blob with trailer information.
+            </param>
+            <param name="size">
+            Size of the data
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+            <remarks>Information taken from this call must not be used after disposing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetTuneData(System.IntPtr@,System.Int64@)">
+            <summary>
+            Get access to the tune data.
+            </summary>
+            <param name="data">
+            The binary blob with tune data.
+            </param>
+            <param name="size">
+            Size of the data
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+            <remarks>Information taken from this call must not be used after disposing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetStatusLog(System.IntPtr@,System.Int64@)">
+            <summary>
+            Get access to the status log.
+            </summary>
+            <param name="data">
+            The binary blob with status information.
+            </param>
+            <param name="size">
+            Size of the data
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+            <remarks>Information taken from this call must not be used after disposing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetErrorLog(System.Collections.Generic.List{System.String}@)">
+            <summary>
+            Get access to the error log.
+            </summary>
+            <param name="errorLog">
+            The error log information as string.
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.GetTransients(System.IntPtr@,System.Int64@)">
+            <summary>
+            Get access to the transients.
+            </summary>
+            <param name="data">
+            The binary blob with transients.
+            </param>
+            <param name="size">
+            Size of the data
+            </param>
+            <returns>
+            The method returns true when the information is available, otherwise false.
+            </returns>
+            <remarks>Information taken from this call must not be used after disposing <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan"/>.</remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.AsByteArray">
+            <summary>
+            Return the content of this scan as a byte array.
+            </summary>
+            <returns>Returns the content of this scan as a byte array.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.Clone">
+            <summary>
+            Return a shallow clone of this instance that still requires to be disposed.
+            </summary>
+            <returns>Returns a shallow clone of this instance</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan.Setup">
+            <summary>
+            Get access to the setup object of the spectrum.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer">
+            <summary>
+            This interface describes the extensions to IMsScanContainer by Exploris based instruments.
+            </summary>
+            <example>
+            In the following example "access"
+            has to be assigned elsewhere.
+            <code>
+            IInstrumentAccess access;
+            IMsScanContainer scanContainer = access.GetMsScanContainer(0);
+            IExplorisMsScanContainer explorisScanContainer = scanContainer as IExplorisMsScanContainer;
+            if (explorisScanContainer == null)
+            {
+            	Console.WriteLine("Exploris extensions are not available");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer.GetLastMsScan">
+            <summary>
+            Get access to the last scan seen in the system.
+            The value can be null initially.
+            <para>
+            Note that accessing this property forces the consumer to dispose
+            the item as soon as possible in order to free its shared memory resources.
+            </para>
+            </summary>
+            <returns>The method returns the latest scan the framework is aware off. It may be null. It is castable to an Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan</returns>
+        </member>
+        <member name="E:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer.MsScanArrived">
+            <summary>
+            This event will be fired when a new scan has been emitted by the
+            instrument.
+            <para>
+            Any listener to this event must handle the event as fast as possible.
+            It is good practice by analyzing tool to enqueue the scan into
+            queue and process that queue in another thread.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.ExplorisMsScanEventArgs">
+            <summary>
+            This implementation of EventArgs carries an <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScan"/>.
+            </summary>
+            <remarks>
+            See <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/> for an example how this class can be used.
+            <para>
+            An instance of this class will be created by <see cref="E:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer.MsScanArrived"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.ExplorisMsScanEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.ExplorisMsScanEventArgs"/>.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.ExplorisMsScanEventArgs.GetExplorisScan">
+            <summary>
+            Get the scan that has just arrived from the instrument.
+            It has replaced already the LastScan in the <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer"/>.
+            <para>
+            Note that accessing this method forces the consumer to dispose
+            the item as soon as possible in order to free its shared memory resources.
+            </para>
+            </summary>
+            <returns>The method returns the scan data of a scan event. It is castable to an Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScan</returns>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.NamespaceDoc">
+            <summary>
+            This namespace covers the extensions that Exploris-based instruments have in addition
+            to standard instruments.
+            <para>
+            You can simply cast an
+            <see cref="T:Thermo.Interfaces.InstrumentAccess_V1.MsScanContainer.IMsScanContainer"/>
+            to an
+            <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.MsScanContainer.IExplorisMsScanContainer"/>
+            on an Exploris based instrument.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.NamespaceDoc">
+            <summary>
+            This namespace contains extensions to the central access of the API.
+            <para>
+            See the documentation of <see cref="T:Thermo.Interfaces.ExplorisAccess_V1.IExplorisInstrumentAccessContainer"/>
+            for an example how to get access to the primary interface.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.ExplorisAccess_V1.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.ExplorisAccess_V1.Properties.Resources.link">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>
