@@ -18,7 +18,6 @@
     <None Include="app.ico">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="ApiLoadKey.snk" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
