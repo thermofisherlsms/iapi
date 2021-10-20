@@ -20,7 +20,11 @@ namespace Thermo.IAPI.Examples
         internal static void Init(string dbName)
         {
             string conStr = string.Format("data source={0}", dbName);
-            mConn = new SQLiteConnection(conStr);
+
+            // SQLiteConnectionStringBuilder provides secure input to SQLiteConnection
+            SQLiteConnectionStringBuilder builder = new SQLiteConnectionStringBuilder(conStr);
+
+            mConn = new SQLiteConnection(builder.ConnectionString);
             mConn.Open();
         }
 
