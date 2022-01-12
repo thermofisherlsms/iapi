@@ -3,7 +3,7 @@ Instrument Application Programming Interface for the Thermo Fisher Scientific Fu
 
 ## News
 
-Tribrid Series 3.5 has been released!  Use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/20210722-patchForIAPI-for-35.zip).  
+Tribrid Series 3.5 has been released!  Use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/).  
 
 ## About
 
@@ -18,7 +18,8 @@ Versioning for the API will follow [Semantic Versioning](http://semver.org/). Ma
 |[Instrument API](https://github.com/thermofisherlsms/iapi/blob/master/lib/API-2.0.dll) | [1.1.0.1](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
 |[Spectrum API](https://github.com/thermofisherlsms/iapi/blob/master/lib/Spectrum-1.0.dll) | [1.1.0.1](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
 |[Fusion API](https://github.com/thermofisherlsms/iapi/blob/master/lib/fusion/Fusion.API-1.0.dll) |  [1.3.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Sept 21, 2020|
-|Tune |  [3.0.1794](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
+|Tune (oldest supported) |  [3.0.1794](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
+|Tune (latest supported, [patch](https://github.com/thermofisherlsms/iapi/blob/master/misc/) required) |  [3.5.3881.18](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#35388115)|July 2021|
 
 Please see the [Changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for a complete history of the versions.
 

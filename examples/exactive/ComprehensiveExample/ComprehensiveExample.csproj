@@ -43,16 +43,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="API-1.0">
-      <HintPath>..\bin\API-1.0.dll</HintPath>
+      <HintPath>..\..\..\lib\API-1.0.dll</HintPath>
     </Reference>
     <Reference Include="API-1.1">
-      <HintPath>..\bin\API-1.1.dll</HintPath>
+      <HintPath>..\..\..\lib\API-1.1.dll</HintPath>
     </Reference>
     <Reference Include="ESAPI-1.0">
-      <HintPath>..\bin\ESAPI-1.0.dll</HintPath>
+      <HintPath>..\..\..\lib\exactive\ESAPI-1.0.dll</HintPath>
     </Reference>
     <Reference Include="ESAPI-1.1">
-      <HintPath>..\bin\ESAPI-1.1.dll</HintPath>
+      <HintPath>..\..\..\lib\exactive\ESAPI-1.1.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

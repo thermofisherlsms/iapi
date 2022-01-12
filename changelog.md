@@ -4,7 +4,7 @@ This file will summarize the changes and bug fixes by Tune version.
 
 ## 3.5.3881.18 (July 2021)
 
-* Patch required for IAPI use with 3.5, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/20210722-patchForIAPI-for-35.zip)
+* Patch required for IAPI use with 3.5, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/)
 * No change to interface
 * Bug fix: event CanAcceptNextCustomScan now fires appropriately
 * Bug fix: ETciD and EThcD support fixed/added
