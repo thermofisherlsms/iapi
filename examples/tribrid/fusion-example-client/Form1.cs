@@ -13,6 +13,7 @@ using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow;
 using Thermo.Interfaces.FusionAccess_V1.Control.Peripherals;
 using Thermo.Interfaces.FusionAccess_V1.Control;
+using Thermo.Interfaces.FusionAccess_V1.Control.Scans;
 using Thermo.Interfaces.InstrumentAccess_V1.AnalogTraceContainer;
 using System.Collections.Generic;
 using System.Data;
@@ -102,7 +103,9 @@ namespace FusionExampleClient
             _instAccess.ConnectionChanged += _instAccess_ConnectionChanged;
             _instAccess.ContactClosureChanged += _instAccess_ContactClosureChanged;
 
-       
+
+            _instMSScanContainer = _instAccess.GetMsScanContainer(0);
+
             _instAcq = _instControl.Acquisition;
             _instAcq.StateChanged += Acquisition_StateChanged;
             _instAcq.AcquisitionStreamClosing += _instAcq_AcquisitionStreamClosing;
@@ -134,7 +137,6 @@ namespace FusionExampleClient
             _syringe.StatusChanged += _syringe_StatusChanged;
             updateSyringeReadbacks(true);
 
-            _instMSScanContainer = _instAccess.GetMsScanContainer(0);          
 
 
             // Analog Values
@@ -148,7 +150,6 @@ namespace FusionExampleClient
                     analogGroupBoxes[i].Text = trace.DetectorClass;
                 }           
             }
-
         }
 
         private void _instAcq_AcquisitionStreamOpening(object sender, AcquisitionOpeningEventArgs e)
@@ -165,19 +166,17 @@ namespace FusionExampleClient
 
               progressBar1.Style = ProgressBarStyle.Marquee;
           }));
-
-        
         }
 
         private void _instAcq_AcquisitionStreamClosing(object sender, EventArgs e)
         {
             Invoke(new Action(
-       () =>
-       {
-           richTextBox1.AppendText("==Completed Acquisition==\n");
-           progressBar1.Style = ProgressBarStyle.Continuous;
-           progressBar1.Value = 0;
-       }));
+               () =>
+               {
+                   richTextBox1.AppendText("==Completed Acquisition==\n");
+                   progressBar1.Style = ProgressBarStyle.Continuous;
+                   progressBar1.Value = 0;
+               }));
         }
 
         void _instAccess_ContactClosureChanged(object sender, ContactClosureEventArgs e)
@@ -241,7 +240,6 @@ namespace FusionExampleClient
             }
         }
 
-
         void _instAccess_ConnectionChanged(object sender, EventArgs e)
         {
             Invoke(new Action(
@@ -286,11 +284,6 @@ namespace FusionExampleClient
                 textBox1.Text = totalScansArrived.ToString();
                 textBox3.Text = accessID;
             }));
-
-
-     
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -304,7 +297,6 @@ namespace FusionExampleClient
             IMode mode = _instControl.Acquisition.CreateOnMode();
             _instControl.Acquisition.SetMode(mode);
         }
-        
 
         private void UpdateScan(IScanDefinition scan)
         {
@@ -329,6 +321,16 @@ namespace FusionExampleClient
                 cs.SingleProcessingDelay = (double)numericUpDown4.Value;
                 UpdateScan(cs);              
                 _scans.SetCustomScan(cs);
+
+                IFusionScans fusionScans = (IFusionScans) _instControl.GetScans(true);
+
+                IAPIFusionCustomScan fcs = new IAPIFusionCustomScan();
+                
+                fcs.Values["Analyzer"] = "Orbitrap";
+                fcs.IsPAGCScan = true;
+                fcs.PAGCGroupIndex = 1;
+                fcs.RunningNumber = 111;
+                fusionScans.SetFusionCustomScan(fcs);
             }     
         }
 
@@ -562,6 +564,5 @@ namespace FusionExampleClient
         {
             CancelScan();
         }
-        
     }
 }
