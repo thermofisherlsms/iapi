@@ -4,12 +4,13 @@ The following steps are needed to use the Instrument API (IAPI) with the Tribrid
 
 ## Legal Requirements
 
-Use of the IAPI requires the following legal documents to be in place:
+Use of the IAPI requires a **Tribrid IAPI Software License Agreement**.
 
-  1. **Tribrid IAPI Software License Argreement**
-     - Stipulates the usage and rights of the IAPI
-  
- *Documents can be obtained by emailing info.IAPI at thermofisher.com*
+This document stipulates the usage and rights to which users must agree in order to use the IAPI.
+
+Please see the following document for instructions on how to obtain the agreement and a license:
+
+[Orbitrap IAPI Online licensing guidance material](https://github.com/thermofisherlsms/iapi/tree/master/Orbitrap_IAPI_Online_licensing_guidance_material.pdf)
 
 ## Configuration
   
