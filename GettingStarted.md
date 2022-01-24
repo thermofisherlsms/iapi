@@ -11,18 +11,6 @@ This document stipulates the usage and rights to which users must agree in order
 Please see the following document for instructions on how to obtain the agreement and a license:
 
 [Orbitrap IAPI Online licensing guidance material](https://github.com/thermofisherlsms/iapi/tree/master/Orbitrap_IAPI_Online_licensing_guidance_material.pdf)
-
-## Configuration
-  
-Upon the representatives at Thermo receiving the above signed documents, the following steps are needed to configure an Tribrid-series mass spectrometer to use the IAPI:
-
-  1. Obtain and send the 'Instrument Identification' for the instrument to your IAPI contact at Thermo.
-     - This can be obtain from the Tune application 'About Tune' dialog box.
-     - They will generate a license file with the IAPI enabled and send back to you.
-  2. Load the license file into the Tune application 'About Tune' dialog box with the 'Add License' button.
-  3. Restart the Instrument Control Desktop computer.
-  4. Restart (electronics only) the instrument.
-  5. The IAPI should be functional at this point.
   
 ___
   
