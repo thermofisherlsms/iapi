@@ -12,6 +12,12 @@ Please see the following document for instructions on how to obtain the agreemen
 
 [Orbitrap IAPI Online licensing guidance material](https://github.com/thermofisherlsms/iapi/tree/master/Orbitrap_IAPI_Online_licensing_guidance_material.pdf)
   
+Note that the above instructions will not work on Tribrid Instrument Control Software (i.e. Tune) version 3.3 or prior.  For such situations we highly recommend upgrading to a more recent version and using the above instructions.  If this is not possible, please send email to:
+
+*info.IAPI at thermofisher dot com*
+
+and we will try to assist you in getting a license.
+
 ___
   
 ## Example App
