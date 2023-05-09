@@ -2,6 +2,14 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## 4.0.4084.22 and service packs (December 2022)
+
+* No interface changes
+* All changes in the patch for 3.5 are incorporated into this release; no patch required (yet!)
+* Bug fix:  IsMonoisotopic (and other centroid properties) are no longer always null
+* Feature added:  scan description enabled (use scan value string "ScanDescription")
+* Issues list has been updated.  Please consult both the open and closed issues lists to see if your issue has been addressed, and feel free to submit another issue with updated information if you feel your issue was closed without sufficient attention.  Note:  generally "not yet implemented" issues have been converted to "enhancement."
+
 ## 3.5.3881.18 (July 2021)
 
 * Patch required for IAPI use with 3.5, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/)

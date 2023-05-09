@@ -1,9 +1,11 @@
 # iapi
-Instrument Application Programming Interface for the Thermo Fisher Scientific Fusion- and Exactive-series  Mass Spectrometers.
+Instrument Application Programming Interface for the Thermo Fisher Scientific Tribrid, Exactive, and Exploris series Mass Spectrometers.
 
 ## News
 
-Tribrid Series 3.5 has been released!  Use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/).  
+Tribrid Series 4.0 has been released!  The fixes from the patch for 3.5 are all incorporated into 4.0, so no patch is requried.  See the [changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for details.
+
+Note, use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/).  
 
 ## About
 
@@ -19,7 +21,7 @@ Versioning for the API will follow [Semantic Versioning](http://semver.org/). Ma
 |[Spectrum API](https://github.com/thermofisherlsms/iapi/blob/master/lib/Spectrum-1.0.dll) | [1.1.0.1](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
 |[Fusion API](https://github.com/thermofisherlsms/iapi/blob/master/lib/fusion/Fusion.API-1.0.dll) |  [1.3.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Sept 21, 2020|
 |Tune (oldest supported) |  [3.0.1794](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
-|Tune (latest supported, [patch](https://github.com/thermofisherlsms/iapi/blob/master/misc/) required) |  [3.5.3881.18](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#35388115)|July 2021|
+|Tune (latest supported) |  [4.0.4084.22](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md)|December 2022|
 
 Please see the [Changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for a complete history of the versions.
 
