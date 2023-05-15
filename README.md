@@ -24,8 +24,8 @@ There are a variety of documents available, mostly derived from prior presentati
 #### Tribrids
 
 * Derek Bailey's [poster from ASMS 2016](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/ASMS%202016%20poster%20Derek-Bailey%20API.pdf), an introduction
-* Derek Bailey's [slides from ASMS 2018](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/IAPI%20and%20XML%20Modifications.pdf), providing details on how the IAPI works (also containing some details on the XML method modifications tool)
-* Tony Zhao and Jesse Canterbury's [slides from ASMS 2019](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/Orbitrap_1300_TonyZhaoJesseCanterbury.pdf)
+* Derek Bailey's slides from ASMS 2018 as a [pdf](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/IAPI%20and%20XML%20Modifications.pdf) or as a [pptx with working animations](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/IAPI%20and%20XML%20Modifications.pptx), providing details on how the IAPI works (also containing some details on the XML method modifications tool)
+* Tony Zhao and Jesse Canterbury's slides from ASMS 2019 as a [pdf](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/Orbitrap_1300_TonyZhaoJesseCanterbury.pdf) or as a [pptx with working animations](https://github.com/thermofisherlsms/iapi/blob/master/docs/tribrid/IAPI%20and%20XML%20Modifications.pptx)
 
 #### Exactive/Exploris
 
