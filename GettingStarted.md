@@ -6,11 +6,11 @@ The following steps are needed to use the Instrument API (IAPI) with the Tribrid
 
 Use of the IAPI requires a **Tribrid IAPI Software License Agreement**.
 
-This document stipulates the usage and rights to which users must agree in order to use the IAPI.
+This document stipulates the usage and rights to which users must agree in order to use the IAPI.  See the [license FAQ](https://github.com/thermofisherlsms/iapi/blob/master/docs/API%20license%20agreement%20FAQs%20r1.2.pdf) for additional information.
 
 Please see the following document for instructions on how to obtain the agreement and a license:
 
-[Orbitrap IAPI Online licensing guidance material](https://github.com/thermofisherlsms/iapi/tree/master/Orbitrap_IAPI_Online_licensing_guidance_material.pdf)
+[Orbitrap IAPI Online licensing guidance material](https://github.com/thermofisherlsms/iapi/tree/master/docs/Orbitrap_IAPI_Online_licensing_guidance_material.pdf)
   
 Note that the above instructions will not work on Tribrid Instrument Control Software (i.e. Tune) version 3.3 or prior.  For such situations we highly recommend upgrading to a more recent version and using the above instructions.  If this is not possible, please send email to:
 
