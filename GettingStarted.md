@@ -6,7 +6,7 @@ The following steps are needed to use the Instrument API (IAPI) with the Tribrid
 
 Use of the IAPI requires a **Tribrid IAPI Software License Agreement**.
 
-This document stipulates the usage and rights to which users must agree in order to use the IAPI.  See the [license FAQ](https://github.com/thermofisherlsms/iapi/blob/master/docs/API%20license%20agreement%20FAQs%20r1.2.pdf) for additional information.
+This document stipulates the usage and rights to which users must agree in order to use the IAPI.  See the [license FAQ](https://github.com/thermofisherlsms/iapi/blob/master/docs/API%20license%20agreement%20FAQs%20r1.3.pdf) for additional information.
 
 Please see the following document for instructions on how to obtain the agreement and a license:
 

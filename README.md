@@ -92,4 +92,4 @@ All [examples](https://github.com/thermofisherlsms/iapi/tree/master/examples) an
 
 Use of the IAPI requires a *Fusion IAPI Software License Argreement* to be in placed. Please see the [license information](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md#legal-requirements) in the [getting started](https://github.com/thermofisherlsms/iapi/blob/master/GettingStarted.md) document for details.
 
-We also have a [license FAQ](https://github.com/thermofisherlsms/iapi/blob/master/docs/API%20license%20agreement%20FAQs%20r1.2.pdf) to help translate the legalese into regular words. 
+We also have a [license FAQ](https://github.com/thermofisherlsms/iapi/blob/master/docs/API%20license%20agreement%20FAQs%20r1.3.pdf) to help translate the legalese into regular words. 
