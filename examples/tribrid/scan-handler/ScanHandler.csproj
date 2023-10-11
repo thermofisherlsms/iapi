@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5630A2C3-46F1-412B-9C3D-63CDBEBC60E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScanHandler</RootNamespace>
+    <AssemblyName>ScanHandler</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="API-2.0">
+      <HintPath>..\iapi\lib\API-2.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Fusion.API-1.0">
+      <HintPath>..\iapi\lib\tribrid\Fusion.API-1.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Spectrum-1.0">
+      <HintPath>..\iapi\lib\Spectrum-1.0.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Thermo.TNG.Factory">
+      <HintPath>..\iapi\lib\tribrid\Thermo.TNG.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="VI-1.0">
+      <HintPath>..\iapi\lib\VI-1.0.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InstrumentHandler.cs" />
+    <Compile Include="InstrumentHandler_Outputs.cs" />
+    <Compile Include="InstrumentHandler_Streams.cs" />
+    <Compile Include="lib\Centroid.cs" />
+    <Compile Include="lib\DataReport.cs" />
+    <Compile Include="lib\MsOrderType.cs" />
+    <Compile Include="lib\Scan.cs" />
+    <Compile Include="ScanProcessor.cs" />
+    <Compile Include="lib\ScanReport.cs" />
+    <Compile Include="lib\ThermoApi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
