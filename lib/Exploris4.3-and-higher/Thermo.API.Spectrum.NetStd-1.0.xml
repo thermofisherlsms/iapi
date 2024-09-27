@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thermo.API.Spectrum.NetStd-1.0</name>
+    </assembly>
+    <members>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.ICentroid">
+            <summary>
+            This interface describes information about a centroid peak.
+            </summary>
+            <remarks>
+            <para>
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsExceptional">
+            <summary>
+            Get access to the flag whether this peak is an artificial exception.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsReferenced">
+            <summary>
+            Get access to the flag whether this peak is a referenced (lock mass) peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMerged">
+            <summary>
+            Get access to the flag whether this peak is a merged peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsFragmented">
+            <summary>
+            Get access to the flag whether this peak is a fragmented peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Charge">
+            <summary>
+            Get access to the charge state.
+            null is returned if this value couldn't be determined.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Profile">
+            <summary>
+            Get access to the profile information. The return value
+            will be an empty array if no profile information is related to this
+            centroid.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Resolution">
+            <summary>
+            Get access to the resolution information. The return value
+            will be null if the resolution is not available for the peak, otherwise it contains the resolution.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.ChargeEnvelopeIndex">
+            <summary>
+            Get access to the charge envelope index. The value is optional and depends on the availability of information
+            in the instrument and proper identification.
+            <para>
+            If available, all centroids with the same charge envelope index belong to the same molecule having a specific isotope
+            configuration. Properties of the charge envelope can be examined by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.ChargeEnvelopes"/>[ChargeEnvelopeIndex].
+            </para>
+            <para>
+            A value of null doesn't necessarily mean that other centroids do not belong to the same molecule than
+            this centroid.
+            </para>
+            </summary>
+            <remarks>This is an enhancement for better centroid characterization done in 2016.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsMonoisotopic">
+            <summary>
+            Get access to the flag whether this peak is a monoisotopic peak.
+            null is returned if the value couldn't be determined.
+            </summary>
+            <remarks>This is an enhancement for better centroid characterization done in 2016.</remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsClusterTop">
+            <summary>
+            Get access whether this centroid is identified as having the top-peak mass within the charge envelope.
+            </summary>
+            <remarks>
+            The top peak is that peak in a charge envelope that fulfils two requirements in this order: 1) never being considered
+            to be part of another charge envelope, and 2) having the highest abundance.
+            <para>
+            This is an enhancement for better centroid characterization done in 2016.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsIsotopicallyResolved">
+            <summary>
+            Get access to the flag whether this peak has been isotopically resolved.
+            As consequence, an <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope"/>, if assigned and given, will also have this flag assigned and monoisotopic mass was calculated if set to true.
+            The cross-correlation factor is also set in IChargeEnvelope.
+            <para>
+            The value will be null if no APD information is stored in the raw file.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.IsSaturated">
+            <summary>
+            Get access to the flag whether this peak is describing a saturated peak.
+            <para>
+            The value will be null if no saturation information is available (e.g. for an Orbitrap scan), for a MrTOF scan, it will be true or false.
+            </para>
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope">
+            <summary>
+            This interface covers charge envelopes. All isotopes just having a different charge belong to the same charge envelope.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass">
+            <summary>
+            This is the monoisotopic mass that a particular peak belongs to. The value is a calculated one,
+            it is very likely that this cannot be seen at all in the spectrum. But it is the reference point of all
+            members of one charge envelope.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.CrossCorrelation">
+            <summary>
+            This cross-correlation factor is the maximum of all cross-correlation values over all averagines. An averagine is a statistical model
+            of the isotope distribution of the same molecule (see remarks of <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope"/>) at a given charge. The observed peaks
+            within the spectrum are fitted to this, the overlap is calculated by a cross-correlation that only takes the intensities into account.
+            <para>
+            The averagine model is strongly linked to peptide analysis. As an example, averagine mass distribution for pesticides are totally different.
+            </para>
+            <para>
+            Cross-correlation factors vary in the range 0 to 1. 0 will be set if <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass"/> is also 0.
+            In this case, the fit was unsuccessful.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.TopPeakCentroidId">
+            <summary>
+            This is the index to the top peak centroid in the centroid list (<see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids"/>).
+            One can use this to get access to the mass of the so called top peak.
+            </summary>
+            <remarks>
+            The top peak is that peak in a charge envelope that fulfils two requirements in this order: 1) never being considered
+            to be part of another charge envelope, and 2) having the highest abundance.
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.IsIsotopicallyResolved">
+            <summary>
+            Is this charge envelope created using isotopically resolved species? If so, 
+            <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.MonoisotopicMass"/> will return the non-zero value,
+            but <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.AverageMass"/> will return 0.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IChargeEnvelope.AverageMass">
+            <summary>
+            When peaks are non-isotopically resolved, this value contains the average mass of all species in the envelope.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess">
+            <summary>
+            This interface defines the functionality to access a particular information source which
+            is usually TuneData, Trailer or StatusLog (wording known to Xcalibur users).
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.ItemNames">
+            <summary>
+            Access to the items by use of their name. The returned value is sorted according
+            to its original order and contains also comment entries.
+            </summary>
+        </member>
+        <member name="M:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.TryGetRawValue(System.String,System.Object@)">
+            <summary>
+            Try to retrieve the value of an item.
+            </summary>
+            <param name="name">The name for that the content shall be returned</param>
+            <param name="value">value of the item</param>
+            <returns>Returns true if the item has been found, false otherwise.</returns>
+        </member>
+        <member name="M:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.TryGetValue(System.String,System.String@)">
+            <summary>
+            Try to retrieve the textual representation of an item.
+            </summary>
+            <param name="name">The name for that the content shall be returned</param>
+            <param name="value">textual representation of the value of the item</param>
+            <returns>Returns true if the item has been found, false otherwise.</returns>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.Available">
+            <summary>
+            Return whether this particular information source has been made available by the instrument.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IInformationSourceAccess.Valid">
+            <summary>
+            Return whether this particular information source block matches the expected format.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity">
+            <summary>
+            This interface is used to store the basic information about peaks.
+            </summary>
+            <remarks>
+            <para>
+            Derived classes are <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.ICentroid"/> and <see cref="T:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode"/>.
+            An instance of this class will be created by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ICentroid.Profile"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity.Mz">
+            <summary>
+            m/z value of the information.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.IMassIntensity.Intensity">
+            <summary>
+            Intensity at the given m/z value.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode">
+            <summary>
+            One noise node is part of a set of noise nodes which describe the individual noise
+            by interpolation at a specific point. Each noise node should be combined with its
+            neightbors in a polygonial way.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.INoiseNode.Baseline">
+            <summary>
+            Baseline of the noise node. The value will be null if no baseline is available.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum">
+            <summary>
+            This class describes a spectrum without information coming alongh with it.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.DetectorName">
+            <summary>
+            Get access to the name of the detector that acquired this scan.
+            <para>
+            Example: The instrument name may be "Thermo Orbitrap Velos Pro", the
+            detector class may be "Hybrid LinearIonTrap Orbitrap" and the
+            scan detector name may be "LinearIonTrap".
+            </para>
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseCount">
+            <summary>
+            Get access to the number of elements returned by <see cref="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseBand"/>. The value will
+            be null if the detector doesn't support noise information at all. 0 will be returned if no
+            peaks below noise level were cut off, 1 will be returned for a constant level of the returned
+            intensity.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.NoiseBand">
+            <summary>
+            Get access to the noise information. The noise nodes form a polygon that covers the noise area.
+            An empty enumeration is returned if noise information is not present.
+            This value will not be null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.CentroidCount">
+            <summary>
+            Get access to the number of centroids in this scan. The value is null if the detector
+            is not capable to provide centroids. The value may also be null if a computation
+            cannot be performed.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.Centroids">
+            <summary>
+            Get access to the centroids and further information to those peaks.
+            An empty enumeration is returned if centroid information is not present.
+            This value will not be null.
+            </summary>
+        </member>
+        <member name="P:Thermo.Interfaces.SpectrumFormat_V1.ISpectrum.ChargeEnvelopes">
+            <summary>
+            Access to the array of all charge envelopes found in the spectrum. An empty array will be returned if nothing
+            had been found. null will be returned if the detector's processing software doesn't support detection of
+            charge envelopes for this scan.
+            </summary>
+        </member>
+        <member name="T:Thermo.Interfaces.SpectrumFormat_V1.NamespaceDoc">
+            <summary>
+            This namespace covers the definition of a customer-accessible spectrum. A customer can be
+            an API or a consuming program.
+            </summary>
+        </member>
+    </members>
+</doc>
