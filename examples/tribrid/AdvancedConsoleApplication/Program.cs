@@ -10,19 +10,17 @@ using System.Linq;
 using Thermo.Interfaces.SpectrumFormat_V1;
 using Thermo.Interfaces.FusionAccess_V1.Control.Scans;
 
-// by YX
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition; 
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Modes;
 using Thermo.Interfaces.InstrumentAccess_V1.Control.Acquisition.Workflow; 
 using Thermo.Interfaces.InstrumentAccess_V1.Control.InstrumentValues; 
-// using Thermo.Interfaces.InstrumentAccess_V1.Control.Scans; 
 using System.Data; 
 using System.Windows.Forms; 
 //
 using Thermo.Interfaces.FusionAccess_V1.Control;
 using System.Threading;
 using System.IO.IsolatedStorage;
-using Microsoft.Win32; // for the "IFusionControl" class below
+using Microsoft.Win32; 
 
 
 namespace AdvancedConsoleApplication
@@ -39,10 +37,9 @@ namespace AdvancedConsoleApplication
         static IFusionInstrumentAccess _fusionAccess; 
         static IFusionMsScanContainer _fusionScanContainer;
 
-        // by YX
         static IAcquisition _instAcq; 
-        static IFusionControl _instControl; // from FusionAccess_V1.Control
-        static IScans _scans; // from InstrumentAcess_V1.Control.Scans
+        static IFusionControl _instControl; 
+        static IScans _scans; 
         static IMsScan _currentScan; 
         static IInstrumentValues _instValues; 
         static DataTable scanProperties;
@@ -81,7 +78,7 @@ namespace AdvancedConsoleApplication
                         // Unsubscribe 
                         _fusionScanContainer.MsScanArrived -= FusionScanContainer_MsScanArrived;
                         break;
-                    // by YX for testing
+                    // more functionalities added below
                     case ConsoleKey.H:
                         Console.WriteLine(" ========== Helper =========="); 
                         Console.WriteLine("  N: coNtrol of the instrument");
@@ -112,7 +109,7 @@ namespace AdvancedConsoleApplication
                         Console.WriteLine("> Acquisition mode -> OFF\n"); 
 
                         break; 
-                    case ConsoleKey.N: // for control
+                    case ConsoleKey.N: // to control the instrument
                         GetControl(); 
                         SetAcquisition(); 
                         GetScans(); 
@@ -125,13 +122,13 @@ namespace AdvancedConsoleApplication
                         scanProperties.Columns.Add("Selection", typeof(string)).ReadOnly = true; 
                         scanProperties.Columns.Add("Help", typeof(string)).ReadOnly = true; 
 
-                        BindingSource source = new BindingSource(); // requires System.Windows.Forms
+                        BindingSource source = new BindingSource();
                         source.DataSource = scanProperties; 
                         UpdateScanProperties(); 
                         Console.WriteLine("> Scan properties updated!"); 
 
                         break; 
-                    case ConsoleKey.A: // for acquisition
+                    case ConsoleKey.A: // start an acquisition
                         IAcquisitionWorkflow acq = null; 
 
                         if(_scans != null) {
@@ -144,7 +141,6 @@ namespace AdvancedConsoleApplication
                             string relativePath = @"..\..\raw";
                             string absolutePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath));
 
-                            // Ensure the "raw" directory exists or create it
                             if (!System.IO.Directory.Exists(absolutePath))
                             {
                                 System.IO.Directory.CreateDirectory(absolutePath);
@@ -162,7 +158,7 @@ namespace AdvancedConsoleApplication
                         }
 
                         break; 
-                    case ConsoleKey.Z: // to quit the acquisition
+                    case ConsoleKey.Z: // to stop the acquisition
                         if(_instControl.Acquisition != null) {
                             _instControl.Acquisition.CancelAcquisition(); 
                         }
@@ -187,7 +183,7 @@ namespace AdvancedConsoleApplication
                         Console.WriteLine("> Current scan ended!");
 
                         break;
-                    case ConsoleKey.K:
+                    case ConsoleKey.K: // clear all current scan definitions to upload
                         scanDefToUpload.Clear();
                         if(_scans != null)
                         {
@@ -207,7 +203,7 @@ namespace AdvancedConsoleApplication
                         break;
                     case ConsoleKey.I: // input scan definitions
                         Console.WriteLine("\n> Set up the scan definition: (start with ScanType)");
-                        Console.WriteLine("> ----------------------------------------"); 
+                        Console.WriteLine("> ----------------------------------------");
                         Console.WriteLine("> K: Clean up all current definitions");
                         Console.WriteLine("> Q: Quit");
                         Console.WriteLine("> ----------------------------------------");
@@ -248,10 +244,7 @@ namespace AdvancedConsoleApplication
                         }
 
                         break;
-                    case ConsoleKey.D: // DD scan
-                        // subscribe to a scan event, make a DD MS2 scan for each event without 
-                        // manually pausing the system
-
+                    case ConsoleKey.D: // for DD scan
                         if(!isDDSubscribed) {
                             _fusionScanContainer.MsScanArrived += RunDDTest;
                             isDDSubscribed = true;
@@ -269,7 +262,7 @@ namespace AdvancedConsoleApplication
             }
         }
 
-        private static IDictionary<string, string> scanDefToDownload; // = new Dictionary<string, string>();
+        private static IDictionary<string, string> scanDefToDownload; 
         private static IDictionary<string, string> scanDefToUpload = new Dictionary<string, string>();
         private static void FusionScanContainer_MsScanArrived(object sender, MsScanEventArgs e)
         {
@@ -282,11 +275,6 @@ namespace AdvancedConsoleApplication
             {
                 Console.WriteLine($">\tPrecursor Mass = {e.GetScan().Header["PrecursorMass[0]"]}"); 
             }
-
-            //foreach (var kvp in e.GetScan().Header)
-            //{
-            //    Console.WriteLine($" {kvp.Key} | {kvp.Value}");
-            //}
         }
 
 
@@ -302,7 +290,6 @@ namespace AdvancedConsoleApplication
                 }
                 Console.WriteLine("=========================================");
             }
-
         }
 
         private static void UpdateScanReceive(IMsScan msScan) {
@@ -313,7 +300,6 @@ namespace AdvancedConsoleApplication
 
         private static void RepeatTest()
         {
-            // hard code the parameters for now
             IRepeatingScan rs = _scans.CreateRepeatingScan(); 
 
             foreach (KeyValuePair<string, string> kvp in scanDefToUpload)
@@ -325,7 +311,6 @@ namespace AdvancedConsoleApplication
 
         private static void CustomTest() 
         {
-            // hard code the parameters for now
             ICustomScan cs = _scans.CreateCustomScan();
 
             int numOfScans = 1; 
@@ -350,10 +335,7 @@ namespace AdvancedConsoleApplication
             _instControl = _fusionContainer.Get(1).Control; 
             Console.WriteLine("> Control granted!"); 
 
-            // now manipulate the control
             _instValues = _instControl.InstrumentValues; 
-            //Console.WriteLine(_instValues.ValueName); 
-
         }
 
         private static void GetScans() {
@@ -362,6 +344,8 @@ namespace AdvancedConsoleApplication
         }
         private static void CustomDDTest(List<Centroid> listOfPrecursors)
         {
+            // hard code some parameters for now, of course you can input these numbers
+            // by pressing "I" key
             scanDefToUpload["ScanType"] = "MSn";
             scanDefToUpload["MSOrder"] = "2";
             scanDefToUpload["IsolationWidth"] = "0.7";
@@ -393,7 +377,6 @@ namespace AdvancedConsoleApplication
                 _currentScan = e.GetScan();
                 Console.WriteLine($"\n\n> This is event No.{_currentScan.Header["Scan"]}, ScanType = {_currentScan.Header["ScanMode"]}");
 
-
                 foreach (var cent in _currentScan.Centroids)
                 {
                     Centroid c = new Centroid();
@@ -415,7 +398,6 @@ namespace AdvancedConsoleApplication
                 listOfCentroids = listOfCentroids.Take(topN).ToList();
 
                 CustomDDTest(listOfCentroids);
-
             }
         }
         private static void SetAcquisition() {
@@ -433,11 +415,5 @@ namespace AdvancedConsoleApplication
                 }, LoadOption.OverwriteChanges);
             }
         }
-/*         private void UpdateScan(IScanDefinition scan) {
-            foreach (RataRow row in scanProperties )
-        }
- */
-        
-
     }
 }
