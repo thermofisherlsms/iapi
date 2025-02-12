@@ -2,6 +2,18 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## New example application for Tribrids (December 2024)
+
+* Added a new example for Tribrids, AdvancedConsoleApplication, which incoporates most features from other GUI example applications
+
+## Tribrid Series 4.2, Stellar 1.0, and service packs (Summer 2024)
+
+* IAPI now supports Stellar!
+* Bug fix: Changed the source CID scaling factor default to zero to prevent unexpected results when using source CID via the API
+* Bug fix: ensured default values for isolation width are set when precursors get added
+* Bug fix: make users without Ardia aware of how to get an IAPI license
+	
+
 ## 4.0.4084.22 and service packs (December 2022)
 
 * No interface changes
