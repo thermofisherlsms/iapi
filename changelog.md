@@ -2,6 +2,21 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## Tribrid Series 4.3 (September 2025)
+
+* New interface Fusion.API-2.0.dll available [here](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt3/).
+	* Apps must be updated with the new interface to be used with Tribrid Series 4.3
+	* Simply replace the reference to Fusion.API-1.0.dll in your app with a reference to Fusion.API-2.0.dll
+* The new interface makes the following improvements and additions:
+	* You can instantiate a ```FusionCustomScan``` directly instead of using the ```IAPIFusionCustomScan``` wrapper
+	* You can send a query for the number of available custom scan slots, using the IFusionInstrumentAccess interface.  The number is returned as part of an event to which you subscribe.
+* New [example project](https://github.com/thermofisherlsms/iapi/tree/master/examples/tribrid/fusion-example-client-2.0) with the very creative name ```FusionExampleClient2pt0```, containing example usage for the above new features
+* Expanded MinifiedExample showing how to make a scan and print the list of possible parameters
+* Scan parameter added, "UseIC": internal calibrant can now be used as part of the scan
+* Scan parameter added, "TurboTMT": TurboTMT can now be used as part of the scan
+* Enhancement: Increased max value for "ReactionTime" to 5000 ms
+* Bug fix: Add default value to collision energy
+
 ## New example application for Tribrids (December 2024)
 
 * Added a new example for Tribrids, AdvancedConsoleApplication, which incoporates most features from other GUI example applications

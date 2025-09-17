@@ -37,7 +37,7 @@
       <HintPath>..\..\..\lib\API-2.0.dll</HintPath>
     </Reference>
     <Reference Include="Fusion.API-1.0">
-      <HintPath>..\..\..\lib\tribrid\Fusion.API-1.0.dll</HintPath>
+      <HintPath>..\..\..\lib\tribrid\TribridSeries4pt2-and-previous\Fusion.API-1.0.dll</HintPath>
     </Reference>
     <Reference Include="Spectrum-1.0">
       <HintPath>..\..\..\lib\Spectrum-1.0.dll</HintPath>

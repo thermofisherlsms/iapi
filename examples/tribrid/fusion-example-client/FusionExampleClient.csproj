@@ -38,9 +38,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\API-2.0.dll</HintPath>
     </Reference>
-    <Reference Include="Fusion.API-1.0, Version=1.2.0.0, Culture=neutral, PublicKeyToken=35efc4498449bc4c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\tribrid\Fusion.API-1.0.dll</HintPath>
+    <Reference Include="Fusion.API-1.0">
+      <HintPath>..\..\..\lib\tribrid\TribridSeries4pt2-and-previous\Fusion.API-1.0.dll</HintPath>
     </Reference>
     <Reference Include="Spectrum-1.0, Version=1.1.0.1, Culture=neutral, PublicKeyToken=c03bf447005257eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

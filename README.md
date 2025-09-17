@@ -3,7 +3,11 @@ Instrument Application Programming Interface for the Thermo Fisher Scientific Tr
 
 ## News
 
-Tribrid Series 4.0 has been released!  The fixes from the patch for 3.5 are all incorporated into 4.0, so no patch is requried.  See the [changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for details.
+Tribrid Series 4.3 has been released!  For this release, we have added a couple of new features which required changing the interface.  There is a new DLL, Fusion.API-2.0.dll, and it should be a simple drop-in replacement for the old one.  The new interface is [here](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt3/).
+
+We've also updated some of the [Tribrid code examples](https://github.com/thermofisherlsms/iapi/tree/master/examples/tribrid).  There is a new example project, ```FusionExampleClient2pt0``` which reorganizes and adds more extensive comments and examples to the original FusionExampleClient project, as well as demonstrating the new features in the new interface.  The ```MinifiedExample``` has also been updated and slightly expanded with examples of common questions:  how to send a scan and how to print the list of possible parameters.  
+
+There are also a couple of new parameters as well as one or two bug fixes.  See the [changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for details.
 
 Note, use of the IAPI with Tune 3.5 requires a patch, available [here](https://github.com/thermofisherlsms/iapi/blob/master/misc/).  
 
@@ -32,34 +36,7 @@ There are a variety of documents available, mostly derived from prior presentati
 * Andreas Kuehn's [poster from ASMS 2013](https://github.com/thermofisherlsms/iapi/blob/master/docs/exactive/Customized%20Real-Time%20Control%20of%20Benchtop%20Orbitrap%20MS%20-%20API.pdf)
 * Florian Grosse-Coosman and Andreas Kuehn's [training slides from May 2018](https://github.com/thermofisherlsms/iapi/blob/master/docs/exactive/Applied%20API%20Training%20for%20Exactive%20series%20-%20Online%20edition_v1.pdf)
 
-## Usage
-
-Some basic usage examples. These are just parital code snippets and require the proper setup to run correctly. They are here to provide a flavor of what is possible with the IAPI.
-
-### Receiving Spectra
-
-Registers an event handler whenever a new spectrum arrives from the instrument.
-
-```csharp
-// API access to a Fusion MS
-IFusionInstrumentAccess instAccess = <else where>; 
-
-// Get the first scan container for the instrument
-var scanContainer = instAccess.GetMsScanContainer(0);
-
-// Add an event handler for whenever a spectrum has arrived from the instrument
-scanContainer.MsScanArrived += spectrumArrived;
- 
-// The event handler
-void spectrumArrived(object sender, MsScanEventArgs e)
-{
-	// get the spectrum from the sending scan container
-	var spectrum = e.GetScan();
-}
-
-```
-
-## Examples
+## Example code
 
 Visit the [examples](https://github.com/thermofisherlsms/iapi/tree/master/examples) directory for some C# example programs.
 
@@ -80,9 +57,10 @@ Versioning for the API will follow [Semantic Versioning](http://semver.org/). Ma
 |-----|---------|------|
 |[Instrument API](https://github.com/thermofisherlsms/iapi/blob/master/lib/API-2.0.dll) | [1.1.0.1](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
 |[Spectrum API](https://github.com/thermofisherlsms/iapi/blob/master/lib/Spectrum-1.0.dll) | [1.1.0.1](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
-|[Fusion API](https://github.com/thermofisherlsms/iapi/blob/master/lib/fusion/Fusion.API-1.0.dll) |  [1.3.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Sept 21, 2020|
+|[Fusion API 1.0](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt2-and-previous/Fusion.API-1.0.dll) |  [1.3.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Sept 21, 2020|
+|[Fusion API 2.0](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt3/Fusion.API-2.0.dll) |  [2.0.0.0](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#22178-nov-7-2016)|Sept 17, 2025|
 |Tune (oldest supported) |  [3.0.1794](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md#301794-nov-30-2016)|Nov 30, 2016|
-|Tune (latest supported) |  [4.0.4084.22](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md)|December 2022|
+|Tune (latest supported) |  [4.3.4477.11](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md)|September 2025|
 
 Please see the [Changelog](https://github.com/thermofisherlsms/iapi/blob/master/changelog.md) for a complete history of the versions.
 
