@@ -10,7 +10,7 @@ This file will summarize the changes and bug fixes by Tune version.
 * The new interface makes the following improvements and additions:
 	* You can instantiate a ```FusionCustomScan``` directly instead of using the ```IAPIFusionCustomScan``` wrapper
 	* You can send a query for the number of available custom scan slots, using the IFusionInstrumentAccess interface.  The number is returned as part of an event to which you subscribe.
-* New [example project](https://github.com/thermofisherlsms/iapi/tree/master/examples/tribrid/fusion-example-client-2.0) with the very creative name ```FusionExampleClient2pt0```, containing example usage for the above new features
+* New [example project](https://github.com/thermofisherlsms/iapi/tree/master/examples/tribrid/FusionExampleClient2pt0) with the very creative name ```FusionExampleClient2pt0```, containing example usage for the above new features
 * Expanded MinifiedExample showing how to make a scan and print the list of possible parameters
 * Scan parameter added, "UseIC": internal calibrant can now be used as part of the scan
 * Scan parameter added, "TurboTMT": TurboTMT can now be used as part of the scan
