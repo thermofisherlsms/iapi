@@ -2,6 +2,10 @@
 
 This file will summarize the changes and bug fixes by Tune version. 
 
+## Patch for microscans issue
+
+* [Issue 49](https://github.com/thermofisherlsms/iapi/issues/49) described a problem resulting in a system crash when trying to use microscans.  This is fixed for Tune 4.2 and 4.3 by patches located [here](https://github.com/thermofisherlsms/iapi/tree/master/misc).  Thanks to Tom M&#252;ller for testing the patch on Tune 4.2. 
+
 ## Tribrid Series 4.3 (September 2025)
 
 * New interface Fusion.API-2.0.dll available [here](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt3/).

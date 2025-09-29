@@ -3,6 +3,8 @@ Instrument Application Programming Interface for the Thermo Fisher Scientific Tr
 
 ## News
 
+Update (September 29 2025):  there are now patches available for the [microscans issue](https://github.com/thermofisherlsms/iapi/issues/49) seen on Tune 4.2 and 4.3, available [here](https://github.com/thermofisherlsms/iapi/tree/master/misc).  
+
 Tribrid Series 4.3 has been released!  For this release, we have added a couple of new features which required changing the interface.  There is a new DLL, Fusion.API-2.0.dll, and it should be a simple drop-in replacement for the old one.  The new interface is [here](https://github.com/thermofisherlsms/iapi/blob/master/lib/tribrid/TribridSeries4pt3/).
 
 We've also updated some of the [Tribrid code examples](https://github.com/thermofisherlsms/iapi/tree/master/examples/tribrid).  There is a new example project, ```FusionExampleClient2pt0``` which reorganizes and adds more extensive comments and examples to the original FusionExampleClient project, as well as demonstrating the new features in the new interface.  The ```MinifiedExample``` has also been updated and slightly expanded with examples of common questions:  how to send a scan and how to print the list of possible parameters.  
