@@ -887,9 +887,9 @@ namespace FusionExampleClient
 
                  if (setControls)
                  {
-                     numericUpDown1.Value = decimal.Parse(diamterRB.Text);
-                     numericUpDown2.Value = decimal.Parse(volumeRB.Text);
-                     numericUpDown3.Value = decimal.Parse(flowrateRB.Text);
+                     numericUpDown1.Value = (decimal)_syringe.Diameter;
+                     numericUpDown2.Value = (decimal)_syringe.Volume;
+                     numericUpDown3.Value = (decimal)_syringe.FlowRate; // was decimal.Parse(), conflicts with F100T2 syringe pump here; F100T2 is no longer supported
                  }
 
              }));
